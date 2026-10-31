@@ -6,7 +6,7 @@
 <meta name="description" content="Step-by-step VHDL midterm preparation: when/else, with/select, registers and counters, timing diagrams, question bank and mock exams.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>VHDL Midterm Coach</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 /* Layout: fixed left "datasheet index" sidebar + reading column; waveforms drawn like a logic analyzer trace. */
 :root{
@@ -18,7 +18,7 @@
   --clk:#2448c4; --sig:#2f7d6d; --qans:#b86a00; --grid:#e3e7ee;
   --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --radius:10px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
@@ -200,41 +200,154 @@ svg.wave .uq{fill:var(--muted);font-size:11px}
 .timer{font-family:var(--f-mono);font-size:1.4rem;font-weight:700;font-variant-numeric:tabular-nums}
 .hr{height:1px;background:var(--line);margin:22px 0}
 
+/* ================= v2 polish ================= */
+:root{ --c1:#2448c4; --c2:#0f8a7a; --c3:#7a3db8; --c4:#b86a00; --shadow:0 1px 2px rgba(20,26,40,.06),0 6px 20px rgba(20,26,40,.06); --top:56px; }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --c1:#7d9bff; --c2:#4fd1bd; --c3:#c79bff; --c4:#f0a646; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.25);} }
+:root[data-theme="dark"]{ --c1:#7d9bff; --c2:#4fd1bd; --c3:#c79bff; --c4:#f0a646; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.25); }
+code,kbd,pre,.code,textarea,input.blank,svg text,select{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
+body{background-color:var(--paper);background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:22px 22px}
+body::before{background:var(--panel)}
+.topbar{display:flex;align-items:center;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:40;height:var(--top);background:var(--panel);border-bottom:1px solid var(--line);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.tb-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+.tb-brand b{font-family:var(--f-display);font-size:1.02rem;letter-spacing:-.01em}
+.tb-space{flex:1}
+.iconbtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.iconbtn:hover{border-color:var(--accent);color:var(--accent)}
+.xpchip{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:30px;padding:4px 10px;background:var(--panel)}
+.xpchip b{color:var(--accent);font-family:var(--f-display);font-size:.9rem}
+.xpbar{width:70px;height:6px;border-radius:6px;background:var(--soft);overflow:hidden;display:inline-block}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--c2));border-radius:6px;transition:width .4s}
+.xpchip.big{font-size:.95rem;padding:8px 14px}.xpchip.big .xpbar{width:160px;height:9px}
+.xpcard{float:right;display:flex;flex-direction:column;gap:6px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);margin:0 0 12px 16px}
+@media (max-width:700px){.xpcard{float:none;margin:0 0 14px}}
+.shell{display:grid;grid-template-columns:268px minmax(0,1fr);min-height:calc(100vh - var(--top));transition:grid-template-columns .2s}
+body.nav-closed .shell{grid-template-columns:0 minmax(0,1fr)}
+body.nav-closed .side{visibility:hidden;padding:0;border:0}
+.side{top:calc(var(--top) + env(safe-area-inset-top,0px));height:calc(100vh - var(--top));padding-top:14px;overflow-x:hidden}
+.nav a{gap:10px;padding:8px 10px;border-radius:10px;white-space:nowrap}
+.ni{width:24px;height:24px;flex:none;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font:700 .75rem var(--f-mono);background:var(--soft);color:var(--muted)}
+.ni.c1{background:var(--c1);color:var(--accent-ink)}.ni.c2{background:var(--c2);color:var(--accent-ink)}.ni.c3{background:var(--c3);color:var(--accent-ink)}.ni.c4{background:var(--c4);color:var(--accent-ink)}
+.nav a.active .ni{outline:2px solid var(--accent);outline-offset:1px}
+.np{margin-left:auto;font:600 .68rem var(--f-mono);color:var(--muted)}
+.np.full{color:var(--ok)}
+.nav a .done{margin-left:4px}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr}
+  body.nav-closed .shell{grid-template-columns:1fr}
+  .side{position:fixed;top:calc(var(--top) + env(safe-area-inset-top,0px));left:0;bottom:0;height:auto;width:min(300px,86vw);z-index:50;transform:translateX(-105%);transition:transform .2s;visibility:visible;padding:14px 12px;border-right:1px solid var(--line)}
+  .side.open{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.35)}
+  .tb-brand b{font-size:.92rem}
+  .xpchip .xpbar{display:none}
+}
+.card{box-shadow:var(--shadow);border-radius:14px}
+.lead{font-size:1.06rem;color:var(--muted);max-width:68ch}
+.step>h3{font-size:1.2rem}
+.step>h3 .sn{background:var(--accent-soft);color:var(--accent);border-radius:20px;padding:2px 9px;font-size:.72rem}
+.dots button{transition:transform .1s}
+.dots button:hover{transform:scale(1.08)}
+.dots button.cur{box-shadow:0 0 0 3px var(--accent-soft)}
+.dots button.solvedall{border-color:var(--ok);color:var(--ok)}
+/* your-turn */
+.try{margin-top:20px;border:1.5px dashed var(--amber);background:var(--amber-soft);border-radius:14px;padding:14px 16px 16px}
+.try-head{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--amber)}
+.try-head .try-count{margin-left:auto;text-transform:none;letter-spacing:0;font-family:var(--f-mono);font-weight:600}
+.tq{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}
+.tq.solved{border-color:var(--ok)}
+.tq.solved::after{content:"✓ done";position:absolute;top:8px;right:10px;font:700 .7rem var(--f-mono);color:var(--ok)}
+.tq-q{margin-bottom:6px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px}
+.opts .opt{width:100%;text-align:left;font-family:var(--f-mono);font-size:.86rem;justify-content:flex-start}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);opacity:.8}
+.good{color:var(--ok)}.badc{color:var(--bad)}
+pre.fillcode{padding-top:12px;line-height:2.1;white-space:pre-wrap}
+input.blank{font:600 .84rem var(--f-mono);border:0;border-bottom:2px solid var(--accent);background:var(--panel);color:var(--ink);padding:1px 4px;border-radius:4px 4px 0 0;min-width:2.2em;max-width:100%}
+input.blank.ok{border-color:var(--ok);background:var(--ok-soft)}
+input.blank.bad{border-color:var(--bad);background:var(--bad-soft)}
+textarea.codein{width:100%;font:.86rem/1.55 var(--f-mono);background:var(--code-bg);color:var(--code-ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical;tab-size:2;margin:4px 0 8px}
+textarea.codein:focus{outline:2px solid var(--accent);outline-offset:1px}
+ul.checks{list-style:none;padding:0;margin:6px 0;font-family:var(--f-mono);font-size:.84rem}
+ul.checks li.ok{color:var(--ok)}ul.checks li.no{color:var(--bad)}
+.ttb{min-width:2.6em;justify-content:center;font-family:var(--f-mono)}
+.tq .row{margin-top:6px}
+.xpfloat{position:absolute;left:50%;top:-6px;transform:translateX(-50%);font:800 .85rem var(--f-display);color:var(--ok);pointer-events:none;animation:xpup 1.2s ease-out forwards;white-space:nowrap}
+.btn,.opt,.ttb{position:relative}
+@keyframes xpup{from{opacity:0;transform:translate(-50%,6px)}20%{opacity:1}to{opacity:0;transform:translate(-50%,-28px)}}
+/* widgets */
+.widget{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0;box-shadow:var(--shadow)}
+.wctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.bit{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:30px;padding:4px 6px 4px 10px;cursor:pointer;font:.82rem var(--f-mono)}
+.bit .bv{display:inline-flex;width:24px;height:24px;border-radius:50%;align-items:center;justify-content:center;background:var(--panel);border:1px solid var(--line);font-weight:700}
+.bit.one .bv{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.bit:hover{border-color:var(--accent)}
+.wrow{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.lamp{display:inline-flex;align-items:center;gap:7px;font:600 .85rem var(--f-mono);margin:4px 10px 4px 0}
+.lamp i{width:18px;height:18px;border-radius:50%;background:var(--soft);border:2px solid var(--line);display:inline-block;transition:all .2s}
+.lamp.on i{background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 4px var(--ok-soft),0 0 14px var(--ok)}
+.lamps{display:flex;flex-wrap:wrap}
+.live{margin-top:10px;background:var(--code-bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.live code{background:none;font-size:.86rem;padding:0}
+.gsvg{max-width:100%;height:auto}
+.gsvg .gt{font:12px var(--f-mono);fill:var(--ink)}
+table.mini{font-size:.82rem}table.mini td,table.mini th{padding:2px 9px;text-align:center}
+table.mini tr.cur td{background:var(--accent-soft);font-weight:700}
+.boxes{display:flex;gap:6px}
+.bx{width:52px;height:58px;border-radius:10px;border:2px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 1.4rem var(--f-mono);background:var(--panel)}
+.bx small{font:500 .62rem var(--f-mono);color:var(--muted)}
+.bx.one{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}.bx.one small{color:var(--accent-ink)}
+.bx.chg{animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(.8)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+.bignum{font:800 3rem var(--f-display);color:var(--accent);min-width:1.5em;text-align:center;font-variant-numeric:tabular-nums}
+.flash{animation:flash .5s ease-out}
+@keyframes flash{0%{background:var(--accent-soft)}100%{background:transparent}}
+ol.log{margin:0;padding-left:1.2em;font-size:.84rem;color:var(--muted);max-width:44ch}
+ol.log li:first-child{color:var(--ink);font-weight:600}
+
+.btn.copy{position:absolute;top:6px;right:6px}
+.xpchip{white-space:nowrap}
+.tb-brand b{white-space:nowrap}
+.tb-brand .short{display:none}
+@media (max-width:480px){ .tb-brand .long{display:none} .tb-brand .short{display:inline} .xpchip{padding:4px 8px;font-size:.72rem} .topbar{gap:8px} }
+.conf{position:fixed;top:40vh;width:9px;height:14px;border-radius:2px;z-index:99;pointer-events:none;animation:conf 1.6s cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),60vh) rotate(var(--r));opacity:0}}
+
 </style>
 </head>
 <body>
-<div class="topbar"><button type="button" class="btn sm" id="menu-btn" aria-label="Open menu">☰ Menu</button><b>VHDL Midterm 20/20</b><span style="flex:1"></span><button type="button" class="btn sm theme-btn" aria-label="Switch light or dark theme">Theme</button></div>
+<header class="topbar">
+  <button type="button" class="iconbtn" id="menu-btn" aria-label="Show or hide the menu" aria-expanded="true"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+  <a href="#home" class="tb-brand"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="var(--accent)"/><path d="M6 22 H11 V12 H17 V22 H23 V12 H28" fill="none" stroke="var(--accent-ink)" stroke-width="2.6" stroke-linejoin="round"/></svg><b><span class="long">VHDL Midterm Coach</span><span class="short">VHDL Coach</span></b></a>
+  <span class="tb-space"></span>
+  <span class="xpchip" title="Experience points from the Your-turn exercises"></span>
+  <button type="button" class="iconbtn theme-btn" aria-label="Switch light or dark theme"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+</header>
 <div class="shell">
 <nav class="side" aria-label="Sections">
-  <div class="brand">
-    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="8" fill="var(--accent)"/><path d="M6 22 H11 V12 H17 V22 H23 V12 H28" fill="none" stroke="var(--accent-ink)" stroke-width="2.4" stroke-linejoin="round"/></svg>
-    <div><b>VHDL Midterm 20/20</b><span>Microelectronic Design Tools</span></div>
-  </div>
   <div class="nav">
-    <a href="#home" data-k="home">Start here <span class="tag">plan</span></a>
-    <div class="nav-group label">Learn (in order)</div>
-    <a href="#basics" data-k="basics">0 · VHDL survival kit</a>
-    <a href="#when" data-k="when">1 · when / else <span class="tag">5 m</span></a>
-    <a href="#select" data-k="select">2 · with / select <span class="tag">5 m</span></a>
-    <a href="#seq" data-k="seq">3 · Registers & counters <span class="tag">5 m</span></a>
-    <a href="#timing" data-k="timing">4 · Timing diagrams <span class="tag">5 m</span></a>
+    <a href="#home" data-k="home"><span class="ni">⌂</span>Start here</a>
+    <div class="nav-group label">Learn — in this order</div>
+    <a href="#logic" data-k="logic"><span class="ni">F</span>Digital logic from zero<span class="np" data-np="logic"></span></a>
+    <a href="#basics" data-k="basics"><span class="ni">0</span>VHDL survival kit<span class="np" data-np="basics"></span></a>
+    <a href="#when" data-k="when"><span class="ni c1">1</span>when / else<span class="np" data-np="when"></span></a>
+    <a href="#select" data-k="select"><span class="ni c2">2</span>with / select<span class="np" data-np="select"></span></a>
+    <a href="#seq" data-k="seq"><span class="ni c3">3</span>Registers &amp; counters<span class="np" data-np="seq"></span></a>
+    <a href="#timing" data-k="timing"><span class="ni c4">4</span>Timing diagrams<span class="np" data-np="timing"></span></a>
     <div class="nav-group label">Practise</div>
-    <a href="#bank">Question bank <span class="tag">all PDFs</span></a>
-    <a href="#trainer">Timing trainer <span class="tag">∞</span></a>
-    <a href="#gen">Code question generator <span class="tag">∞</span></a>
-    <a href="#trace">60-second trace drills <span class="tag">∞</span></a>
-    <a href="#mock">Mock exams <span class="tag">/20</span></a>
+    <a href="#bank"><span class="ni">▤</span>Question bank</a>
+    <a href="#trainer"><span class="ni">∿</span>Timing trainer</a>
+    <a href="#gen"><span class="ni">∞</span>Question generator</a>
+    <a href="#trace"><span class="ni">⏱</span>60-second drills</a>
+    <a href="#mock"><span class="ni">✎</span>Mock exams</a>
     <div class="nav-group label">Before the exam</div>
-    <a href="#cheat">Cheat sheet</a>
+    <a href="#cheat"><span class="ni">★</span>Cheat sheet</a>
   </div>
-  <div class="side-foot"><button type="button" class="btn sm theme-btn">Switch light / dark</button></div>
 </nav>
-
 <main><div class="wrap">
 
 <!-- ======================= HOME ======================= -->
 <section class="view" id="v-home">
   <div class="hero">
+    <div class="xpcard"><span class="label">Your progress</span><span class="xpchip big"></span><span class="small">Earn XP in every “Your turn” exercise.</span></div>
     <span class="label">Midterm · 20 marks · all coding & logic</span>
     <h1>Your road to 20 / 20</h1>
     <p>Everything in this site comes from your course PDFs: the lectures (Weeks 1–5), Sheet 1, the ELE-413 solutions, the question bank, and Chapter 3. Learn one small step at a time, then practise until each question type is automatic.</p>
@@ -247,8 +360,9 @@ svg.wave .uq{fill:var(--muted);font-size:11px}
   </div>
 
   <h2 style="margin-top:28px">The plan for tonight <span class="small" id="path-pct"></span></h2>
-  <p class="small">Tick each step when done (saved in this browser). Times are a guide: about 5 hours in total. If you are short on time, do steps 1–5 and one mock.</p>
+  <p class="small">Tick each step when done (saved in this browser). Times are a guide: about 6 hours in total. Every lesson step ends with a “Your turn” exercise — do it before pressing Next. If you are short on time, do steps 1–5 and one mock.</p>
   <ol class="path">
+    <li data-k="logic"><span class="pn">00</span><div><b><a href="#logic">Digital logic from zero</a></b><br><span class="small">What a gate, mux, decoder, register, shift register and counter ARE — with hands-on widgets.</span></div><span class="t">50 min <input type="checkbox" aria-label="done"></span></li>
     <li data-k="basics"><span class="pn">01</span><div><b><a href="#basics">VHDL survival kit</a></b><br><span class="small">The skeleton you write in every answer, ports, vectors, operators, the error checklist.</span></div><span class="t">25 min <input type="checkbox" aria-label="done"></span></li>
     <li data-k="when"><span class="pn">02</span><div><b><a href="#when">when / else</a></b> + 4 bank questions (W1, W2, W3, W11)<br><span class="small">Priority, the final else, the six patterns the doctor uses.</span></div><span class="t">45 min <input type="checkbox" aria-label="done"></span></li>
     <li data-k="select"><span class="pn">03</span><div><b><a href="#select">with / select</a></b> + 4 bank questions (S1, S3, S4, S7)<br><span class="small">Commas, |, when others, helper signals, the ALU.</span></div><span class="t">45 min <input type="checkbox" aria-label="done"></span></li>
@@ -285,10 +399,111 @@ svg.wave .uq{fill:var(--muted);font-size:11px}
   </div>
 </section>
 
+<!-- ======================= LESSON F: FROM ZERO ======================= -->
+<section class="view" id="v-logic">
+  <span class="label">Lesson F · start here if the words are new · about 50 minutes</span>
+  <h1>Digital logic from zero</h1>
+  <p class="lead">What is a bit, a gate, a multiplexer, a register, a counter? Play with each block, then try it yourself. Every later lesson just writes these blocks in VHDL.</p>
+  <div class="lesson" data-id="logic" data-next="basics">
+    <section class="step card"><h3>Bits, wires and buses</h3>
+      <p>Digital hardware only knows two values: <b>0</b> (low voltage) and <b>1</b> (high voltage). One value is a <b>bit</b>, carried on one <b>wire</b> (in VHDL a <code>std_logic</code>).</p>
+      <p>Several wires grouped together are a <b>bus</b> (in VHDL a <code>std_logic_vector</code>). A 4-bit bus carries a binary number:</p>
+      <div class="tw"><table><tr><th>bit</th><td>3</td><td>2</td><td>1</td><td>0</td></tr><tr><th>weight</th><td>8</td><td>4</td><td>2</td><td>1</td></tr><tr><th>"1011"</th><td>1</td><td>0</td><td>1</td><td>1</td></tr></table></div>
+      <p>"1011" = 8 + 2 + 1 = <b>11</b>. The left bit is the <b>MSB</b> (most significant), the right bit is the <b>LSB</b>. N bits give 2<sup>N</sup> values (4 bits → 0 … 15).</p>
+    </section>
+    <section class="step card"><h3>Logic gates</h3>
+      <p>A <b>gate</b> takes bits in and gives one bit out. Play with them — pick a gate, click A and B:</p>
+      <div data-w="gate"></div>
+      <div class="tw"><table><tr><th>Gate</th><th>Output is 1 when …</th><th>VHDL</th></tr>
+        <tr><td>AND</td><td>all inputs are 1</td><td><code>a and b</code></td></tr><tr><td>OR</td><td>at least one input is 1</td><td><code>a or b</code></td></tr>
+        <tr><td>NOT</td><td>the input is 0</td><td><code>not a</code></td></tr><tr><td>NAND / NOR</td><td>opposite of AND / OR</td><td><code>a nand b</code></td></tr>
+        <tr><td>XOR</td><td>the inputs are different</td><td><code>a xor b</code></td></tr><tr><td>XNOR</td><td>the inputs are equal</td><td><code>a xnor b</code></td></tr></table></div>
+    </section>
+    <section class="step card"><h3>Truth tables and minterms (Σm)</h3>
+      <p>A <b>truth table</b> lists the output for every input combination. With 3 inputs there are 2³ = 8 rows. Each row has a number: read the inputs as a binary number (A is the MSB).</p>
+      <div class="tw"><table><tr><th>m</th><th>A</th><th>B</th><th>C</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><td>2</td><td>0</td><td>1</td><td>0</td></tr><tr><td>…</td><td></td><td></td><td></td></tr><tr><td>7</td><td>1</td><td>1</td><td>1</td></tr></table></div>
+      <p><b>F = Σm(1, 2, 6)</b> means “F is 1 in rows 1, 2 and 6, and 0 everywhere else”. This notation appears in your sheet many times (Q11, Q12, ELE-413 Q2).</p>
+    </section>
+    <section class="step card"><h3>From a truth table to an equation</h3>
+      <p>Each row where F = 1 is a <b>product</b> (AND) of the inputs: a 1 is the input itself, a 0 is the input with a prime (NOT). Then OR all products together:</p>
+      <p>Rows 001 and 110 → F = A'B'C + ABC'.</p>
+      <p><b>Simplify:</b> two rows that differ in ONE input only can be merged and that input disappears. Rows 110 and 111 → AB (C does not matter).</p>
+      <div class="key"><b>In VHDL</b> each product becomes a condition: A'B'C → <code>(A = '0' and B = '0' and C = '1')</code>. You never HAVE to simplify — one condition per row is always correct.</div>
+    </section>
+    <section class="step card"><h3>The multiplexer (mux)</h3>
+      <p>A <b>mux</b> is a <b>selector switch</b>: several data inputs, ONE output, and a <b>select</b> signal that says which input goes through. Think of a TV remote choosing one channel.</p>
+      <div data-w="mux"></div>
+      <ul><li>4 inputs need 2 select bits ("00" … "11"), 8 inputs need 3. In general k select bits choose among 2<sup>k</sup> inputs.</li>
+        <li>In VHDL a mux is <code>y &lt;= D0 when sel = "00" else …</code> (Q1) or <code>with sel select y &lt;= D0 when "00", …</code> (Q2).</li></ul>
+    </section>
+    <section class="step card"><h3>The demultiplexer (demux)</h3>
+      <p>The opposite of a mux: ONE input <b>x</b> and several outputs. The select signal says which output receives x; all the other outputs are 0.</p>
+      <div class="tw"><table><tr><th>sel</th><th>y(3) y(2) y(1) y(0)</th></tr><tr><td>"00"</td><td>0 0 0 x</td></tr><tr><td>"01"</td><td>0 0 x 0</td></tr><tr><td>"10"</td><td>0 x 0 0</td></tr><tr><td>"11"</td><td>x 0 0 0</td></tr></table></div>
+    </section>
+    <section class="step card"><h3>The decoder</h3>
+      <p>A <b>decoder</b> turns a binary number into “one line on”: input a (n bits) → 2<sup>n</sup> outputs, exactly one is 1 — the one whose number is a. Used to select one memory chip, one register, one LED.</p>
+      <div data-w="decoder"></div>
+      <p>With an <b>enable</b> (en): en = 0 switches everything off. The output pattern with a single 1 is called <b>one-hot</b>.</p>
+    </section>
+    <section class="step card"><h3>Encoder and priority encoder</h3>
+      <p>An <b>encoder</b> is the reverse of a decoder: one-hot in → binary number out ("0100" → "10").</p>
+      <p>A <b>priority encoder</b> allows several inputs to be 1 at the same time and outputs the number of the <b>most important</b> one (usually the highest). A <b>valid</b> output says whether any input was 1.</p>
+      <div data-w="encoder"></div>
+      <p>This is exactly the doctor’s “INDEX” question — he counts positions from 1 instead of 0.</p>
+    </section>
+    <section class="step card"><h3>Comparator, ALU, code converter</h3>
+      <ul><li><b>Comparator</b>: compares two numbers → outputs gt (a &gt; b), eq (a = b), lt (a &lt; b).</li>
+        <li><b>ALU</b> (Arithmetic Logic Unit): computes several operations (and, or, +, − …) on a and b, and an <b>opcode</b> selects which result goes out — it is a mux in front of many calculators.</li>
+        <li><b>Code converter</b>: any table that maps one code to another, e.g. BCD → 7-segment display (which segments of the digit to light up), binary → Gray, BCD → Excess-3.</li></ul>
+      <p>All of these are <b>combinational</b>: the output depends only on the inputs right now.</p>
+    </section>
+    <section class="step card"><h3>Sequential logic and the clock</h3>
+      <p><b>Combinational</b> circuits have no memory. <b>Sequential</b> circuits remember: their output depends on the past too (a counter remembers its count).</p>
+      <p>Memory is updated in step with a <b>clock</b>: a signal that goes 0, 1, 0, 1 forever. The moment it goes 0 → 1 is the <b>rising edge</b>; 1 → 0 is the <b>falling edge</b>.</p>
+      <div class="wavebox" data-demo="clockOnly" data-table="no"></div>
+      <p class="small">Dashed lines = rising edges (t = 2, 6, 10 …). In this site one clock period is 4 grid units.</p>
+    </section>
+    <section class="step card"><h3>Latch vs flip-flop</h3>
+      <p>Both store one bit.</p>
+      <ul><li>A <b>latch</b> is a door: while its enable is 1 the door is open and Q follows D all the time; when enable is 0 the door closes and Q keeps the last value.</li>
+        <li>A <b>flip-flop</b> is a camera: it takes ONE photo of D at the clock edge and shows that photo until the next edge.</li></ul>
+      <div data-w="ff"></div>
+    </section>
+    <section class="step card"><h3>Reset and enable</h3>
+      <ul><li><b>Reset</b> forces the stored value to 0. <b>Synchronous</b> reset: only at a clock edge. <b>Asynchronous</b> reset: immediately, without waiting for the clock.</li>
+        <li><b>Enable</b>: at an edge, if enable = 1 the flip-flop loads; if enable = 0 it <b>holds</b> its value.</li>
+        <li><b>Active-low</b> signals work when they are 0 and are usually named with _n: <code>rst_n</code>, <code>en_n</code>.</li></ul>
+      <p>Priority is usually: reset first, then load, then enable.</p>
+    </section>
+    <section class="step card"><h3>The register</h3>
+      <p>A <b>register</b> is N flip-flops side by side that share one clock: it stores an N-bit word. All bits load together at the edge. Also called PIPO (Parallel In, Parallel Out).</p>
+      <div data-w="register"></div>
+    </section>
+    <section class="step card"><h3>The shift register</h3>
+      <p>A <b>shift register</b> moves its bits one place at every clock edge. A new bit (sin) comes in at one end; the bit at the other end falls out (serial out).</p>
+      <div data-w="shift"></div>
+      <div class="tw"><table><tr><th>Name</th><th>In</th><th>Out</th><th>Use</th></tr><tr><td>SISO</td><td>serial</td><td>serial</td><td>delay line</td></tr><tr><td>SIPO</td><td>serial</td><td>parallel</td><td>receive a serial stream</td></tr><tr><td>PISO</td><td>parallel (load)</td><td>serial</td><td>send a word bit by bit</td></tr><tr><td>PIPO</td><td>parallel</td><td>parallel</td><td>= a normal register</td></tr></table></div>
+    </section>
+    <section class="step card"><h3>The counter</h3>
+      <p>A <b>counter</b> is a register that adds 1 (or subtracts 1) to itself at every enabled clock edge. With N bits it wraps around: 1111 + 1 = 0000. A <b>mod-M</b> counter wraps earlier (mod-10 counts 0 … 9).</p>
+      <div data-w="counter"></div>
+    </section>
+    <section class="step card"><h3>The map: block → exam question</h3>
+      <div class="tw"><table><tr><th>Block</th><th>Kind</th><th>VHDL tool</th><th>Exam</th></tr>
+        <tr><td>gates, Σm, mux, decoder, priority encoder, comparator</td><td>combinational</td><td>when / else</td><td>Q1</td></tr>
+        <tr><td>truth tables, mux, decoder, ALU, code converters</td><td>combinational</td><td>with / select</td><td>Q2</td></tr>
+        <tr><td>flip-flop, register, shift register, counter</td><td>sequential</td><td>process + rising_edge</td><td>Q3</td></tr>
+        <tr><td>how flip-flops/latches react over time</td><td>sequential</td><td>reading code → waveform</td><td>Q4</td></tr></table></div>
+      <p>Now you know <i>what</i> each block is. Next: how to write it in VHDL.</p>
+    </section>
+  </div>
+</section>
+
 <!-- ======================= LESSON 0 ======================= -->
 <section class="view" id="v-basics">
   <span class="label">Lesson 0 · about 25 minutes</span>
   <h1>VHDL survival kit</h1>
+  <p class="lead">The grammar you need for all four questions. Type the exercises — your hand has to learn it, not only your eyes.</p>
   <div class="lesson" data-id="basics" data-next="when">
     <section class="step card"><h3>Every answer has three parts</h3>
       <p>Whatever the question, your answer is always the same three blocks, in this order:</p>
@@ -396,6 +611,7 @@ clear &lt;= (others =&gt; '0');                       -- all bits 0, any width</
 <section class="view" id="v-when">
   <span class="label">Lesson 1 · exam question 1 (5 marks) · about 45 minutes</span>
   <h1>when / else — conditional signal assignment</h1>
+  <p class="lead">Not sure what a multiplexer, decoder or priority encoder is? Do <a href="#logic">Lesson F</a> first — this lesson writes those blocks in VHDL.</p>
   <div class="lesson" data-id="when" data-next="select">
     <section class="step card"><h3>The shape</h3>
       <pre class="v">target &lt;= value_1 when condition_1 else
@@ -538,6 +754,7 @@ step &lt;= "0100" when (a = '1' and b = '0') else
 <section class="view" id="v-select">
   <span class="label">Lesson 2 · exam question 2 (5 marks) · about 45 minutes</span>
   <h1>with / select — selected signal assignment</h1>
+  <p class="lead">Same blocks as Lesson 1, written as a lookup table. Every step ends with a “Your turn” exercise.</p>
   <div class="lesson" data-id="select" data-next="seq">
     <section class="step card"><h3>The shape</h3>
       <pre class="v">with selector select
@@ -682,7 +899,8 @@ end process;</pre>
 <!-- ======================= LESSON 3: SEQUENTIAL ======================= -->
 <section class="view" id="v-seq">
   <span class="label">Lesson 3 · exam question 3 (5 marks) · about 60 minutes</span>
-  <h1>Registers & counters</h1>
+  <h1>Registers &amp; counters</h1>
+  <p class="lead">If “register”, “shift register” or “counter” are new words, play with them in <a href="#logic">Lesson F</a> (steps 11–15) first.</p>
   <div class="lesson" data-id="seq" data-next="timing">
     <section class="step card"><h3>Latch vs flip-flop</h3>
       <div class="grid2">
@@ -870,6 +1088,7 @@ q &lt;= q_i;</pre>
 <section class="view" id="v-timing">
   <span class="label">Lesson 4 · exam question 4 (5 marks) · about 60 minutes</span>
   <h1>Timing diagrams</h1>
+  <p class="lead">You read the VHDL, then draw what the hardware does over time. In every “Your turn” you draw the answer yourself by clicking.</p>
   <div class="lesson" data-id="timing" data-next="trainer">
     <section class="step card"><h3>The 4-question method</h3>
       <ol><li><b>Which edge?</b> <code>rising_edge</code> / <code>clk = '1'</code> after 'event → rising. <code>falling_edge</code> / <code>clk = '0'</code> after 'event → falling. Level test (<code>if clk = '1'</code> with no 'event) → latch.</li>
@@ -1634,6 +1853,7 @@ const GEN = (() => {
 /* ===================== Demo waveforms (used by lessons and questions) ===================== */
 const sg = (N,l) => TD.segs(N,l);
 const DEMOS = {
+  clockOnly: {type:'combo', N:16, cfg:{edge:'rise'}, sig:{}, order:[], combo:()=>({}), outRows:[]},
   ex1: {type:'dff', N:18, clkName:'Clk', cfg:{edge:'fall', reset:{type:'sync',active:1,name:'Reset'}, en:{type:'high',name:'Enable'}, q0:1, dName:'D'},
         sig:{Enable:sg(18,[[0,0],[7,1],[11,0]]), Reset:sg(18,[[0,1],[5,0]]), D:sg(18,[[0,1],[5,0],[7,1],[11,0]])}, order:['Enable','Reset','D']},
   syncR: {type:'dff', N:26, cfg:{edge:'rise', reset:{type:'sync',active:1,name:'rst'}, en:{type:'none'}, q0:0, dName:'d'},
@@ -3782,6 +4002,702 @@ const MOCKS = [
   {name:'Classifier · decoder · BCD counter · exam-classic waveform', items:['M3W','M3S','M3R','M3T']}
 ];
 
+/* ===================== "Your turn" practice inside every lesson step ===================== */
+const XP = {
+  get(){ return store.get('xp',0); },
+  solved(){ return store.get('solved',{}); },
+  award(id, pts, anchor){
+    const s=XP.solved(); if(s[id]) return false; s[id]=1; store.set('solved',s); const before=XP.level(XP.get()); store.set('xp',XP.get()+pts); if(XP.level(XP.get())>before && typeof confetti==='function') confetti();
+    XP.paint();
+    if(anchor){ const f=document.createElement('span'); f.className='xpfloat'; f.textContent=`+${pts} XP`; anchor.appendChild(f); setTimeout(()=>f.remove(),1300); }
+    return true;
+  },
+  level(x){ return Math.floor(x/150)+1; },
+  paint(){
+    const x=XP.get(), lv=XP.level(x), into=x%150;
+    $$('.xpchip').forEach(c=>{ c.innerHTML=`<b>Lv ${lv}</b><span class="xpbar"><i style="width:${Math.round(into/150*100)}%"></i></span><span>${x} XP</span>`; });
+    if(typeof updateNav==='function') updateNav();
+  }
+};
+// normalise code so small spacing / case differences do not matter
+function normCode(s){
+  let n=s.toLowerCase().replace(/--[^\n]*/g,'').replace(/\s+/g,' ').replace(/ ?([()\[\];,:&|<>=+*\/-]) ?/g,'$1').trim();
+  // drop optional brackets around a whole condition: if (a='1') then  →  if a='1' then
+  const re=/\b(if|elsif|when)\(((?:[^()]|\([^()]*\))*)\)(then|else|,|;)/g; let prev;
+  do{ prev=n; n=n.replace(re,'$1 $2 $3'); }while(n!==prev);
+  return n.replace(/ ;/g,';').replace(/ ,/g,',');
+}
+function normAns(s){ return s.toLowerCase().replace(/\s+/g,''); }
+
+function renderTry(el, key){
+  const items=PRACTICE[key]; if(!items) return;
+  el.classList.add('try');
+  el.innerHTML=`<div class="try-head"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Your turn</span><span class="small try-count"></span></div>`;
+  items.forEach((it,i)=>{ const id=`${key}#${i}`; const box=document.createElement('div'); box.className='tq'; box.dataset.id=id; el.appendChild(box); TRY[it.t](box,it,id); });
+  countTry(el);
+}
+function countTry(el){ const s=XP.solved(); const ids=$$('.tq',el).map(b=>b.dataset.id); const n=ids.filter(i=>s[i]).length; const c=$('.try-count',el); if(c) c.textContent=`${n}/${ids.length} done`; $$('.tq',el).forEach(b=>b.classList.toggle('solved',!!s[b.dataset.id])); }
+function solvedHere(box){ const t=box.closest('.try'); if(t) countTry(t); }
+
+const TRY = {
+  mcq(box,it,id){
+    box.innerHTML=`<div class="tq-q">${it.q}</div>${it.code?codeBlock(it.code):''}<div class="opts">${it.opts.map((o,i)=>`<button type="button" class="btn opt" data-i="${i}">${esc(o)}</button>`).join('')}</div><div class="fb" hidden></div>`;
+    let tries=0;
+    $$('.opt',box).forEach(b=>b.addEventListener('click',()=>{
+      if(box.dataset.done) return; tries++;
+      const i=+b.dataset.i, ok=i===it.ans; const fb=$('.fb',box); fb.hidden=false;
+      if(ok){ box.dataset.done=1; b.classList.add('right'); fb.innerHTML=`<b class="good">Correct!</b> ${it.why||''}`; XP.award(id, tries===1?10:5, b); solvedHere(box); }
+      else { b.classList.add('wrong'); b.disabled=true; fb.innerHTML=`<b class="badc">Not quite — try again.</b> ${it.hint||''}`; if(tries>=2){ box.dataset.done=1; $$('.opt',box)[it.ans].classList.add('right'); fb.innerHTML=`<b class="badc">The answer is highlighted.</b> ${it.why||''}`; } }
+    }));
+  },
+  fill(box,it,id){
+    const parts=(it.code||'[[0]]').split(/\[\[(\d+)\]\]/);
+    let html=''; parts.forEach((p,i)=>{ if(i%2===0) html+=esc(p); else { const n=+p; const w=Math.max(3, ...it.ans[n].map(a=>a.length))+1; html+=`<input class="blank" data-n="${n}" size="${w}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="blank ${n+1}">`; } });
+    box.innerHTML=`<div class="tq-q">${it.q}</div><pre class="code fillcode">${html}</pre><div class="row"><button type="button" class="btn primary sm chk">Check</button><button type="button" class="btn sm shw">Show answer</button></div><div class="fb" hidden></div>`;
+    const inputs=$$('.blank',box); let tries=0;
+    inputs.forEach(inp=>inp.addEventListener('keydown',e=>{ if(e.key==='Enter') $('.chk',box).click(); }));
+    $('.chk',box).addEventListener('click',()=>{
+      tries++; let all=true;
+      inputs.forEach(inp=>{ const n=+inp.dataset.n; const v=normAns(inp.value); const ok=it.ans[n].some(a=>normAns(a)===v || (it.loose && normAns(a).replace(/["']/g,'')===v.replace(/["']/g,''))); inp.classList.toggle('ok',ok); inp.classList.toggle('bad',!ok); if(!ok) all=false; });
+      const fb=$('.fb',box); fb.hidden=false;
+      if(all){ fb.innerHTML=`<b class="good">All correct!</b> ${it.why||''}`; XP.award(id, tries===1?15:8, $('.chk',box)); solvedHere(box); }
+      else fb.innerHTML=`<b class="badc">Red boxes are not right yet.</b> ${it.hint||'Check quotes: \'1\' is one bit, "10" is a vector.'}`;
+    });
+    $('.shw',box).addEventListener('click',()=>{ inputs.forEach(inp=>{ inp.value=it.ans[+inp.dataset.n][0]; inp.classList.remove('bad'); }); const fb=$('.fb',box); fb.hidden=false; fb.innerHTML=it.why||''; });
+  },
+  write(box,it,id){
+    box.innerHTML=`<div class="tq-q">${it.q}</div><textarea class="codein" rows="${it.rows||8}" spellcheck="false" autocapitalize="off" aria-label="your VHDL">${esc(it.starter||'')}</textarea><div class="row"><button type="button" class="btn primary sm chk">Check my code</button><button type="button" class="btn sm shw">Show model answer</button></div><div class="fb" hidden></div><div class="model" hidden>${codeBlock(it.model,'Model answer')}${it.why?`<p class="small">${it.why}</p>`:''}</div>`;
+    const ta=$('textarea',box);
+    ta.addEventListener('keydown',e=>{ if(e.key==='Tab'){ e.preventDefault(); const s=ta.selectionStart; ta.value=ta.value.slice(0,s)+'  '+ta.value.slice(ta.selectionEnd); ta.selectionStart=ta.selectionEnd=s+2; } });
+    $('.chk',box).addEventListener('click',()=>{
+      const n=normCode(ta.value); let pass=0;
+      const lis=it.checks.map(([re,label,neg])=>{ const hit=re.test(n); const ok=neg?!hit:hit; if(ok) pass++; return `<li class="${ok?'ok':'no'}">${ok?'✓':'✗'} ${label}</li>`; });
+      const fb=$('.fb',box); fb.hidden=false;
+      fb.innerHTML=`<ul class="checks">${lis.join('')}</ul>`+(pass===it.checks.length?'<b class="good">Excellent — everything the checker looks for is there.</b> Compare with the model answer too.':'<span class="small">The checker looks for key parts only (spacing and capital letters do not matter). Fix the ✗ items or open the model answer.</span>');
+      if(pass===it.checks.length){ XP.award(id,25,$('.chk',box)); solvedHere(box); $('.model',box).hidden=false; }
+    });
+    $('.shw',box).addEventListener('click',()=>{ $('.model',box).hidden=false; });
+  },
+  tt(box,it,id){
+    const n=it.cols.length; const rows=it.rows || [...Array(1<<n).keys()].map(m=>[...GEN.bin(m,n)].map(Number));
+    box.innerHTML=`<div class="tq-q">${it.q}</div><div class="tw"><table class="evtable"><tr>${it.cols.map(c=>`<th>${c}</th>`).join('')}<th>${it.out||'Y'}</th></tr>`+rows.map((r,i)=>`<tr>${r.map(v=>`<td>${v}</td>`).join('')}<td><button type="button" class="btn sm ttb" data-i="${i}">?</button></td></tr>`).join('')+`</table></div><div class="row"><button type="button" class="btn primary sm chk">Check</button></div><div class="fb" hidden></div>`;
+    const vals=rows.map(()=>null);
+    $$('.ttb',box).forEach(b=>b.addEventListener('click',()=>{ const i=+b.dataset.i; vals[i]= vals[i]===1?0:1; b.textContent=vals[i]; b.parentNode.className=''; }));
+    let tries=0;
+    $('.chk',box).addEventListener('click',()=>{ tries++; let ok=0; $$('.ttb',box).forEach(b=>{ const i=+b.dataset.i; const g=vals[i]===it.ans[i]; if(g) ok++; b.parentNode.className=g?'ok':'bad'; });
+      const fb=$('.fb',box); fb.hidden=false; if(ok===rows.length){ fb.innerHTML=`<b class="good">Perfect table!</b> ${it.why||''}`; XP.award(id,tries===1?15:8,$('.chk',box)); solvedHere(box); } else fb.innerHTML=`<b class="badc">${ok}/${rows.length} rows right.</b> Click a cell to switch it between 0 and 1.`; });
+  },
+  wave(box,it,id){
+    box.innerHTML=`<div class="tq-q">${it.q}</div>${it.code?codeBlock(it.code):''}<div class="wavebox wq"></div>`;
+    const m=$('.wq',box); m.id='w-'+id.replace(/[^a-z0-9]/gi,'_');
+    mountQuiz(m, it.spec, pct=>{ if(pct===100){ XP.award(id,25,m); solvedHere(box); } });
+  }
+};
+
+/* ---------- waveform specs used in practice ---------- */
+const PS = {
+  r1: {type:'dff',N:22,cfg:{edge:'rise',reset:{type:'none'},en:{type:'none'},q0:0,dName:'d'},sig:{d:sg(22,[[0,1],[5,0],[7,1],[13,0],[17,1]])},order:['d'],qName:'q'},
+  ex: {type:'dff',N:22,clkName:'Clk',cfg:{edge:'fall',reset:{type:'sync',active:1,name:'reset'},en:{type:'high',name:'enable'},q0:1,dName:'D'},sig:{enable:sg(22,[[0,1],[9,0],[13,1]]),reset:sg(22,[[0,1],[3,0],[17,1],[19,0]]),D:sg(22,[[0,0],[5,1],[11,0],[15,1],[21,0]])},order:['enable','reset','D']},
+  as: {type:'dff',N:26,cfg:{edge:'rise',reset:{type:'async',active:1,name:'rst'},en:{type:'none'},q0:0,dName:'d'},sig:{rst:sg(26,[[0,0],[11,1],[13,0],[21,1],[23,0]]),d:sg(26,[[0,1],[9,0],[15,1]])},order:['rst','d'],qName:'q'},
+  la: {type:'latch',N:20,noClk:true,cfg:{level:1,en:'en',dName:'D',q0:1},sig:{en:sg(20,[[0,1],[5,0],[11,1],[15,0]]),D:sg(20,[[0,0],[3,1],[7,0],[9,1],[13,0],[17,1]])},order:['en','D']},
+  two:{type:'twolatch',N:20,clkName:'clock',cfg:{qa0:null,qb0:0},sig:{D:sg(20,[[0,1],[5,0],[7,1],[13,0],[15,1],[17,0]])},order:['D']},
+  cn: {type:'counter',N:26,cfg:{edge:'rise',bits:3,reset:{type:'async',active:0,name:'rst_n'},en:{type:'high',name:'en'},dir:'up',mod:null,load:null,q0:5},sig:{rst_n:sg(26,[[0,1],[19,0],[21,1]]),en:sg(26,[[0,1],[9,0],[13,1]])},order:['rst_n','en']},
+  sh: {type:'shift',N:22,cfg:{edge:'rise',bits:4,dir:'left',type:'sipo',reset:{type:'sync',active:1,name:'rst'},en:{type:'high',name:'en'},q0:'1111'},sig:{rst:sg(22,[[0,0]]),en:sg(22,[[0,1],[13,0],[15,1]]),sin:sg(22,[[0,0],[7,1],[11,0],[17,1]])},order:['rst','en','sin']},
+  fin:{type:'dff',N:22,cfg:{edge:'fall',reset:{type:'async',active:1,name:'clr'},en:{type:'high',name:'en'},q0:1,dName:'d'},sig:{clr:sg(22,[[0,0],[9,1],[11,0]]),en:sg(22,[[0,1],[13,0],[17,1]]),d:sg(22,[[0,0],[3,1],[15,0],[19,1]])},order:['clr','en','d'],qName:'q'}
+};
+
+/* ---------- regex helpers for the code checker ---------- */
+const C = {
+  lib:[/library ieee;/,'library ieee;'],
+  use:[/use ieee\.std_logic_1164\.all;/,'use ieee.std_logic_1164.all;'],
+  num:[/use ieee\.numeric_std\.all;/,'use ieee.numeric_std.all; (needed for numbers)'],
+  ent:[/entity \w+ is/,'entity … is'],
+  endEnt:[/\);\s?end( entity)?( \w+)?;/,'port list closed with ); then end …;'],
+  arch:[/architecture \w+ of \w+ is/,'architecture … of … is'],
+  begin:[/\bbegin\b/,'begin'],
+  noBadSemi:[/;\)/,'no semicolon right before )',true],
+  finalElse:[/ else ('[01]'|"[01]+"|\w+|\(others=>'0'\));/,'ends with a final else (no condition)'],
+  others:[/when others;/,'ends with when others;'],
+  withSel:[/with \w+ select/,'with … select']
+};
+
+/* ===================== the exercises ===================== */
+const PRACTICE = {
+/* ---------- Lesson F: digital logic from zero ---------- */
+'logic-1':[
+  {t:'fill', q:'Convert each binary number to decimal (bit weights 8 4 2 1).', code:'1011 = [[0]]     0110 = [[1]]     1111 = [[2]]     0001 = [[3]]', ans:[['11'],['6'],['15'],['1']], why:'1011 = 8 + 0 + 2 + 1 = 11. 0110 = 4 + 2 = 6. 1111 = 15 (the largest 4-bit number).'},
+  {t:'mcq', q:'How many different values can a 3-bit bus carry?', opts:['3','6','8','9'], ans:2, why:'2³ = 8 values: 000 … 111 (0 … 7).'},
+  {t:'mcq', q:'In <code>std_logic_vector(7 downto 0)</code>, which bit is the MSB (the most significant, on the left)?', opts:['bit 0','bit 7','bit 8','it depends'], ans:1, why:'With downto, the first number is the left / most significant bit.'}
+],
+'logic-2':[
+  {t:'tt', q:'Fill the truth table of an <b>XOR</b> gate (click to switch 0/1).', cols:['A','B'], ans:[0,1,1,0], why:'XOR = 1 when the inputs are different.'},
+  {t:'tt', q:'Fill the truth table of a <b>NAND</b> gate.', cols:['A','B'], ans:[1,1,1,0], why:'NAND = NOT(AND): 0 only when both inputs are 1.'},
+  {t:'mcq', q:'Which gate gives 1 only when ALL its inputs are 1?', opts:['OR','AND','XOR','NOR'], ans:1, why:'AND.'},
+  {t:'fill', q:'Write the VHDL operator.', code:'y <= a [[0]] b;    -- y is 1 when a and b are different\nz <= [[1]] (a or b);  -- NOR written with two operators', ans:[['xor'],['not']], why:'a xor b; not (a or b) is the same as a nor b.'}
+],
+'logic-3':[
+  {t:'tt', q:'F(A,B,C) = Σm(1, 2, 6). Fill F for every row (A is the MSB).', cols:['A','B','C'], out:'F', ans:[0,1,1,0,0,0,1,0], why:'Minterm number = the row read as a binary number: 1 = 001, 2 = 010, 6 = 110.'},
+  {t:'fill', q:'Which minterm number is each row?', code:'A=1, B=0, C=1  →  m[[0]]\nA=0, B=1, C=1  →  m[[1]]\nA=1, B=1, C=1  →  m[[2]]', ans:[['5'],['3'],['7']], why:'Read ABC as binary: 101 = 5, 011 = 3, 111 = 7.'}
+],
+'logic-4':[
+  {t:'mcq', q:'F = 1 only in rows ABC = 110 and 111. Simplest equation?', opts:['F = AB','F = ABC','F = A + B','F = AB\''], ans:0, why:'Both rows have A = 1 and B = 1; C changes, so C does not matter → AB.'},
+  {t:'mcq', q:'F = A\'B\'C + A\'BC. Simplify.', opts:['A\'C','A\'B\'','BC','C'], ans:0, why:'Both terms have A\' and C; B is 0 in one and 1 in the other → A\'C.'},
+  {t:'fill', q:'Write each product term as a VHDL condition.', code:"A'B   →  (A = [[0]] and B = [[1]])\nAB'C  →  (A = '1' and B = [[2]] and C = '1')", ans:[["'0'"],["'1'"],["'0'"]], why:'A primed (A\') means A = \'0\'.'}
+],
+'logic-5':[
+  {t:'mcq', q:'4:1 mux with D0 = 1, D1 = 0, D2 = 0, D3 = 1 and sel = "11". Output?', opts:['0','1','D0','undefined'], ans:1, why:'"11" = 3 → output = D3 = 1.'},
+  {t:'fill', q:'How many select bits?', code:'2:1 mux  →  [[0]] select bit(s)\n4:1 mux  →  [[1]]\n8:1 mux  →  [[2]]\n16:1 mux →  [[3]]', ans:[['1'],['2'],['3'],['4']], why:'k select bits can choose between 2^k inputs.'},
+  {t:'mcq', q:'What does a multiplexer do?', opts:['Adds two numbers','Chooses ONE of several inputs and sends it to one output','Sends one input to one of several outputs','Stores a bit'], ans:1, why:'A mux is a data selector, like a rotary switch controlled by sel.'}
+],
+'logic-6':[
+  {t:'mcq', q:'1:4 demux, x = 1, sel = "10". Outputs y(3) y(2) y(1) y(0) = ?', opts:['"0100"','"0010"','"1000"','"0001"'], ans:0, why:'sel = 2 → x goes to y(2); every other output is 0.'},
+  {t:'mcq', q:'Mux vs demux:', opts:['mux: many → one ; demux: one → many','mux: one → many ; demux: many → one','they are the same','both store data'], ans:0}
+],
+'logic-7':[
+  {t:'fill', q:'3:8 decoder (enabled). Write the output y(7 downto 0) as a vector.', code:'a = "101"  →  y = [[0]]\na = "000"  →  y = [[1]]', ans:[['"00100000"','00100000'],['"00000001"','00000001']], why:'Only line number a is 1. "101" = 5 → the 1 is 5 places from the right.'},
+  {t:'mcq', q:'Decoder with en = 0 → outputs?', opts:['all 0','all 1','the last value','line 0 only'], ans:0, why:'Disabled → no line is selected.'}
+],
+'logic-8':[
+  {t:'mcq', q:'Priority encoder (highest wins) with w(3..0) = "0110". y = ?', opts:['"01"','"10"','"11"','"00"'], ans:1, why:'w(2) and w(1) are 1; the highest is w(2) → "10".'},
+  {t:'mcq', q:'A NORMAL (non-priority) 4:2 encoder gets "0011". What should valid be?', opts:["'1'","'0'"], ans:1, why:'A plain encoder expects exactly one 1 (one-hot). Two 1s → invalid.'},
+  {t:'fill', q:'Doctor style “INDEX” (position counted from 1, highest bit wins). X(3 downto 0):', code:'X = "0100"  →  INDEX = [[0]]\nX = "1001"  →  INDEX = [[1]]\nX = "0000"  →  INDEX = [[2]]', ans:[['"011"','011'],['"100"','100'],['"000"','000']], why:'X(2) is position 3 = "011"; X(3) is position 4 = "100"; no 1 → "000".'}
+],
+'logic-9':[
+  {t:'mcq', q:'Comparator: a = "0101" (5), b = "0011" (3). gt eq lt = ?', opts:['1 0 0','0 1 0','0 0 1','1 1 0'], ans:0},
+  {t:'fill', q:'ALU with op "10" = a + b (4-bit). a = "0011", b = "0100".', code:'y = [[0]]', ans:[['"0111"','0111']], loose:true, why:'3 + 4 = 7 = 0111.'},
+  {t:'mcq', q:'A BCD → 7-segment decoder is an example of …', opts:['a counter','a code converter (lookup table)','a register','a latch'], ans:1}
+],
+'logic-10':[
+  {t:'mcq', q:'Clock period = 4 grid units, starting LOW (low on 0–2, high on 2–4 …). Where are the rising edges?', opts:['t = 0, 4, 8','t = 2, 6, 10','t = 4, 8, 12','t = 1, 3, 5'], ans:1, why:'The clock goes 0 → 1 at t = 2, 6, 10 … and 1 → 0 (falling) at 4, 8, 12 …'},
+  {t:'mcq', q:'Which block needs MEMORY (is sequential)?', opts:['multiplexer','decoder','counter','comparator'], ans:2, why:'A counter must remember its current value.'}
+],
+'logic-11':[
+  {t:'mcq', q:'A latch has en = 1 and D changes 0 → 1 → 0. Q does …', opts:['follows every change','changes once at the next edge','stays the same','goes to X'], ans:0, why:'Enabled latch = transparent.'},
+  {t:'mcq', q:'A rising-edge flip-flop: D changes in the middle of a clock-high period. Q …', opts:['changes immediately','does not change until the next rising edge','toggles','becomes 0'], ans:1}
+],
+'logic-12':[
+  {t:'mcq', q:'An ASYNCHRONOUS reset becomes active between two clock edges. Q becomes 0 …', opts:['immediately','at the next edge','never','after two edges'], ans:0},
+  {t:'mcq', q:'At a clock edge, enable = 0. A register …', opts:['clears','loads D','keeps (holds) its value','toggles'], ans:2}
+],
+'logic-13':[
+  {t:'fill', q:'A 4-bit register holds "1010". d = "0110". What is q after one rising edge?', code:'en = 1  →  q = [[0]]\nen = 0  →  q = [[1]]', ans:[['"0110"','0110'],['"1010"','1010']], why:'Enabled: all 4 bits copied at once. Disabled: hold.'}
+],
+'logic-14':[
+  {t:'fill', q:'q = "0000". Shift RIGHT (sin enters q(3), on the left). sin = 1, then 1, then 0.', code:'after edge 1: q = [[0]]\nafter edge 2: q = [[1]]\nafter edge 3: q = [[2]]', ans:[['"1000"','1000'],['"1100"','1100'],['"0110"','0110']], why:'Each edge: the new bit enters on the left and everything moves one place right.'},
+  {t:'mcq', q:'SIPO means …', opts:['serial in, parallel out','single input, parallel output','shift in, push out','serial in, pulse out'], ans:0}
+],
+'logic-15':[
+  {t:'fill', q:'3-bit UP counter (0..7) is at 6. Three enabled edges arrive.', code:'after edge 1: [[0]]\nafter edge 2: [[1]]\nafter edge 3: [[2]]', ans:[['7'],['0'],['1']], why:'7 + 1 wraps to 0 (3 bits).'},
+  {t:'mcq', q:'A mod-10 (BCD) counter is at 9. Next enabled edge?', opts:['10','0','9','1'], ans:1}
+],
+
+/* ---------- Lesson 0: survival kit ---------- */
+'basics-1':[
+  {t:'fill', q:'Fill in the four keywords of the skeleton.', code:'[[0]] ieee;\n[[1]] ieee.std_logic_1164.all;\n\n[[2]] and_gate is\n  port ( a, b : in  std_logic;\n         y    : out std_logic );\nend and_gate;\n\n[[3]] rtl of and_gate is\nbegin\n  y <= a and b;\nend rtl;', ans:[['library'],['use'],['entity'],['architecture']]},
+  {t:'write', q:'Write the COMPLETE VHDL of a 2-input OR gate: inputs a, b; output y.', model:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity or_gate is
+  port ( a, b : in  std_logic;
+         y    : out std_logic );
+end or_gate;
+
+architecture rtl of or_gate is
+begin
+  y <= a or b;
+end rtl;`, checks:[C.lib,C.use,C.ent,[/a,b:in std_logic|a:in std_logic;b:in std_logic/,'a, b : in std_logic'],[/y:out std_logic\)/,'y : out std_logic );'],C.arch,C.begin,[/y<=(a or b|b or a);/,'y <= a or b;'],[/end \w+;\s?$/,'end …; at the end']]}
+],
+'basics-2':[
+  {t:'fill', q:'Box “REG8”: input X (8-bit bus), input S (1 bit), output Y (8-bit bus).', code:'entity REG8 is\n  port ( X : in  [[0]];\n         S : in  [[1]];\n         Y : out [[2]] );\nend REG8;', ans:[['std_logic_vector(7 downto 0)'],['std_logic'],['std_logic_vector(7 downto 0)']]},
+  {t:'mcq', q:'Which is the correct LAST port line?', opts:['q : out std_logic; );','q : out std_logic );','q ; out std_logic );','q : out std_logic;'], ans:1},
+  {t:'write', q:'Write only the ENTITY for ADDER4: inputs A, B (4-bit), CIN (1 bit); outputs SUM (4-bit), COUT (1 bit).', rows:7, model:`entity ADDER4 is
+  port ( A, B : in  std_logic_vector(3 downto 0);
+         CIN  : in  std_logic;
+         SUM  : out std_logic_vector(3 downto 0);
+         COUT : out std_logic );
+end ADDER4;`, checks:[[/entity adder4 is/,'entity ADDER4 is'],[/a,b:in std_logic_vector\(3 downto 0\)/,'A, B : in std_logic_vector(3 downto 0)'],[/cin:in std_logic;/,'CIN : in std_logic;'],[/sum:out std_logic_vector\(3 downto 0\)/,'SUM : out std_logic_vector(3 downto 0)'],[/cout:out std_logic\);/,'COUT : out std_logic ); (no ; before ))'],[/end( entity)?( adder4)?;/,'end ADDER4;']]}
+],
+'basics-3':[
+  {t:'mcq', q:'Two concurrent statements drive the same std_logic signal with \'0\' and \'1\'. The simulator shows …', opts:["'0'","'1'","'X'","'Z'"], ans:2},
+  {t:'mcq', q:'At time 0, before anything drives a signal, the waveform shows …', opts:["'0'","'U'","'Z'","'-'"], ans:1}
+],
+'basics-4':[
+  {t:'fill', q:'Declare the internal wire t.', code:'architecture rtl of c is\n  [[0]] t : std_logic;\nbegin\n  t <= a and b;\n  y <= t or c;\nend rtl;', ans:[['signal']]},
+  {t:'mcq', q:'Where are internal signals declared?', opts:['inside the entity port list','between “architecture … is” and “begin”','after “end”','inside the library line'], ans:1}
+],
+'basics-5':[
+  {t:'fill', q:'a = "1100", b = "0101". Work out each result (4 bits).', code:'a and b = [[0]]\na or b  = [[1]]\na xor b = [[2]]\nnot b   = [[3]]\na(1 downto 0) & b(3 downto 2) = [[4]]', ans:[['"0100"'],['"1101"'],['"1001"'],['"1010"'],['"0001"']], loose:true, why:'Bit by bit. The last one: a(1 downto 0) = "00", b(3 downto 2) = "01" → "0001".'},
+  {t:'mcq', q:'How do you fix <code>y &lt;= a or b and c;</code> to mean a OR (b AND c)?', opts:['y <= a or b and c;  (already fine)','y <= a or (b and c);','y <= (a or b) and c;','y <= a + b * c;'], ans:1}
+],
+'basics-6':[
+  {t:'fill', q:'Complete the numeric code.', code:'use ieee.[[0]].all;\n\nsum <= [[1]](unsigned(a) + unsigned(b));\nbig <= \'1\' when [[2]](a) > 9 else \'0\';\nclr <= (others => [[3]]);', ans:[['numeric_std'],['std_logic_vector'],['unsigned'],["'0'"]]}
+],
+'basics-7':[
+  {t:'mcq', q:'Inside ONE process: <code>b &lt;= \'0\'; b &lt;= \'1\';</code> Result?', opts:["'0'","'1'","'X'","compile error"], ans:1, why:'Inside a process the last assignment wins.'},
+  {t:'mcq', q:'Where must an if statement be written?', opts:['anywhere','inside a process','in the entity','after end'], ans:1}
+],
+'basics-8':[
+  {t:'write', q:'Fix ALL the errors (there are 7). Edit the code in the box.', rows:11, starter:`library ieee
+use ieee.std_logic_1164.all;
+entity half_adder
+  ports ( a, b : in std_logic;
+          s, c : out std_logic; );
+end half_adder;
+architecture rtl of halfadder is
+begin
+  s := a xor b;
+  c <= a and b
+end rtl;`, model:`library ieee;
+use ieee.std_logic_1164.all;
+entity half_adder is
+  port ( a, b : in  std_logic;
+         s, c : out std_logic );
+end half_adder;
+architecture rtl of half_adder is
+begin
+  s <= a xor b;
+  c <= a and b;
+end rtl;`, checks:[[/library ieee;/,'; after library ieee'],[/entity half_adder is/,'entity half_adder IS'],[/\bports\b/,'port (not ports)',true],[/s,c:out std_logic\);/,'no ; before ) in the port list'],[/architecture rtl of half_adder is/,'architecture name refers to half_adder'],[/s<=a xor b;/,'s <= (not :=)'],[/c<=a and b;/,'; after c <= a and b']]}
+],
+
+/* ---------- Lesson 1: when / else ---------- */
+'when-1':[
+  {t:'fill', q:'Complete the 2:1 mux.', code:"y [[0]] a [[1]] sel = '0' [[2]] b;", ans:[['<='],['when'],['else']]},
+  {t:'write', q:'Write ONE line: y gets a when s = \'1\', otherwise y gets b.', rows:2, model:"y <= a when s = '1' else b;", checks:[[/y<=a when ?\(?s='1'\)? ?else b;/,"y <= a when s = '1' else b;"]]}
+],
+'when-2':[
+  {t:'mcq', q:'a = \'1\', b = \'1\'. y = ?', code:`y <= "01" when b = '1' else\n     "10" when a = '1' else\n     "00";`, opts:['"01"','"10"','"00"','"11"'], ans:0, why:'The first true condition (b = 1) wins.'},
+  {t:'mcq', q:'A reset must override everything. Where do you put the reset condition?', opts:['first line','last line','anywhere','in the final else'], ans:0}
+],
+'when-3':[
+  {t:'mcq', q:'Which line builds a LATCH?', opts:["y <= a when s = '1' else b;","y <= a when s = '1';","y <= '0' when s = '1' else '1';","y <= not a;"], ans:1},
+  {t:'fill', q:'Make it pure combinational.', code:"eq <= '1' when a = b [[0]] [[1]];", ans:[['else'],["'0'"]]}
+],
+'when-4':[
+  {t:'mcq', q:'sel is a 2-bit std_logic_vector. Which condition is correct for “sel equals 2”?', opts:["sel = 2","sel = '10'",'sel = "10"','sel = "2"'], ans:2},
+  {t:'write', q:'big = \'1\' when the 4-bit std_logic_vector x is greater than 9, else \'0\'. One line (assume numeric_std is used).', rows:2, model:"big <= '1' when unsigned(x) > 9 else '0';", checks:[[/big<='1' when/,"big <= '1' when"],[/unsigned\(x\)(>9|>=10)/,'unsigned(x) > 9'],[/else '0';/,"else '0';"]]}
+],
+'when-5':[
+  {t:'write', q:'Full code (library, entity, architecture): entity <b>small</b> with input n (4-bit) and output s = \'1\' when n &lt; 3, else \'0\'.', model:`library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity small is
+  port ( n : in  std_logic_vector(3 downto 0);
+         s : out std_logic );
+end small;
+
+architecture rtl of small is
+begin
+  s <= '1' when unsigned(n) < 3 else '0';
+end rtl;`, checks:[C.lib,C.use,C.num,[/entity small is/,'entity small is'],[/n:in std_logic_vector\(3 downto 0\)/,'n : in std_logic_vector(3 downto 0)'],[/s:out std_logic\)/,'s : out std_logic );'],C.arch,[/s<='1' when unsigned\(n\)(<3|<=2)/,"s <= '1' when unsigned(n) < 3"],[/else '0';/,"else '0';"]]}
+],
+'when-6':[
+  {t:'fill', q:'F = 1 only for ABC = 011 and 100. Complete.', code:"F <= '1' when (A = [[0]] and B = [[1]] and C = [[2]]) else\n     '1' when (A = [[3]] and B = [[4]] and C = [[5]]) else\n     [[6]];", ans:[["'0'"],["'1'"],["'1'"],["'1'"],["'0'"],["'0'"],["'0'"]]},
+  {t:'write', q:'G(x,y,z) = Σm(0, 7). Write the conditional assignment (architecture body only, x is the MSB).', rows:4, model:`G <= '1' when (x = '0' and y = '0' and z = '0') else
+     '1' when (x = '1' and y = '1' and z = '1') else
+     '0';`, checks:[[/g<=/,'target G <='],[/x='0' and y='0' and z='0'/,'condition for 000'],[/x='1' and y='1' and z='1'/,'condition for 111'],[/else '0';$/,"final else '0';"]]}
+],
+'when-7':[
+  {t:'fill', q:'4:1 mux (D3..D0, SEL).', code:'MX_OUT <= D3 when SEL = [[0]] else\n          D2 when SEL = [[1]] else\n          D1 when SEL = [[2]] else\n          [[3]];', ans:[['"11"'],['"10"'],['"01"'],['D0']]},
+  {t:'write', q:'Full code: entity <b>mux8</b>: a, b are 8-bit inputs, s is 1 bit, y is 8-bit. y = a when s = \'0\', else b.', model:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity mux8 is
+  port ( a, b : in  std_logic_vector(7 downto 0);
+         s    : in  std_logic;
+         y    : out std_logic_vector(7 downto 0) );
+end mux8;
+
+architecture rtl of mux8 is
+begin
+  y <= a when s = '0' else b;
+end rtl;`, checks:[C.lib,C.use,[/entity mux8 is/,'entity mux8 is'],[/a,b:in std_logic_vector\(7 downto 0\)/,'a, b 8-bit inputs'],[/s:in std_logic;/,'s : in std_logic;'],[/y:out std_logic_vector\(7 downto 0\)\)/,'y 8-bit output, closed with );'],C.arch,[/y<=(a when ?\(?s='0'\)? ?else b|b when ?\(?s='1'\)? ?else a);/,'y <= a when s = \'0\' else b;']]}
+],
+'when-8':[
+  {t:'fill', q:'4-input priority encoder where the LOWEST index wins.', code:"idx <= \"00\" when x([[0]]) = '1' else\n       \"01\" when x([[1]]) = '1' else\n       \"10\" when x([[2]]) = '1' else\n       \"11\" when x([[3]]) = '1' else\n       \"00\";", ans:[['0'],['1'],['2'],['3']]},
+  {t:'mcq', q:'Doctor’s INDEX code (X(3) tested first). X = "0101". INDEX = ?', opts:['"001"','"011"','"100"','"010"'], ans:1, why:'Highest 1 is X(2) → position 3 → "011".'},
+  {t:'write', q:'Three requests r(2 downto 0), r(2) has the highest priority. g = "10" if r(2) = \'1\', "01" if r(1) = \'1\', "00" otherwise (r(0) or nothing). One conditional assignment.', rows:4, model:`g <= "10" when r(2) = '1' else
+     "01" when r(1) = '1' else
+     "00";`, checks:[[/g<="10" when r\(2\)='1' else/,'r(2) tested first → "10"'],[/"01" when r\(1\)='1' else/,'then r(1) → "01"'],[/else "00";$/,'final else "00"']]}
+],
+'when-9':[
+  {t:'fill', q:'2:4 decoder with enable.', code:"y <= \"0000\" when en = [[0]] else\n     \"0001\" when w = \"00\" else\n     \"0010\" when w = \"01\" else\n     [[1]] when w = \"10\" else\n     \"1000\";", ans:[["'0'"],['"0100"']]},
+  {t:'mcq', q:'The enable is ACTIVE-LOW (en_n). Which first line disables the decoder?', opts:['"0000" when en_n = \'0\' else','"0000" when en_n = \'1\' else','"0000" when en_n else','"1111" when en_n = \'0\' else'], ans:1}
+],
+'when-10':[
+  {t:'fill', q:'grade: 0–3 → "00", 4–11 → "01", 12–15 → "10".', code:'grade <= "00" when unsigned(s) < [[0]] else\n         "01" when unsigned(s) < [[1]] else\n         "10";', ans:[['4'],['12']]},
+  {t:'mcq', q:'Why test the smallest range first?', opts:['It is faster','The first true condition wins, so later lines only see what is left','VHDL requires it','No reason'], ans:1}
+],
+'when-11':[
+  {t:'write', q:'8-input AND gate, input a(7 downto 0), output y — one conditional assignment.', rows:2, model:`y <= '1' when a = "11111111" else '0';`, checks:[[/y<='1' when a="11111111" else '0';|y<='0' when a\/="11111111" else '1';/,`y <= '1' when a = "11111111" else '0';`]]},
+  {t:'mcq', q:"z <= a when en = '1' else 'Z';  — what is this?", opts:['a latch','a three-state buffer','a mux of two signals','a flip-flop'], ans:1}
+],
+'when-12':[
+  {t:'write', q:"Convert to ONE conditional assignment:<br><code>if a = '1' then y &lt;= x; elsif b = '1' then y &lt;= z; else y &lt;= '0'; end if;</code>", rows:3, model:`y <= x when a = '1' else
+     z when b = '1' else
+     '0';`, checks:[[/y<=x when ?\(?a='1'\)? ?else/,"y <= x when a = '1' else"],[/z when ?\(?b='1'\)? ?else/,"z when b = '1' else"],[/else '0';$/,"final '0';"]]}
+],
+
+/* ---------- Lesson 2: with / select ---------- */
+'select-1':[
+  {t:'fill', q:'Complete the with/select.', code:'[[0]] sel [[1]]\n  y <= a when "00"[[2]]\n       b when "01",\n       c when [[3]];', ans:[['with'],['select'],[','],['others']]},
+  {t:'mcq', q:'How many semicolons does one with/select statement have?', opts:['one per branch','exactly one, at the end','none','two'], ans:1}
+],
+'select-2':[
+  {t:'mcq', q:'Which is a compile ERROR?', code:`with s select\n  y <= a when "00" | "01",\n       b when "01",\n       c when others;`, opts:['nothing','"01" appears twice','| is illegal','others must be first'], ans:1},
+  {t:'mcq', q:'Does the ORDER of the branches change the result?', opts:['Yes, the first wins','No, all choices are compared at once'], ans:1}
+],
+'select-3':[
+  {t:'fill', q:'Helper selector for inputs a, b, c.', code:'signal abc : std_logic_vector([[0]] downto 0);\n...\nabc <= a [[1]] b [[2]] c;', ans:[['2'],['&'],['&']]},
+  {t:'write', q:'Inputs p, q. f = \'1\' when pq = "01" or "10" (that is XOR). Declare a helper, then use ONE with/select (architecture only).', model:`architecture sel of xr is
+  signal pq : std_logic_vector(1 downto 0);
+begin
+  pq <= p & q;
+  with pq select
+    f <= '1' when "01" | "10",
+         '0' when others;
+end sel;`, checks:[[/signal \w+:std_logic_vector\(1 downto 0\);/,'helper: signal … : std_logic_vector(1 downto 0);'],[/\w+<=p&q;/,'helper <= p & q;'],C.withSel,[/f<='1' when ("01"\|"10"|"10"\|"01")/,`f <= '1' when "01" | "10",`],[/'0' when others;/,"'0' when others;"]]}
+],
+'select-4':[
+  {t:'write', q:'Full code with with/select: entity <b>dec24</b>, input a (2-bit), output y (4-bit), one-hot (a = "00" → "0001" …).', model:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity dec24 is
+  port ( a : in  std_logic_vector(1 downto 0);
+         y : out std_logic_vector(3 downto 0) );
+end dec24;
+
+architecture sel of dec24 is
+begin
+  with a select
+    y <= "0001" when "00",
+         "0010" when "01",
+         "0100" when "10",
+         "1000" when "11",
+         "0000" when others;
+end sel;`, checks:[C.lib,C.use,[/entity dec24 is/,'entity dec24 is'],[/a:in std_logic_vector\(1 downto 0\)/,'a 2-bit'],[/y:out std_logic_vector\(3 downto 0\)\)/,'y 4-bit'],[/with a select/,'with a select'],[/"0001" when "00"/,'"0001" when "00"'],[/"1000" when "11"/,'"1000" when "11"'],C.others]}
+],
+'select-5':[
+  {t:'fill', q:'f(a,b,c) = Σm(1, 4, 6) with helper abc.', code:"with abc select\n  f <= '1' when [[0]] | [[1]] | [[2]],\n       '0' when others;", ans:[['"001"'],['"100"'],['"110"']]},
+  {t:'mcq', q:'f has six 1-rows and two 0-rows. What do you list?', opts:['the six 1-rows','the two 0-rows, others → \'1\'','all eight rows','nothing'], ans:1}
+],
+'select-6':[
+  {t:'write', q:'4:1 mux with with/select: input d(3 downto 0), select sel (2-bit), output y (1 bit). Architecture body only.', rows:6, model:`with sel select
+  y <= d(0) when "00",
+       d(1) when "01",
+       d(2) when "10",
+       d(3) when "11",
+       '0'  when others;`, checks:[[/with sel select/,'with sel select'],[/d\(0\) ?when "00"/,'d(0) when "00"'],[/d\(1\) ?when "01"/,'d(1) when "01"'],[/d\(2\) ?when "10"/,'d(2) when "10"'],[/d\(3\) ?when "11"|d\(3\) ?when others/,'d(3) for "11"'],[/when others;/,'when others;']]}
+],
+'select-7':[
+  {t:'fill', q:'d (3-bit): 0–2 → "01", 3–7 → "10", others → "00".', code:'with d select\n  r <= "01" when "000" | "001" | [[0]],\n       "10" when "011" | "100" | "101" | "110" | [[1]],\n       "00" when [[2]];', ans:[['"010"'],['"111"'],['others']]},
+  {t:'mcq', q:'Can you write <code>"01" when 0 to 2,</code> for a std_logic_vector selector?', opts:['Yes','No — ranges only for integer/enumerated selectors'], ans:1}
+],
+'select-8':[
+  {t:'fill', q:'3:8 decoder with enable: ea <= en & a; (en is the MSB).', code:'en = 1, a = "110"  →  choice [[0]]  →  y = [[1]]\nen = 0, a = "110"  →  falls into [[2]]', ans:[['"1110"'],['"01000000"'],['others']]}
+],
+'select-9':[
+  {t:'fill', q:'ALU branches (a, b are std_logic_vector, numeric_std used).', code:'with op select\n  y <= std_logic_vector(unsigned(a) [[0]] unsigned(b)) when "00",  -- a - b\n       a [[1]] b                                        when "01",  -- a XOR b\n       [[2]] a                                          when "10",  -- NOT a\n       (others => \'0\')                                  when others;', ans:[['-'],['xor'],['not']]},
+  {t:'write', q:'4-op ALU, architecture body only: op "00" → a and b, "01" → a or b, "10" → not a, "11" → a xor b. Use with/select.', rows:6, model:`with op select
+  y <= a and b         when "00",
+       a or b          when "01",
+       not a           when "10",
+       a xor b         when "11",
+       (others => '0') when others;`, checks:[C.withSel,[/a and b when "00"/,'a and b when "00"'],[/a or b when "01"/,'a or b when "01"'],[/not a when "10"/,'not a when "10"'],[/a xor b when ("11"|others)/,'a xor b for "11"'],[/when others;/,'when others;']]}
+],
+'select-10':[
+  {t:'fill', q:'BCD → Excess-3 (value + 3).', code:'"0000" → [[0]]\n"0101" → [[1]]\n"1001" → [[2]]', ans:[['"0011"'],['"1000"'],['"1100"']], loose:true}
+],
+'select-11':[
+  {t:'write', q:"Convert to when/else:<br><code>with s select z &lt;= a when '0', b when others;</code>", rows:2, model:"z <= a when s = '0' else b;", checks:[[/z<=a when ?\(?s='0'\)? ?else b;|z<=b when ?\(?s='1'\)? ?else a;/,"z <= a when s = '0' else b;"]]},
+  {t:'mcq', q:'Converting with/select to when/else — when does the order of the when/else lines matter?', opts:['always','never, because with/select choices never overlap','only for vectors'], ans:1}
+],
+
+/* ---------- Lesson 3: registers & counters ---------- */
+'seq-1':[
+  {t:'mcq', q:'<code>if en = \'1\' then q &lt;= d; end if;</code> in a process(en, d) builds …', opts:['a flip-flop','a latch','a mux','nothing'], ans:1},
+  {t:'mcq', q:'What makes a FLIP-FLOP in VHDL?', opts:["if clk = '1' then","if rising_edge(clk) then","process(clk) alone","wait"], ans:1}
+],
+'seq-2':[
+  {t:'fill', q:'Name the edge.', code:"if clk'event and clk = [[0]] then   -- falling edge\nif [[1]](clk) then                  -- rising edge\nif [[2]](clk) then                  -- falling edge", ans:[["'0'"],['rising_edge'],['falling_edge']]}
+],
+'seq-3':[
+  {t:'fill', q:'Complete the asynchronous-reset template.', code:"process(clk, [[0]])\nbegin\n  if rst = '1' then\n    q <= '0';\n  [[1]] rising_edge(clk) then\n    if en = '1' then\n      q <= d;\n    end if;\n  end [[2]];\nend process;", ans:[['rst'],['elsif'],['if']]},
+  {t:'write', q:'Write the PROCESS of a D flip-flop: rising edge, asynchronous active-high reset rst, enable en.', model:`process(clk, rst)
+begin
+  if rst = '1' then
+    q <= '0';
+  elsif rising_edge(clk) then
+    if en = '1' then
+      q <= d;
+    end if;
+  end if;
+end process;`, checks:[[/process\((clk,rst|rst,clk)\)/,'process(clk, rst)'],[/if rst='1' then q<='0';/,"if rst = '1' then q <= '0';"],[/elsif rising_edge\(clk\) ?then/,'elsif rising_edge(clk) then'],[/if en='1' then q<=d;/,"if en = '1' then q <= d;"],[/end process;/,'end process;']]}
+],
+'seq-4':[
+  {t:'mcq', q:'Synchronous reset — sensitivity list?', opts:['(clk)','(clk, rst)','(d)','(clk, d, rst)'], ans:0},
+  {t:'write', q:'PROCESS of a FALLING-edge D flip-flop with SYNCHRONOUS ACTIVE-LOW reset rst_n.', model:`process(clk)
+begin
+  if falling_edge(clk) then
+    if rst_n = '0' then
+      q <= '0';
+    else
+      q <= d;
+    end if;
+  end if;
+end process;`, checks:[[/process\(clk\)/,'process(clk) only'],[/if falling_edge\(clk\) ?then/,'if falling_edge(clk) then (first)'],[/if rst_n='0' then q<='0';/,"if rst_n = '0' then q <= '0';"],[/else q<=d;|elsif .* then q<=d;/,'else q <= d;']]}
+],
+'seq-5':[
+  {t:'mcq', q:'At an edge load = 1 and en = 1. What happens?', code:`if load = '1' then\n  count <= unsigned(din);\nelsif en = '1' then\n  count <= count + 1;\nend if;`, opts:['count + 1','count = din','both','hold'], ans:1, why:'load is tested first → it has priority.'},
+  {t:'mcq', q:'Inside the clock edge you write “if en = \'1\' then q <= d; end if;” with no else. This means …', opts:['a latch bug','hold when en = 0 — correct','compile error','q becomes 0'], ans:1}
+],
+'seq-6':[
+  {t:'write', q:'Full code: 4-bit register <b>reg4</b>: rising edge, asynchronous active-high reset rst, enable en, input d, output q (4-bit).', model:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity reg4 is
+  port ( clk, rst, en : in  std_logic;
+         d : in  std_logic_vector(3 downto 0);
+         q : out std_logic_vector(3 downto 0) );
+end reg4;
+
+architecture rtl of reg4 is
+begin
+  process(clk, rst)
+  begin
+    if rst = '1' then
+      q <= (others => '0');
+    elsif rising_edge(clk) then
+      if en = '1' then
+        q <= d;
+      end if;
+    end if;
+  end process;
+end rtl;`, checks:[C.lib,C.use,[/entity reg4 is/,'entity reg4 is'],[/d:in std_logic_vector\(3 downto 0\)/,'d 4-bit in'],[/q:out std_logic_vector\(3 downto 0\)\)/,'q 4-bit out'],[/process\((clk,rst|rst,clk)\)/,'process(clk, rst)'],[/q<=\(others=>'0'\);|q<="0000";/,'reset to zeros'],[/elsif rising_edge\(clk\)/,'elsif rising_edge(clk)'],[/if en='1' then q<=d;/,'enable then q <= d']]}
+],
+'seq-7':[
+  {t:'fill', q:'4-bit shift lines (internal signal q).', code:'-- shift RIGHT, sin enters q(3)\nq <= sin & q([[0]] downto [[1]]);\n-- shift LEFT, sin enters q(0)\nq <= q([[2]] downto [[3]]) & sin;\n-- serial out for shift right\nso <= q([[4]]);', ans:[['3'],['1'],['2'],['0'],['0']]},
+  {t:'write', q:'PROCESS of a 4-bit SISO that shifts LEFT on the rising edge (sin enters q(0)), with synchronous active-high reset rst. No enable.', model:`process(clk)
+begin
+  if rising_edge(clk) then
+    if rst = '1' then
+      q <= (others => '0');
+    else
+      q <= q(2 downto 0) & sin;
+    end if;
+  end if;
+end process;`, checks:[[/process\(clk\)/,'process(clk)'],[/if rising_edge\(clk\) ?then/,'rising_edge inside'],[/if rst='1' then q<=(\(others=>'0'\)|"0000");/,'sync reset to zeros'],[/q<=q\(2 downto 0\)&sin;/,'q <= q(2 downto 0) & sin;']]}
+],
+'seq-8':[
+  {t:'fill', q:'Counter skeleton.', code:'use ieee.[[0]].all;\n...\nsignal count : [[1]](3 downto 0);\n...\ncount <= count [[2]] 1;\n...\nq <= [[3]](count);', ans:[['numeric_std'],['unsigned'],['+'],['std_logic_vector']]},
+  {t:'write', q:'PROCESS of a 3-bit DOWN counter: rising edge, SYNCHRONOUS active-high reset rst (to 0), no enable. (signal count : unsigned(2 downto 0) already declared)', model:`process(clk)
+begin
+  if rising_edge(clk) then
+    if rst = '1' then
+      count <= (others => '0');
+    else
+      count <= count - 1;
+    end if;
+  end if;
+end process;`, checks:[[/process\(clk\)/,'process(clk)'],[/if rising_edge\(clk\) ?then/,'rising edge'],[/if rst='1' then count<=(\(others=>'0'\)|"000");/,'sync reset of count'],[/count<=count-1;/,'count <= count - 1;']]}
+],
+'seq-9':[
+  {t:'fill', q:'Mod-6 up counter (0..5).', code:"if en = '1' then\n  if count = [[0]] then\n    count <= (others => [[1]]);\n  else\n    count <= count + 1;\n  end if;\nend if;", ans:[['5'],["'0'"]]},
+  {t:'write', q:'Inside the clock edge: a mod-10 (BCD) counter with enable en. Write just the inner if-block.', rows:7, model:`if en = '1' then
+  if count = 9 then
+    count <= (others => '0');
+  else
+    count <= count + 1;
+  end if;
+end if;`, checks:[[/if en='1' then/,"if en = '1' then"],[/if count=9 then/,'if count = 9 then'],[/count<=(\(others=>'0'\)|"0000");/,'wrap to 0'],[/else count<=count\+1;/,'else count <= count + 1;']]}
+],
+'seq-10':[
+  {t:'fill', q:'T flip-flop update (q_i is the internal signal).', code:'q_i <= q_i [[0]] t;', ans:[['xor']]},
+  {t:'mcq', q:'JK flip-flop with J = 1, K = 1 at the edge:', opts:['hold','reset','set','toggle'], ans:3}
+],
+'seq-11':[
+  {t:'mcq', q:'Which line is a bug in a counter whose output q is an out port?', opts:['count <= count + 1;','q <= q + 1;','q <= std_logic_vector(count);','signal count : unsigned(3 downto 0);'], ans:1, why:'q is out (cannot be read in VHDL-93) and std_logic_vector has no +.'}
+],
+
+/* ---------- Lesson 4: timing ---------- */
+'timing-1':[
+  {t:'mcq', q:"<code>if clk'event and clk = '1' then</code> means …", opts:['falling edge','rising edge','clk is high (level)','both edges'], ans:1},
+  {t:'wave', q:'Warm-up: plain rising-edge D flip-flop (q <= d at every rising edge), q starts at 0. Draw q.', spec:PS.r1}
+],
+'timing-2':[
+  {t:'wave', q:'Same process as the doctor’s question (falling edge, synchronous reset, enable) but NEW inputs. Q starts at 1.', code:`process(reset, clk)\nbegin\n  if (clk'event and clk = '0') then\n    if reset = '1' then\n      Q <= '0';\n    elsif enable = '1' then\n      Q <= D;\n    end if;\n  end if;\nend process;`, spec:PS.ex}
+],
+'timing-3':[
+  {t:'wave', q:'ASYNCHRONOUS reset this time. q starts at 0.', code:`process(clk, rst)\nbegin\n  if rst = '1' then\n    q <= '0';\n  elsif rising_edge(clk) then\n    q <= d;\n  end if;\nend process;`, spec:PS.as}
+],
+'timing-4':[
+  {t:'wave', q:'D latch, transparent while en = 1. Q starts at 1.', spec:PS.la}
+],
+'timing-5':[
+  {t:'wave', q:'The QA / QB process (QA follows D while clock = 0, QB follows QA while clock = 1). QB starts at 0. Draw both.', spec:PS.two}
+],
+'timing-6':[
+  {t:'wave', q:'3-bit up counter, rising edge, async active-low rst_n, enable en. Starts at 5. Type the value after each event (remember 7 + 1 → 0).', spec:PS.cn}
+],
+'timing-7':[
+  {t:'wave', q:'4-bit shift LEFT (q <= q(2 downto 0) & sin), enable en, starts at "1111". Type q after each edge.', spec:PS.sh}
+],
+'timing-8':[
+  {t:'mcq', q:'In one clocked process: a <= d; b <= a; (all signals). b is …', opts:['equal to d at the same edge','d delayed by one more clock (old a)','always 0','equal to a'], ans:1},
+  {t:'mcq', q:'Same, but v is a VARIABLE: v := d; b <= v;  b is …', opts:['d sampled at this edge (no extra delay)','delayed by two clocks','undefined'], ans:0}
+],
+'timing-9':[
+  {t:'tt', q:'A waveform shows these input combinations and outputs: abc = 000→1, 001→0, 010→1, 011→0, 100→1, 101→1, 110→1, 111→1. Copy f into the table (practice reading rows).', cols:['a','b','c'], out:'f', ans:[1,0,1,0,1,1,1,1]},
+  {t:'mcq', q:'Simplify that f.', opts:['f = a + c\'','f = a\'c','f = b + c','f = ac\''], ans:0, why:'f = 1 whenever a = 1, and when a = 0 only if c = 0 → a + c\'.'}
+],
+'timing-10':[
+  {t:'wave', q:'Final check: FALLING edge, ASYNC clear clr (active-high), enable en. q starts at 1.', code:`process(clk, clr)\nbegin\n  if clr = '1' then\n    q <= '0';\n  elsif falling_edge(clk) then\n    if en = '1' then\n      q <= d;\n    end if;\n  end if;\nend process;`, spec:PS.fin}
+]
+};
+
+/* ===================== Interactive hardware widgets (lesson "from zero") ===================== */
+const W = (() => {
+  const h = (tag, attrs={}, ...kids) => { const e=document.createElement(tag); for(const [k,v] of Object.entries(attrs)){ if(k==='class') e.className=v; else if(k.startsWith('on')) e.addEventListener(k.slice(2),v); else e.setAttribute(k,v); } kids.flat().forEach(k=>e.append(k instanceof Node?k:document.createTextNode(k))); return e; };
+  const bitBtn = (label, get, set, onchange) => { const b=h('button',{type:'button',class:'bit'}); const draw=()=>{ b.innerHTML=`<span class="bl">${label}</span><span class="bv">${get()}</span>`; b.classList.toggle('one',get()===1); }; b.addEventListener('click',()=>{ set(get()^1); draw(); onchange(); }); draw(); b.redraw=draw; return b; };
+  const lamp = (label, v) => `<span class="lamp ${v?'on':''}"><i></i>${label}</span>`;
+  const codeLine = s => `<div class="live"><span class="label">VHDL view</span><code>${esc(s)}</code></div>`;
+
+  // ---------- gate symbols ----------
+  function gateSVG(g, a, b, y){
+    const col=v=>v?'var(--ok)':'var(--muted)';
+    const bub = g.startsWith('N')||g==='XNOR'||g==='NOT';
+    let body;
+    if(g==='AND'||g==='NAND') body='M40,10 H62 A22,22 0 0 1 62,54 H40 Z';
+    else if(g==='NOT') body='M40,10 L80,32 L40,54 Z';
+    else body='M38,10 Q52,32 38,54 Q72,54 88,32 Q72,10 38,10 Z';
+    const xr = g==='XOR'||g==='XNOR' ? '<path d="M31,10 Q45,32 31,54" fill="none" stroke="var(--ink)" stroke-width="2"/>' : '';
+    const outX = (g==='AND'||g==='NAND') ? 84 : (g==='NOT'?80:88);
+    const bx = bub ? outX+5 : outX;
+    return `<svg viewBox="0 0 140 64" width="210" height="96" class="gsvg" role="img" aria-label="${g} gate">
+      <line x1="0" y1="${g==='NOT'?32:22}" x2="44" y2="${g==='NOT'?32:22}" stroke="${col(a)}" stroke-width="3"/>
+      ${g==='NOT'?'':`<line x1="0" y1="42" x2="44" y2="42" stroke="${col(b)}" stroke-width="3"/>`}
+      <path d="${body}" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>${xr}
+      ${bub?`<circle cx="${outX+4}" cy="32" r="4" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>`:''}
+      <line x1="${bx+4}" y1="32" x2="140" y2="32" stroke="${col(y)}" stroke-width="3"/>
+      <text x="2" y="${g==='NOT'?28:18}" class="gt">A</text>${g==='NOT'?'':'<text x="2" y="38" class="gt">B</text>'}<text x="126" y="28" class="gt">Y</text></svg>`;
+  }
+  const GATES={AND:(a,b)=>a&b,OR:(a,b)=>a|b,NOT:a=>a^1,NAND:(a,b)=>(a&b)^1,NOR:(a,b)=>(a|b)^1,XOR:(a,b)=>a^b,XNOR:(a,b)=>(a^b)^1};
+  const OPS={AND:'a and b',OR:'a or b',NOT:'not a',NAND:'a nand b',NOR:'a nor b',XOR:'a xor b',XNOR:'a xnor b'};
+  function gate(el){
+    let g='AND', a=0, b=0;
+    const sel=h('select',{'aria-label':'gate'}); Object.keys(GATES).forEach(k=>sel.append(h('option',{value:k},k)));
+    const out=h('div',{class:'wout'});
+    const A=bitBtn('A',()=>a,v=>a=v,draw), B=bitBtn('B',()=>b,v=>b=v,draw);
+    sel.addEventListener('change',()=>{ g=sel.value; draw(); });
+    function draw(){
+      const y=GATES[g](a,b); B.style.display = g==='NOT'?'none':'';
+      let tt='<table class="mini"><tr><th>A</th>'+(g==='NOT'?'':'<th>B</th>')+'<th>Y</th></tr>';
+      const rows = g==='NOT'?[[0],[1]]:[[0,0],[0,1],[1,0],[1,1]];
+      rows.forEach(r=>{ const cur = r[0]===a && (g==='NOT'||r[1]===b); tt+=`<tr class="${cur?'cur':''}"><td>${r[0]}</td>${g==='NOT'?'':`<td>${r[1]}</td>`}<td><b>${GATES[g](r[0],r[1])}</b></td></tr>`; });
+      tt+='</table>';
+      out.innerHTML=`<div class="wrow">${gateSVG(g,a,b,y)}${lamp('Y = '+y,y)}${tt}</div>`+codeLine(`y <= ${OPS[g]};`);
+    }
+    el.append(h('div',{class:'wctl'},h('span',{class:'label'},'Gate'),sel,A,B), out); draw();
+  }
+
+  // ---------- multiplexer ----------
+  function mux(el){
+    const d=[1,0,1,0]; let s1=0, s0=0;
+    const out=h('div',{class:'wout'});
+    const dBtns=[3,2,1,0].map(i=>bitBtn('D'+i,()=>d[i],v=>d[i]=v,draw));
+    const S1=bitBtn('sel(1)',()=>s1,v=>s1=v,draw), S0=bitBtn('sel(0)',()=>s0,v=>s0=v,draw);
+    function draw(){
+      const k=s1*2+s0, y=d[k];
+      let lines=''; for(let i=0;i<4;i++){ const yy=22+i*30; const on=i===k; lines+=`<line x1="10" y1="${yy}" x2="70" y2="${yy}" stroke="${on?'var(--accent)':'var(--line)'}" stroke-width="${on?4:2}"/><text x="12" y="${yy-5}" class="gt">D${i} = ${d[i]}</text>`; if(on) lines+=`<path d="M70,${yy} L130,82" stroke="var(--accent)" stroke-width="4" fill="none"/>`; }
+      const svg=`<svg viewBox="0 0 230 150" width="300" height="196" class="gsvg" role="img" aria-label="4 to 1 multiplexer">${lines}
+        <path d="M70,6 L150,30 L150,124 L70,148 Z" fill="var(--panel)" stroke="var(--ink)" stroke-width="2" opacity=".92"/>
+        <text x="92" y="80" class="gt" font-weight="700">MUX</text>
+        <line x1="150" y1="78" x2="220" y2="78" stroke="${y?'var(--ok)':'var(--muted)'}" stroke-width="4"/><text x="172" y="70" class="gt">y = ${y}</text>
+        <line x1="110" y1="137" x2="110" y2="150" stroke="var(--amber)" stroke-width="3"/><text x="118" y="148" class="gt">sel = "${s1}${s0}"</text></svg>`;
+      out.innerHTML=`<div class="wrow">${svg}<div><p class="small">sel = "${s1}${s0}" = ${k} → the switch connects <b>D${k}</b> to the output.</p>${lamp('y = '+y,y)}</div></div>`+codeLine(`y <= D${k};   -- because sel = "${s1}${s0}"`);
+    }
+    el.append(h('div',{class:'wctl'},h('span',{class:'label'},'Data'),...dBtns,h('span',{class:'label'},'Select'),S1,S0), out); draw();
+  }
+
+  // ---------- decoder ----------
+  function decoder(el){
+    let a1=1,a0=0,en=1; const out=h('div',{class:'wout'});
+    const E=bitBtn('en',()=>en,v=>en=v,draw), A1=bitBtn('a(1)',()=>a1,v=>a1=v,draw), A0=bitBtn('a(0)',()=>a0,v=>a0=v,draw);
+    function draw(){ const k=a1*2+a0; let ys=''; let code=''; for(let i=3;i>=0;i--){ const v= en && i===k ?1:0; ys+=lamp('y('+i+')',v); code+=v; }
+      out.innerHTML=`<div class="wrow"><div class="lamps">${ys}</div><p class="small">${en?`a = "${a1}${a0}" = ${k} → only output line <b>y(${k})</b> is 1.`:'en = 0 → decoder switched off → all outputs 0.'}</p></div>`+codeLine(`y <= "${code}";`); }
+    el.append(h('div',{class:'wctl'},E,A1,A0),out); draw();
+  }
+
+  // ---------- priority encoder ----------
+  function encoder(el){
+    const w=[0,1,1,0]; const out=h('div',{class:'wout'});
+    const btns=[3,2,1,0].map(i=>bitBtn('w('+i+')',()=>w[i],v=>w[i]=v,draw));
+    function draw(){ let hi=-1; for(let i=3;i>=0;i--) if(w[i]){hi=i;break;}
+      const y = hi<0?'00':GEN.bin(hi,2), valid=hi<0?0:1;
+      out.innerHTML=`<div class="wrow"><div>${lamp('y = "'+y+'"',hi>0)} ${lamp('valid = '+valid,valid)}</div><p class="small">${hi<0?'No input is 1 → valid = 0 (ignore y).':`Several inputs may be 1; the <b>highest</b> one wins: w(${hi}) → y = "${y}".`}</p></div>`+codeLine(`y <= "${y}";  valid <= '${valid}';`); }
+    el.append(h('div',{class:'wctl'},...btns),out); draw();
+  }
+
+  // ---------- latch vs flip-flop ----------
+  function ff(el){
+    let D=0, C=0, QL=0, QF=0; const log=[]; const out=h('div',{class:'wout'});
+    const Db=bitBtn('D',()=>D,v=>D=v,()=>step(false));
+    const Cb=bitBtn('clk / en',()=>C,v=>C=v,()=>step(true));
+    function step(clkChanged){
+      const prevQF=QF;
+      if(C===1) QL=D;
+      if(clkChanged && C===1){ QF=D; log.unshift(`↑ rising edge: flip-flop copies D = ${D}`); }
+      else if(clkChanged){ log.unshift('↓ clock went to 0: nothing happens to the flip-flop'); }
+      else log.unshift(`D changed to ${D}: ${C?'latch is OPEN → follows it; flip-flop ignores it':'latch is closed, flip-flop ignores it'}`);
+      if(log.length>5) log.pop(); draw(); }
+    function draw(){ out.innerHTML=`<div class="wrow"><div>${lamp('Q latch = '+QL,QL)} ${lamp('Q flip-flop = '+QF,QF)}</div><ol class="log">${log.map(l=>`<li>${esc(l)}</li>`).join('')}</ol></div><p class="small">Try: set clk = 1, then toggle D several times. The latch follows every change; the flip-flop only changes at the moment clk goes 0 → 1.</p>`; }
+    el.append(h('div',{class:'wctl'},Db,Cb),out); draw();
+  }
+
+  // ---------- register / shift register / counter ----------
+  function boxes(bits, prev){ return `<div class="boxes">${[...bits].map((b,i)=>`<span class="bx ${b==='1'?'one':''} ${prev&&prev[i]!==b?'chg':''}"><small>q(${bits.length-1-i})</small>${b}</span>`).join('')}</div>`; }
+  function register(el){
+    const d=[0,1,1,0]; let en=1, q='0000'; const out=h('div',{class:'wout'}); let msg='Set d, then press Clock ↑.'; let prev=null;
+    const dB=[3,2,1,0].map(i=>bitBtn('d('+i+')',()=>d[i],v=>d[i]=v,draw));
+    const E=bitBtn('en',()=>en,v=>en=v,draw);
+    const tick=h('button',{type:'button',class:'btn primary'},'Clock ↑'); const rst=h('button',{type:'button',class:'btn'},'Reset (async)');
+    tick.addEventListener('click',()=>{ prev=q; if(en){ q=[3,2,1,0].map(i=>d[i]).join(''); msg=`Edge! en = 1 → q copied d = "${q}" (all 4 bits at once).`; } else msg=`Edge, but en = 0 → q holds "${q}".`; draw(); flash(out); });
+    rst.addEventListener('click',()=>{ prev=q; q='0000'; msg='Reset → q = "0000" immediately (no clock needed).'; draw(); });
+    function draw(){ out.innerHTML=`${boxes(q,prev)}<p class="small">${msg}</p>`+codeLine(en?`q <= d;   -- on the edge, d = "${[3,2,1,0].map(i=>d[i]).join('')}"`:'-- en = 0: no assignment → q keeps its value'); }
+    el.append(h('div',{class:'wctl'},...dB,E,tick,rst),out); draw();
+  }
+  function shift(el){
+    let sin=1, q='0000', dir='right', prev=null, msg='Pick sin and press Clock ↑.'; const out=h('div',{class:'wout'});
+    const S=bitBtn('sin',()=>sin,v=>sin=v,draw);
+    const sel=h('select',{'aria-label':'direction'},h('option',{value:'right'},'shift right (sin enters q(3))'),h('option',{value:'left'},'shift left (sin enters q(0))'));
+    sel.addEventListener('change',()=>{ dir=sel.value; draw(); });
+    const tick=h('button',{type:'button',class:'btn primary'},'Clock ↑'); const clr=h('button',{type:'button',class:'btn'},'Clear');
+    tick.addEventListener('click',()=>{ prev=q; const out1 = dir==='right'?q[3]:q[0]; q = dir==='right' ? sin+q.slice(0,3) : q.slice(1)+sin; msg=`Edge! ${sin} entered ${dir==='right'?'on the left (q(3))':'on the right (q(0))'}, every bit moved one place, and ${out1} fell out.`; draw(); flash(out); });
+    clr.addEventListener('click',()=>{ prev=null; q='0000'; msg='Cleared.'; draw(); });
+    function draw(){ out.innerHTML=`${boxes(q,prev)}<p class="small">${msg} Serial out = <b>${dir==='right'?q[3]:q[0]}</b> (${dir==='right'?'q(0)':'q(3)'}).</p>`+codeLine(dir==='right'?'q <= sin & q(3 downto 1);':'q <= q(2 downto 0) & sin;'); }
+    el.append(h('div',{class:'wctl'},S,sel,tick,clr),out); draw();
+  }
+  function counter(el){
+    let c=0, en=1, up=1, mod=16, msg='Press Clock ↑ (or Auto).', timer=null, prev=null; const out=h('div',{class:'wout'});
+    const E=bitBtn('en',()=>en,v=>en=v,draw), U=bitBtn('up',()=>up,v=>up=v,draw);
+    const M=h('select',{'aria-label':'modulus'},h('option',{value:16},'4-bit (0..15)'),h('option',{value:10},'mod-10 / BCD (0..9)'),h('option',{value:6},'mod-6 (0..5)'));
+    M.addEventListener('change',()=>{ mod=+M.value; c=0; draw(); });
+    const tick=h('button',{type:'button',class:'btn primary'},'Clock ↑'); const auto=h('button',{type:'button',class:'btn'},'Auto ▶'); const rst=h('button',{type:'button',class:'btn'},'Reset');
+    const doTick=()=>{ prev=GEN.bin(c,4); if(!en){ msg=`en = 0 → hold at ${c}.`; } else if(up){ msg = c===mod-1?`${c} + 1 wraps to 0.`:`${c} → ${c+1}`; c=(c+1)%mod; } else { msg = c===0?`0 − 1 wraps to ${mod-1}.`:`${c} → ${c-1}`; c=(c+mod-1)%mod; } draw(); flash(out); };
+    tick.addEventListener('click',doTick);
+    auto.addEventListener('click',()=>{ if(timer){ clearInterval(timer); timer=null; auto.textContent='Auto ▶'; } else { timer=setInterval(()=>{ if(!document.body.contains(el)){clearInterval(timer);return;} doTick(); },700); auto.textContent='Pause ❚❚'; } });
+    rst.addEventListener('click',()=>{ c=0; prev=null; msg='Reset → 0.'; draw(); });
+    function draw(){ out.innerHTML=`<div class="wrow"><div class="bignum">${c}</div>${boxes(GEN.bin(c,4),prev)}</div><p class="small">${msg}</p>`+codeLine(!en?'-- en = 0: count keeps its value': mod<16 ? (up?`if count = ${mod-1} then count <= (others => '0'); else count <= count + 1; end if;`:`if count = 0 then count <= to_unsigned(${mod-1}, 4); else count <= count - 1; end if;`) : `count <= count ${up?'+':'-'} 1;`); }
+    el.append(h('div',{class:'wctl'},E,U,M,tick,auto,rst),out); draw();
+  }
+  function flash(el){ el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+
+  const ALL={gate,mux,decoder,encoder,ff,register,shift,counter};
+  function init(){ $$('[data-w]').forEach(el=>{ const f=ALL[el.dataset.w]; if(f && !el.dataset.ready){ el.dataset.ready=1; el.classList.add('widget'); f(el); } }); }
+  return {init};
+})();
+
 /* ===================== App ===================== */
 const store = {
   get(k, d){ try{ const v=localStorage.getItem('vhdl20:'+k); return v===null? d : JSON.parse(v); }catch(e){ return d; } },
@@ -3940,6 +4856,7 @@ function initLessons(){
     L.prepend(head);
     const dots=$('.dots',head);
     steps.forEach((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.textContent=i+1; b.title=$('h3',s)?$('h3',s).textContent.replace(/^\d+\/\d+/,''):''; b.addEventListener('click',()=>go(i)); dots.appendChild(b);
+      if(typeof PRACTICE!=='undefined' && PRACTICE[`${id}-${i+1}`]){ const t=document.createElement('div'); s.appendChild(t); renderTry(t, `${id}-${i+1}`); }
       const nav=document.createElement('div'); nav.className='stepnav';
       nav.append(btn('← Previous',()=>go(i-1),'ghost'));
       nav.append(i<steps.length-1 ? btn('Next step →',()=>go(i+1),'primary') : btn('✓ Lesson done',()=>{ markDone(id,true); go(i); location.hash=L.dataset.next||'home'; },'primary'));
@@ -3947,18 +4864,23 @@ function initLessons(){
       s.appendChild(nav);
     });
     $('.allt',head).addEventListener('change',e=>{ L.classList.toggle('all',e.target.checked); });
+    const markDots=()=>{ const sv=store.get('solved',{}); $$('button',dots).forEach((b,j)=>{ const key=`${id}-${j+1}`; const it=PRACTICE[key]; b.classList.toggle('solvedall', !!it && it.every((_,q)=>sv[`${key}#${q}`])); }); };
+    L.addEventListener('click',()=>setTimeout(markDots,50)); markDots();
     function go(i){ if(i<0||i>=steps.length) return; cur=i; seen.add(i); store.set('step:'+id,i); store.set('seen:'+id,[...seen]);
       steps.forEach((s,j)=>s.classList.toggle('cur',j===i)); $$('button',dots).forEach((b,j)=>{ b.classList.toggle('cur',j===i); b.classList.toggle('seen',seen.has(j)); });
       const top=L.getBoundingClientRect().top+scrollY-70; if(scrollY>top) scrollTo({top}); }
     go(cur);
   });
 }
-function markDone(id,v){ const d=store.get('done',{}); d[id]=v; store.set('done',d); updateNav(); updatePath(); }
+function confetti(){ if(matchMedia('(prefers-reduced-motion: reduce)').matches) return; const cols=['var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--ok)']; for(let i=0;i<36;i++){ const p=document.createElement('span'); p.className='conf'; p.style.left=(40+Math.random()*20)+'vw'; p.style.background=cols[i%cols.length]; p.style.setProperty('--dx',(Math.random()*80-40)+'vw'); p.style.setProperty('--r',(Math.random()*720)+'deg'); p.style.animationDelay=(Math.random()*0.15)+'s'; document.body.appendChild(p); setTimeout(()=>p.remove(),1800); } }
+function markDone(id,v){ if(v) confetti(); const d=store.get('done',{}); d[id]=v; store.set('done',d); updateNav(); updatePath(); }
 
 /* ---------- path / progress ---------- */
 function updatePath(){ const d=store.get('done',{}); $$('.path li[data-k]').forEach(li=>{ const k=li.dataset.k; const cb=$('input',li); cb.checked=!!d[k]; li.classList.toggle('ok',!!d[k]); }); const n=$$('.path li[data-k]').length, k=$$('.path li[data-k]').filter(li=>d[li.dataset.k]).length; const p=$('#path-pct'); if(p) p.textContent=`${k}/${n}`; }
 function initPath(){ $$('.path li[data-k] input').forEach(cb=>cb.addEventListener('change',()=>markDone(cb.closest('li').dataset.k, cb.checked))); updatePath(); }
-function updateNav(){ const d=store.get('done',{}); $$('.nav a[data-k]').forEach(a=>{ let s=$('.done',a); if(d[a.dataset.k]){ if(!s){ s=document.createElement('span'); s.className='done'; s.textContent='✓'; a.appendChild(s);} } else if(s) s.remove(); }); }
+function practiceStats(lesson){ const sv=store.get('solved',{}); let n=0,k=0; Object.keys(PRACTICE).filter(key=>key.startsWith(lesson+'-')).forEach(key=>PRACTICE[key].forEach((_,i)=>{ n++; if(sv[`${key}#${i}`]) k++; })); return [k,n]; }
+function updateNav(){ $$('.np[data-np]').forEach(sp=>{ const [k,n]=practiceStats(sp.dataset.np); sp.textContent=n?`${k}/${n}`:''; sp.classList.toggle('full',n>0&&k===n); });
+  const d=store.get('done',{}); $$('.nav a[data-k]').forEach(a=>{ let s=$('.done',a); if(d[a.dataset.k]){ if(!s){ s=document.createElement('span'); s.className='done'; s.textContent='✓'; a.appendChild(s);} } else if(s) s.remove(); }); }
 
 /* ---------- question cards ---------- */
 const PARTS={W:'Q1 · when / else',S:'Q2 · with / select',R:'Q3 · registers & counters',T:'Q4 · timing diagram',E:'Basics & error-finding'};
@@ -4199,7 +5121,10 @@ document.addEventListener('DOMContentLoaded',()=>{
   $$('.mcqs').forEach(box=>{ const items=QUICK[box.dataset.set]||[]; box.innerHTML=items.map((it,i)=>mcqHTML(it,box.dataset.set+i)).join(''); });
   $$('.bankref').forEach(box=>{ box.dataset.ids.split(',').forEach(id=>{ const it=BANK.find(b=>b.id===id.trim()); if(it) box.appendChild(qCard(it)); }); });
   initLessons(); initDemos(); initPath(); updateNav(); initGen(); initTrace(); initTrainer(); initMocks();
-  $('#menu-btn').addEventListener('click',()=>$('.side').classList.toggle('open'));
+  const narrow=()=>matchMedia('(max-width:900px)').matches;
+  if(store.get('navClosed',false)) document.body.classList.add('nav-closed');
+  $('#menu-btn').addEventListener('click',()=>{ if(narrow()) $('.side').classList.toggle('open'); else { const c=document.body.classList.toggle('nav-closed'); store.set('navClosed',c); } });
+  XP.paint(); W.init();
   document.addEventListener('keydown',e=>{ if(e.key==='Escape') $('.side').classList.remove('open'); });
   window.addEventListener('hashchange',route); route();
 });
