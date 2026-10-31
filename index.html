@@ -21,22 +21,6 @@
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --radius:10px;
 }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --paper:#0f131b; --panel:#161b25; --ink:#e7ebf2; --muted:#9aa5b8; --line:#2a3242; --soft:#1d2431;
-  --accent:#7d9bff; --accent-soft:#1d2a4d; --accent-ink:#0f131b;
-  --amber:#f0a646; --amber-soft:#3a2a12;
-  --ok:#5ccf8c; --ok-soft:#14301f; --bad:#ff7a7a; --bad-soft:#3a1818;
-  --code-bg:#0b0f16; --code-ink:#dfe5ef; --kw:#8fb0ff; --str:#f3b36b; --com:#7d8aa0; --num:#6fd69a; --typ:#c79bff;
-  --clk:#7d9bff; --sig:#5fc7b0; --qans:#f0a646; --grid:#232b39; color-scheme:dark;
-}}
-:root[data-theme="dark"]{
-  --paper:#0f131b; --panel:#161b25; --ink:#e7ebf2; --muted:#9aa5b8; --line:#2a3242; --soft:#1d2431;
-  --accent:#7d9bff; --accent-soft:#1d2a4d; --accent-ink:#0f131b;
-  --amber:#f0a646; --amber-soft:#3a2a12;
-  --ok:#5ccf8c; --ok-soft:#14301f; --bad:#ff7a7a; --bad-soft:#3a1818;
-  --code-bg:#0b0f16; --code-ink:#dfe5ef; --kw:#8fb0ff; --str:#f3b36b; --com:#7d8aa0; --num:#6fd69a; --typ:#c79bff;
-  --clk:#7d9bff; --sig:#5fc7b0; --qans:#f0a646; --grid:#232b39; color-scheme:dark;
-}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none!important;animation:none!important}}
@@ -201,19 +185,15 @@ svg.wave .uq{fill:var(--muted);font-size:11px}
 .hr{height:1px;background:var(--line);margin:22px 0}
 
 /* ================= v2 polish ================= */
-:root{ --c1:#2448c4; --c2:#0f8a7a; --c3:#7a3db8; --c4:#b86a00; --shadow:0 1px 2px rgba(20,26,40,.06),0 6px 20px rgba(20,26,40,.06); --top:56px; }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --c1:#7d9bff; --c2:#4fd1bd; --c3:#c79bff; --c4:#f0a646; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.25);} }
-:root[data-theme="dark"]{ --c1:#7d9bff; --c2:#4fd1bd; --c3:#c79bff; --c4:#f0a646; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.25); }
+:root{ --c1:#2448c4; --c2:#0f8a7a; --c3:#7a3db8; --c4:#b86a00; --shadow:0 1px 2px rgba(20,26,40,.06),0 6px 20px rgba(20,26,40,.06); --top:60px; }
 code,kbd,pre,.code,textarea,input.blank,svg text,select{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
-body{background-color:var(--paper);background-image:radial-gradient(var(--grid) 1px,transparent 1px);background-size:22px 22px}
+body{background:var(--paper)}
 body::before{background:var(--panel)}
-.topbar{display:flex;align-items:center;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:40;height:var(--top);background:var(--panel);border-bottom:1px solid var(--line);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.topbar{display:flex;align-items:center;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:40;height:var(--top);background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
 .tb-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
-.tb-brand b{font-family:var(--f-display);font-size:1.02rem;letter-spacing:-.01em}
+.tb-brand b{font-family:var(--f-display);font-size:1.05rem;letter-spacing:-.01em;white-space:nowrap}
 .tb-space{flex:1}
-.iconbtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
-.iconbtn:hover{border-color:var(--accent);color:var(--accent)}
-.xpchip{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:30px;padding:4px 10px;background:var(--panel)}
+.xpchip{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:30px;padding:4px 10px;background:var(--panel);white-space:nowrap}
 .xpchip b{color:var(--accent);font-family:var(--f-display);font-size:.9rem}
 .xpbar{width:70px;height:6px;border-radius:6px;background:var(--soft);overflow:hidden;display:inline-block}
 .xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--c2));border-radius:6px;transition:width .4s}
@@ -311,18 +291,63 @@ ol.log li:first-child{color:var(--ink);font-weight:600}
 .conf{position:fixed;top:40vh;width:9px;height:14px;border-radius:2px;z-index:99;pointer-events:none;animation:conf 1.6s cubic-bezier(.2,.7,.4,1) forwards}
 @keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),60vh) rotate(var(--r));opacity:0}}
 
+.tq.mainw{border:2px solid var(--accent);background:var(--panel)}
+.mainlabel{display:inline-block;font:700 .78rem var(--f-display);letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);border-radius:20px;padding:3px 10px;margin-bottom:8px}
+.typebox{margin:12px 0 6px}
+.typebox .label{display:block;margin-bottom:4px;color:var(--accent)}
+
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --paper:#0f131b; --panel:#161b25; --ink:#e7ebf2; --muted:#9aa5b8; --line:#2a3242; --soft:#1d2431;
+  --accent:#7d9bff; --accent-soft:#1d2a4d; --accent-ink:#0f131b;
+  --amber:#f0a646; --amber-soft:#3a2a12;
+  --ok:#5ccf8c; --ok-soft:#14301f; --bad:#ff7a7a; --bad-soft:#3a1818;
+  --code-bg:#0b0f16; --code-ink:#dfe5ef; --kw:#8fb0ff; --str:#f3b36b; --com:#7d8aa0; --num:#6fd69a; --typ:#c79bff;
+  --clk:#7d9bff; --sig:#5fc7b0; --qans:#f0a646; --grid:#232b39;
+  --c1:#7d9bff; --c2:#4fd1bd; --c3:#c79bff; --c4:#f0a646; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.25); color-scheme:dark; } }
+:root[data-theme="dark"]{ --paper:#0f131b; --panel:#161b25; --ink:#e7ebf2; --muted:#9aa5b8; --line:#2a3242; --soft:#1d2431;
+  --accent:#7d9bff; --accent-soft:#1d2a4d; --accent-ink:#0f131b;
+  --amber:#f0a646; --amber-soft:#3a2a12;
+  --ok:#5ccf8c; --ok-soft:#14301f; --bad:#ff7a7a; --bad-soft:#3a1818;
+  --code-bg:#0b0f16; --code-ink:#dfe5ef; --kw:#8fb0ff; --str:#f3b36b; --com:#7d8aa0; --num:#6fd69a; --typ:#c79bff;
+  --clk:#7d9bff; --sig:#5fc7b0; --qans:#f0a646; --grid:#232b39;
+  --c1:#7d9bff; --c2:#4fd1bd; --c3:#c79bff; --c4:#f0a646; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.25); color-scheme:dark; }
+.menubtn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:600 .88rem var(--f-body);cursor:pointer}
+.menubtn:hover{border-color:var(--accent);color:var(--accent)}
+.themebtn{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 .85rem var(--f-body);cursor:pointer}
+.themebtn:hover{border-color:var(--accent)}
+.side-close{display:flex;align-items:center;justify-content:space-between;margin:0 4px 10px}
+@media (max-width:480px){ .menubtn .mt,.themebtn .tt{display:none} }
+
+.ac{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-top:10px;background:var(--panel)}
+.ac.perfect{border-color:var(--ok);background:var(--ok-soft)}
+.ac-head{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;margin-bottom:4px}
+.ac-score{font:800 1.15rem var(--f-display);color:var(--accent)}
+.ac.perfect .ac-score{color:var(--ok)}
+ul.checks2{list-style:none;padding:0;margin:4px 0;max-width:none}
+ul.checks2 li{margin:6px 0;line-height:1.5}
+ul.checks2 li.ok{color:var(--ok)}
+ul.checks2 li.no{color:var(--bad)}
+ul.checks2 li.no b,ul.checks2 li.no code{color:var(--ink)}
+ul.checks2 li.warnl{color:var(--amber)}
+.hint{display:inline-block;margin-top:4px;color:var(--ink);background:var(--amber-soft);border-radius:8px;padding:4px 8px}
+pre.errline{margin:6px 0 0;padding:6px 10px;border-color:var(--bad)}
+pre.errline .ln{color:var(--bad);font-weight:700;margin-right:12px}
+.acrow{margin-top:6px}
+
+.entexp{margin:4px 0 6px;font-size:.85rem}.entexp summary{cursor:pointer;color:var(--muted)}
+
 </style>
 </head>
 <body>
 <header class="topbar">
-  <button type="button" class="iconbtn" id="menu-btn" aria-label="Show or hide the menu" aria-expanded="true"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+  <button type="button" class="menubtn" id="menu-btn" aria-label="Hide or show the side menu"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span class="mt">Hide menu</span></button>
   <a href="#home" class="tb-brand"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="var(--accent)"/><path d="M6 22 H11 V12 H17 V22 H23 V12 H28" fill="none" stroke="var(--accent-ink)" stroke-width="2.6" stroke-linejoin="round"/></svg><b><span class="long">VHDL Midterm Coach</span><span class="short">VHDL Coach</span></b></a>
   <span class="tb-space"></span>
   <span class="xpchip" title="Experience points from the Your-turn exercises"></span>
-  <button type="button" class="iconbtn theme-btn" aria-label="Switch light or dark theme"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+  <button type="button" class="themebtn theme-btn" aria-label="Switch dark or light mode"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" fill="currentColor"/></svg><span class="tt">Dark mode</span></button>
 </header>
 <div class="shell">
 <nav class="side" aria-label="Sections">
+  <div class="side-close"><span class="label">Menu</span><button type="button" class="btn sm" id="side-hide">« Hide</button></div>
   <div class="nav">
     <a href="#home" data-k="home"><span class="ni">⌂</span>Start here</a>
     <div class="nav-group label">Learn — in this order</div>
@@ -4002,6 +4027,197 @@ const MOCKS = [
   {name:'Classifier · decoder · BCD counter · exam-classic waveform', items:['M3W','M3S','M3R','M3T']}
 ];
 
+/* full designs used by the auto-checker for questions whose model answer is only a snippet */
+const CHECKM = {
+S9:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity alu_op is
+  port ( a, b : in  std_logic_vector(3 downto 0);
+         op   : in  std_logic_vector(1 downto 0);
+         r    : out std_logic_vector(3 downto 0) );
+end alu_op;
+
+architecture sel of alu_op is
+begin
+  with op select
+    r <= a and b when "00",
+         a or b  when "01",
+         a xor b when "10",
+         not a   when others;
+end sel;`,
+S10:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity bin2gray3 is
+  port ( b : in  std_logic_vector(2 downto 0);
+         g : out std_logic_vector(2 downto 0) );
+end bin2gray3;
+
+architecture sel_arch of bin2gray3 is
+begin
+  with b select
+    g <= "000" when "000",
+         "001" when "001",
+         "011" when "010",
+         "010" when "011",
+         "110" when "100",
+         "111" when "101",
+         "101" when "110",
+         "100" when "111",
+         "000" when others;
+end sel_arch;`,
+S14:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity f4 is
+  port ( a, b, c, d : in  std_logic;
+         f          : out std_logic );
+end f4;
+
+architecture sel of f4 is
+  signal abcd : std_logic_vector(3 downto 0);
+begin
+  abcd <= a & b & c & d;
+  with abcd select
+    f <= '1' when "0000" | "0010" | "0101" | "0111" |
+                  "1000" | "1010" | "1101" | "1111",
+         '0' when others;
+end sel;`,
+S15:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity shifter4 is
+  port ( x  : in  std_logic_vector(3 downto 0);
+         op : in  std_logic_vector(1 downto 0);
+         y  : out std_logic_vector(3 downto 0) );
+end shifter4;
+
+architecture sel of shifter4 is
+begin
+  with op select
+    y <= x(2 downto 0) & '0'  when "01",
+         '0' & x(3 downto 1)  when "10",
+         x(2 downto 0) & x(3) when "11",
+         x                    when others;
+end sel;`,
+S16:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity q14e is
+  port ( A, B, C : in  std_logic;
+         F       : out std_logic );
+end q14e;
+
+architecture sel of q14e is
+  signal abc : std_logic_vector(2 downto 0);
+begin
+  abc <= A & B & C;
+  with abc select
+    F <= '1' when "000" | "001" | "011" | "100",
+         '0' when others;
+end sel;`,
+S17:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity enc42 is
+  port ( w     : in  std_logic_vector(3 downto 0);
+         y     : out std_logic_vector(1 downto 0);
+         valid : out std_logic );
+end enc42;
+
+architecture sel_arch of enc42 is
+begin
+  with w select
+    y <= "00" when "0001",
+         "01" when "0010",
+         "10" when "0100",
+         "11" when "1000",
+         "00" when others;
+
+  with w select
+    valid <= '1' when "0001" | "0010" | "0100" | "1000",
+             '0' when others;
+end sel_arch;`,
+W15:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity traffic is
+  port ( stop, go : in  std_logic;
+         light    : out std_logic_vector(2 downto 0) );
+end traffic;
+
+architecture cond of traffic is
+begin
+  light <= "100" when stop = '1' else
+           "001" when go = '1'   else
+           "010";
+end cond;`,
+R1:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity dff is
+  port ( clk, rst, d : in  std_logic;
+         q           : out std_logic );
+end entity;
+
+architecture async of dff is
+begin
+  process(clk, rst)
+  begin
+    if rst = '1' then
+      q <= '0';
+    elsif rising_edge(clk) then
+      q <= d;
+    end if;
+  end process;
+end architecture;`,
+R6:`library ieee;
+use ieee.std_logic_1164.all;
+
+entity shiftreg is
+  port ( clk, En_n, Sin : in  std_logic;
+         Sout           : out std_logic );
+end entity;
+
+architecture behavior of shiftreg is
+  signal sreg : std_logic_vector(3 downto 0);
+begin
+  process(clk)
+  begin
+    if falling_edge(clk) then
+      if En_n = '0' then
+        sreg <= Sin & sreg(3 downto 1);
+      end if;
+    end if;
+  end process;
+  Sout <= sreg(0);
+end architecture;`,
+R13:`library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity cnt is
+  port ( clk, rst : in  std_logic;
+         q        : out std_logic_vector(3 downto 0) );
+end cnt;
+
+architecture fixed of cnt is
+  signal count : unsigned(3 downto 0);
+begin
+  process(clk, rst)
+  begin
+    if rst = '1' then
+      count <= "0000";
+    elsif rising_edge(clk) then
+      count <= count + 1;
+    end if;
+  end process;
+  q <= std_logic_vector(count);
+end fixed;`
+};
+BANK.forEach(b=>{ if(CHECKM[b.id]) b.checkModel=CHECKM[b.id]; });
+
 /* ===================== "Your turn" practice inside every lesson step ===================== */
 const XP = {
   get(){ return store.get('xp',0); },
@@ -4025,7 +4241,7 @@ function normCode(s){
   // drop optional brackets around a whole condition: if (a='1') then  →  if a='1' then
   const re=/\b(if|elsif|when)\(((?:[^()]|\([^()]*\))*)\)(then|else|,|;)/g; let prev;
   do{ prev=n; n=n.replace(re,'$1 $2 $3'); }while(n!==prev);
-  return n.replace(/ ;/g,';').replace(/ ,/g,',');
+  return n.replace(/ ;/g,';').replace(/ ,/g,',').replace(/\)(then|when|else)\b/g,') $1');
 }
 function normAns(s){ return s.toLowerCase().replace(/\s+/g,''); }
 
@@ -4066,10 +4282,13 @@ const TRY = {
     $('.shw',box).addEventListener('click',()=>{ inputs.forEach(inp=>{ inp.value=it.ans[+inp.dataset.n][0]; inp.classList.remove('bad'); }); const fb=$('.fb',box); fb.hidden=false; fb.innerHTML=it.why||''; });
   },
   write(box,it,id){
-    box.innerHTML=`<div class="tq-q">${it.q}</div><textarea class="codein" rows="${it.rows||8}" spellcheck="false" autocapitalize="off" aria-label="your VHDL">${esc(it.starter||'')}</textarea><div class="row"><button type="button" class="btn primary sm chk">Check my code</button><button type="button" class="btn sm shw">Show model answer</button></div><div class="fb" hidden></div><div class="model" hidden>${codeBlock(it.model,'Model answer')}${it.why?`<p class="small">${it.why}</p>`:''}</div>`;
+    if(it.main) box.classList.add('mainw');
+    box.innerHTML=`${it.main?'<div class="mainlabel">✍ Write the whole code yourself — library, entity, architecture</div>':''}<div class="tq-q">${it.q}</div><textarea class="codein" rows="${it.rows||8}" spellcheck="false" autocapitalize="off" aria-label="your VHDL">${esc(it.starter||'')}</textarea><div class="row"><button type="button" class="btn primary sm chk">Check my code</button><button type="button" class="btn sm shw">Show model answer</button></div><div class="fb" hidden></div><div class="model" hidden>${codeBlock(it.model,'Model answer')}${it.why?`<p class="small">${it.why}</p>`:''}</div>`;
     const ta=$('textarea',box);
     ta.addEventListener('keydown',e=>{ if(e.key==='Tab'){ e.preventDefault(); const s=ta.selectionStart; ta.value=ta.value.slice(0,s)+'  '+ta.value.slice(ta.selectionEnd); ta.selectionStart=ta.selectionEnd=s+2; } });
+    const full = typeof isFullDesign==='function' && isFullDesign(it.model);
     $('.chk',box).addEventListener('click',()=>{
+      if(full){ const acHTML=autoCheckHTML(it.model, ta.value); const fb=$('.fb',box); fb.hidden=false; fb.innerHTML=acHTML; if(fb.querySelector('.ac.perfect')){ XP.award(id,25,$('.chk',box)); solvedHere(box); $('.model',box).hidden=false; } return; }
       const n=normCode(ta.value); let pass=0;
       const lis=it.checks.map(([re,label,neg])=>{ const hit=re.test(n); const ok=neg?!hit:hit; if(ok) pass++; return `<li class="${ok?'ok':'no'}">${ok?'✓':'✗'} ${label}</li>`; });
       const fb=$('.fb',box); fb.hidden=false;
@@ -4556,6 +4775,572 @@ end if;`, checks:[[/if en='1' then/,"if en = '1' then"],[/if count=9 then/,'if c
 ]
 };
 
+/* ===================== "Write the whole code" — first exercise of every step in lessons 0–3 ===================== */
+const PT=(n,m,t)=>{ const ty = t==='sl' ? 'std_logic(?!_)' : t.replace(/[()]/g,'\\$&'); return [new RegExp(`[(;,]${n}(,\\w+)*:${m} ${ty}`), `${n} : ${m} ${t==='sl'?'std_logic':t}`]; };
+const SV=n=>`std_logic_vector(${n-1} downto 0)`;
+const FULL=(name,ports,body,num)=>[C.lib,C.use,...(num?[C.num]:[]),[new RegExp(`entity ${name} is`),`entity ${name} is`],...ports,[/\);end( entity)?( \w+)?;/,'port list closed with ); then end …;'],C.arch,C.begin,...body,[/end( architecture)?( \w+)?;$/,'architecture closed with end …;']];
+const LH='library ieee;\nuse ieee.std_logic_1164.all;\n', LN='library ieee;\nuse ieee.std_logic_1164.all;\nuse ieee.numeric_std.all;\n';
+const W1=(q,model,checks,why)=>({t:'write',main:true,rows:14,q,model,checks,why});
+
+const MAINW = {
+'basics-2': W1('Entity <b>and3</b>: inputs a, b, c; output y = a AND b AND c.', `${LH}
+entity and3 is
+  port ( a, b, c : in  std_logic;
+         y       : out std_logic );
+end and3;
+
+architecture rtl of and3 is
+begin
+  y <= a and b and c;
+end rtl;`, FULL('and3',[PT('a','in','sl'),PT('b','in','sl'),PT('c','in','sl'),PT('y','out','sl')],[[/y<=a and b and c;/,'y <= a and b and c;']])),
+'basics-3': W1('Entity <b>half_adder</b>: inputs a, b; outputs s = a XOR b and co = a AND b.', `${LH}
+entity half_adder is
+  port ( a, b  : in  std_logic;
+         s, co : out std_logic );
+end half_adder;
+
+architecture dataflow of half_adder is
+begin
+  s  <= a xor b;
+  co <= a and b;
+end dataflow;`, FULL('half_adder',[PT('a','in','sl'),PT('b','in','sl'),PT('s','out','sl'),PT('co','out','sl')],[[/s<=(a xor b|b xor a);/,'s <= a xor b;'],[/co<=(a and b|b and a);/,'co <= a and b;']])),
+'basics-4': W1('Entity <b>fun1</b>: inputs a, b, c; output f = (a AND b) OR (NOT c). Use an internal signal <b>t</b> for (a AND b).', `${LH}
+entity fun1 is
+  port ( a, b, c : in  std_logic;
+         f       : out std_logic );
+end fun1;
+
+architecture rtl of fun1 is
+  signal t : std_logic;
+begin
+  t <= a and b;
+  f <= t or not c;
+end rtl;`, FULL('fun1',[PT('a','in','sl'),PT('c','in','sl'),PT('f','out','sl')],[[/is signal t:std_logic;begin/,'signal t : std_logic; declared before begin'],[/t<=(a and b|b and a);/,'t <= a and b;'],[/f<=(t or not c|t or\(not c\)|not c or t|\(not c\)or t);/,'f <= t or not c;']])),
+'basics-5': W1('Entity <b>aoi</b>: inputs a, b, c, d; output f = NOT((a AND b) OR (c AND d)). Mind the parentheses!', `${LH}
+entity aoi is
+  port ( a, b, c, d : in  std_logic;
+         f          : out std_logic );
+end aoi;
+
+architecture rtl of aoi is
+begin
+  f <= not ((a and b) or (c and d));
+end rtl;`, FULL('aoi',[PT('a','in','sl'),PT('d','in','sl'),PT('f','out','sl')],[[/f<=not\(\(a and b\)or\(c and d\)\);/,'f <= not ((a and b) or (c and d));']])),
+'basics-6': W1('Entity <b>add4</b>: inputs a, b (4-bit); output s (4-bit) = a + b. Remember numeric_std.', `${LN}
+entity add4 is
+  port ( a, b : in  std_logic_vector(3 downto 0);
+         s    : out std_logic_vector(3 downto 0) );
+end add4;
+
+architecture rtl of add4 is
+begin
+  s <= std_logic_vector(unsigned(a) + unsigned(b));
+end rtl;`, FULL('add4',[PT('a','in',SV(4)),PT('b','in',SV(4)),PT('s','out',SV(4))],[[/s<=std_logic_vector\(unsigned\(a\)\+unsigned\(b\)\);/,'s <= std_logic_vector(unsigned(a) + unsigned(b));']],true)),
+'basics-7': W1('Entity <b>gates3</b>: inputs a, b; three outputs p = a OR b, q = a AND b, r = a XOR b (three concurrent statements).', `${LH}
+entity gates3 is
+  port ( a, b    : in  std_logic;
+         p, q, r : out std_logic );
+end gates3;
+
+architecture rtl of gates3 is
+begin
+  p <= a or b;
+  q <= a and b;
+  r <= a xor b;
+end rtl;`, FULL('gates3',[PT('a','in','sl'),PT('b','in','sl'),PT('p','out','sl'),PT('r','out','sl')],[[/p<=(a or b|b or a);/,'p <= a or b;'],[/q<=(a and b|b and a);/,'q <= a and b;'],[/r<=(a xor b|b xor a);/,'r <= a xor b;']])),
+
+'when-1': W1('Entity <b>mux2</b>: inputs a, b, s; output y = a when s = \'0\', otherwise b. Full code, ONE conditional assignment.', `${LH}
+entity mux2 is
+  port ( a, b, s : in  std_logic;
+         y       : out std_logic );
+end mux2;
+
+architecture rtl of mux2 is
+begin
+  y <= a when s = '0' else b;
+end rtl;`, FULL('mux2',[PT('a','in','sl'),PT('s','in','sl'),PT('y','out','sl')],[[/y<=(a when s='0' else b|b when s='1' else a);/,"y <= a when s = '0' else b;"]])),
+'when-2': W1('Entity <b>pick</b>: inputs a, b; output y (2-bit) = "11" when a and b are both 1, "10" when only a is 1, "01" when only b is 1, "00" otherwise. Think about the ORDER.', `${LH}
+entity pick is
+  port ( a, b : in  std_logic;
+         y    : out std_logic_vector(1 downto 0) );
+end pick;
+
+architecture rtl of pick is
+begin
+  y <= "11" when (a = '1' and b = '1') else
+       "10" when a = '1' else
+       "01" when b = '1' else
+       "00";
+end rtl;`, FULL('pick',[PT('a','in','sl'),PT('b','in','sl'),PT('y','out',SV(2))],[[/y<="11" when (a='1' and b='1'|b='1' and a='1') else/,'"11" case tested FIRST'],[/"10" when a='1'/,'"10" when a = \'1\''],[/"01" when b='1'/,'"01" when b = \'1\''],[/else "00";/,'final else "00"']]), 'If you put “a = 1” first, the "11" line can never be reached.'),
+'when-3': W1('Entity <b>eq4</b>: inputs a, b (4-bit); output eq = \'1\' when a equals b, else \'0\'.', `${LH}
+entity eq4 is
+  port ( a, b : in  std_logic_vector(3 downto 0);
+         eq   : out std_logic );
+end eq4;
+
+architecture rtl of eq4 is
+begin
+  eq <= '1' when a = b else '0';
+end rtl;`, FULL('eq4',[PT('a','in',SV(4)),PT('b','in',SV(4)),PT('eq','out','sl')],[[/eq<='1' when (a=b|b=a|unsigned\(a\)=unsigned\(b\)) else '0';/,"eq <= '1' when a = b else '0';"]])),
+'when-4': W1('Entity <b>zero_det</b>: input v (8-bit); output z = \'1\' when v is all zeros, else \'0\'.', `${LH}
+entity zero_det is
+  port ( v : in  std_logic_vector(7 downto 0);
+         z : out std_logic );
+end zero_det;
+
+architecture rtl of zero_det is
+begin
+  z <= '1' when v = "00000000" else '0';
+end rtl;`, FULL('zero_det',[PT('v','in',SV(8)),PT('z','out','sl')],[[/z<='1' when v="00000000" else '0';|z<='0' when v\/="00000000" else '1';/,`z <= '1' when v = "00000000" else '0';`]])),
+'when-6': W1('Full code with when/else: <b>F(A,B,C) = Σm(0, 3, 5, 6)</b>, entity <b>par3</b> (A is the MSB).', `${LH}
+entity par3 is
+  port ( A, B, C : in  std_logic;
+         F       : out std_logic );
+end par3;
+
+architecture rtl of par3 is
+begin
+  F <= '1' when (A = '0' and B = '0' and C = '0') else   -- m0
+       '1' when (A = '0' and B = '1' and C = '1') else   -- m3
+       '1' when (A = '1' and B = '0' and C = '1') else   -- m5
+       '1' when (A = '1' and B = '1' and C = '0') else   -- m6
+       '0';
+end rtl;`, FULL('par3',[PT('a','in','sl'),PT('c','in','sl'),PT('f','out','sl')],[[/a='0' and b='0' and c='0'/,'condition for m0 = 000'],[/a='0' and b='1' and c='1'/,'condition for m3 = 011'],[/a='1' and b='0' and c='1'/,'condition for m5 = 101'],[/a='1' and b='1' and c='0'/,'condition for m6 = 110'],[/else '0';/,"final else '0'"]]), 'Write the minterms in A, B, C order so each row is easy to check.'),
+'when-8': W1('Entity <b>prio4</b>: input w (4-bit); outputs y (2-bit) = index of the HIGHEST bit that is \'1\' (w(3) → "11"), and valid = \'0\' when w = "0000".', `${LH}
+entity prio4 is
+  port ( w     : in  std_logic_vector(3 downto 0);
+         y     : out std_logic_vector(1 downto 0);
+         valid : out std_logic );
+end prio4;
+
+architecture dataflow of prio4 is
+begin
+  y <= "11" when w(3) = '1' else
+       "10" when w(2) = '1' else
+       "01" when w(1) = '1' else
+       "00";
+  valid <= '0' when w = "0000" else '1';
+end dataflow;`, FULL('prio4',[PT('w','in',SV(4)),PT('y','out',SV(2)),PT('valid','out','sl')],[[/y<="11" when w\(3\)='1' else "10" when w\(2\)='1' else "01" when w\(1\)='1' else/,'w(3), w(2), w(1) tested in that order'],[/else "00";/,'final else "00"'],[/valid<=('0' when w="0000" else '1'|'1' when w\/="0000" else '0');/,'valid statement']])),
+'when-9': W1('Entity <b>dec24</b>: input w (2-bit), enable en (active-high); output y (4-bit) one-hot; "0000" when en = \'0\'. ONE conditional assignment.', `${LH}
+entity dec24 is
+  port ( w  : in  std_logic_vector(1 downto 0);
+         en : in  std_logic;
+         y  : out std_logic_vector(3 downto 0) );
+end dec24;
+
+architecture rtl of dec24 is
+begin
+  y <= "0000" when en = '0' else
+       "0001" when w = "00" else
+       "0010" when w = "01" else
+       "0100" when w = "10" else
+       "1000";
+end rtl;`, FULL('dec24',[PT('w','in',SV(2)),PT('en','in','sl'),PT('y','out',SV(4))],[[/y<="0000" when en='0' else/,'enable tested FIRST'],[/"0001" when w="00"/,'"0001" when w = "00"'],[/"0100" when w="10"/,'"0100" when w = "10"'],[/"1000"( when w="11" else "0000")?;/,'"1000" for w = "11" + final value']])),
+'when-10': W1('Entity <b>level</b>: input t (4-bit unsigned number); output lvl (2-bit): 0–5 → "00", 6–10 → "01", 11–15 → "10". One conditional assignment.', `${LN}
+entity level is
+  port ( t   : in  std_logic_vector(3 downto 0);
+         lvl : out std_logic_vector(1 downto 0) );
+end level;
+
+architecture rtl of level is
+begin
+  lvl <= "00" when unsigned(t) < 6  else
+         "01" when unsigned(t) < 11 else
+         "10";
+end rtl;`, FULL('level',[PT('t','in',SV(4)),PT('lvl','out',SV(2))],[[/"00" when unsigned\(t\)(<6|<=5)/,'"00" when unsigned(t) < 6'],[/"01" when unsigned\(t\)(<11|<=10)/,'"01" when unsigned(t) < 11'],[/else "10"/,'"10" at the end']],true)),
+'when-11': W1('Entity <b>demux4</b>: input x, select sel (2-bit); output y (4-bit). y(i) = x when sel = i, else \'0\'. Four conditional assignments.', `${LH}
+entity demux4 is
+  port ( x   : in  std_logic;
+         sel : in  std_logic_vector(1 downto 0);
+         y   : out std_logic_vector(3 downto 0) );
+end demux4;
+
+architecture rtl of demux4 is
+begin
+  y(0) <= x when sel = "00" else '0';
+  y(1) <= x when sel = "01" else '0';
+  y(2) <= x when sel = "10" else '0';
+  y(3) <= x when sel = "11" else '0';
+end rtl;`, FULL('demux4',[PT('x','in','sl'),PT('sel','in',SV(2)),PT('y','out',SV(4))],[[/y\(0\)<=x when sel="00" else '0';/,'y(0)'],[/y\(1\)<=x when sel="01" else '0';/,'y(1)'],[/y\(2\)<=x when sel="10" else '0';/,'y(2)'],[/y\(3\)<=x when sel="11" else '0';/,'y(3)']])),
+'when-12': W1('Entity <b>mux4p</b>: inputs d0, d1, d2, d3, sel (2-bit); output y. Write it with a PROCESS and if / elsif / else (the twin of a when/else chain).', `${LH}
+entity mux4p is
+  port ( d0, d1, d2, d3 : in  std_logic;
+         sel            : in  std_logic_vector(1 downto 0);
+         y              : out std_logic );
+end mux4p;
+
+architecture beh of mux4p is
+begin
+  process(d0, d1, d2, d3, sel)
+  begin
+    if sel = "00" then
+      y <= d0;
+    elsif sel = "01" then
+      y <= d1;
+    elsif sel = "10" then
+      y <= d2;
+    else
+      y <= d3;
+    end if;
+  end process;
+end beh;`, FULL('mux4p',[PT('d0','in','sl'),PT('sel','in',SV(2)),PT('y','out','sl')],[[/process\([^)]*sel[^)]*\)/,'process with sel in the sensitivity list'],[/process\([^)]*d3[^)]*\)/,'… and the data inputs in the list'],[/if sel="00" then y<=d0;/,'if sel = "00" then y <= d0;'],[/elsif sel="01" then y<=d1;/,'elsif …'],[/else y<=d3;end if;/,'else y <= d3; end if;'],[/end process;/,'end process;']])),
+
+'select-1': W1('Entity <b>mux4s</b>: inputs a, b, c, d, sel (2-bit); output y. ONE with/select (sel "00" → a … "11" → d).', `${LH}
+entity mux4s is
+  port ( a, b, c, d : in  std_logic;
+         sel        : in  std_logic_vector(1 downto 0);
+         y          : out std_logic );
+end mux4s;
+
+architecture rtl of mux4s is
+begin
+  with sel select
+    y <= a when "00",
+         b when "01",
+         c when "10",
+         d when others;
+end rtl;`, FULL('mux4s',[PT('a','in','sl'),PT('d','in','sl'),PT('sel','in',SV(2)),PT('y','out','sl')],[[/with sel select y<=a when "00",/,'with sel select y <= a when "00",'],[/b when "01",/,'b when "01",'],[/c when "10",/,'c when "10",'],[/d when (others|"11")/,'d for "11"'],[/when others;/,'when others;']])),
+'select-2': W1('Entity <b>odd3</b>: input x (3-bit); output f = \'1\' when x has an ODD number of 1s. Use x directly as the selector.', `${LH}
+entity odd3 is
+  port ( x : in  std_logic_vector(2 downto 0);
+         f : out std_logic );
+end odd3;
+
+architecture rtl of odd3 is
+begin
+  with x select
+    f <= '1' when "001" | "010" | "100" | "111",
+         '0' when others;
+end rtl;`, FULL('odd3',[PT('x','in',SV(3)),PT('f','out','sl')],[[/with x select/,'with x select'],[/"001"/,'"001" listed'],[/"010"/,'"010" listed'],[/"100"/,'"100" listed'],[/"111"/,'"111" listed'],[/'0' when others;/,"'0' when others;"]]), 'Odd number of 1s: 001, 010, 100 (one 1) and 111 (three 1s).'),
+'select-3': W1('Entity <b>fsel</b>: inputs a, b, c; output f = Σm(1, 2, 4, 7) (a is the MSB). Helper signal + ONE with/select.', `${LH}
+entity fsel is
+  port ( a, b, c : in  std_logic;
+         f       : out std_logic );
+end fsel;
+
+architecture rtl of fsel is
+  signal abc : std_logic_vector(2 downto 0);
+begin
+  abc <= a & b & c;
+  with abc select
+    f <= '1' when "001" | "010" | "100" | "111",
+         '0' when others;
+end rtl;`, FULL('fsel',[PT('a','in','sl'),PT('c','in','sl'),PT('f','out','sl')],[[/signal \w+:std_logic_vector\(2 downto 0\);begin/,'helper signal declared before begin'],[/\w+<=a&b&c;/,'helper <= a & b & c;'],[/with \w+ select f<='1' when/,"with … select f <= '1' when"],[/"001"/,'m1'],[/"010"/,'m2'],[/"100"/,'m4'],[/"111"/,'m7'],[/when others;/,'when others;']])),
+'select-5': W1('Entity <b>g4</b>: inputs w, x, y, z; output g = Σm(0, 5, 10, 15) (w is the MSB). Helper + with/select.', `${LH}
+entity g4 is
+  port ( w, x, y, z : in  std_logic;
+         g          : out std_logic );
+end g4;
+
+architecture rtl of g4 is
+  signal wxyz : std_logic_vector(3 downto 0);
+begin
+  wxyz <= w & x & y & z;
+  with wxyz select
+    g <= '1' when "0000" | "0101" | "1010" | "1111",
+         '0' when others;
+end rtl;`, FULL('g4',[PT('w','in','sl'),PT('z','in','sl'),PT('g','out','sl')],[[/signal \w+:std_logic_vector\(3 downto 0\);/,'4-bit helper signal'],[/\w+<=w&x&y&z;/,'helper <= w & x & y & z;'],[/"0000"/,'m0'],[/"0101"/,'m5'],[/"1010"/,'m10'],[/"1111"/,'m15'],[/when others;/,'when others;']])),
+'select-6': W1('Entity <b>bmux</b>: a, b, c, d are 8-bit buses, sel is 2-bit, y is 8-bit. 4:1 bus mux with with/select.', `${LH}
+entity bmux is
+  port ( a, b, c, d : in  std_logic_vector(7 downto 0);
+         sel        : in  std_logic_vector(1 downto 0);
+         y          : out std_logic_vector(7 downto 0) );
+end bmux;
+
+architecture rtl of bmux is
+begin
+  with sel select
+    y <= a               when "00",
+         b               when "01",
+         c               when "10",
+         d               when "11",
+         (others => '0') when others;
+end rtl;`, FULL('bmux',[PT('a','in',SV(8)),PT('d','in',SV(8)),PT('sel','in',SV(2)),PT('y','out',SV(8))],[[/with sel select y<=a when "00",/,'a when "00"'],[/b when "01",/,'b'],[/c when "10",/,'c'],[/d when ("11"|others)/,'d'],[/when others;/,'when others;']])),
+'select-7': W1('Entity <b>band</b>: input n (4-bit); output r (2-bit): 0–4 → "00", 5–9 → "01", 10–15 → "10", unknown → "11". with/select listing values.', `${LH}
+entity band is
+  port ( n : in  std_logic_vector(3 downto 0);
+         r : out std_logic_vector(1 downto 0) );
+end band;
+
+architecture rtl of band is
+begin
+  with n select
+    r <= "00" when "0000" | "0001" | "0010" | "0011" | "0100",
+         "01" when "0101" | "0110" | "0111" | "1000" | "1001",
+         "10" when "1010" | "1011" | "1100" | "1101" | "1110" | "1111",
+         "11" when others;
+end rtl;`, FULL('band',[PT('n','in',SV(4)),PT('r','out',SV(2))],[[/"00" when "0000"\|"0001"\|"0010"\|"0011"\|"0100",/,'0–4 listed'],[/"01" when "0101"\|"0110"\|"0111"\|"1000"\|"1001",/,'5–9 listed'],[/"10" when "1010"\|"1011"\|"1100"\|"1101"\|"1110"\|"1111",/,'10–15 listed'],[/"11" when others;/,'"11" when others;']]), 'List the values in increasing order — easier to check.'),
+'select-8': W1('Entity <b>dec38e</b>: input a (3-bit), enable en; output y (8-bit) one-hot, all zeros when en = \'0\'. with/select only (one helper signal).', `${LH}
+entity dec38e is
+  port ( a  : in  std_logic_vector(2 downto 0);
+         en : in  std_logic;
+         y  : out std_logic_vector(7 downto 0) );
+end dec38e;
+
+architecture rtl of dec38e is
+  signal ea : std_logic_vector(3 downto 0);
+begin
+  ea <= en & a;
+  with ea select
+    y <= "00000001" when "1000",
+         "00000010" when "1001",
+         "00000100" when "1010",
+         "00001000" when "1011",
+         "00010000" when "1100",
+         "00100000" when "1101",
+         "01000000" when "1110",
+         "10000000" when "1111",
+         "00000000" when others;
+end rtl;`, FULL('dec38e',[PT('a','in',SV(3)),PT('en','in','sl'),PT('y','out',SV(8))],[[/signal \w+:std_logic_vector\(3 downto 0\);/,'4-bit helper'],[/\w+<=en&a;/,'helper <= en & a;'],[/"00000001" when "1000"/,'a = 000 row'],[/"00100000" when "1101"/,'a = 101 row'],[/"10000000" when "1111"/,'a = 111 row'],[/"00000000" when others;/,'zeros when others']])),
+'select-9': W1('Entity <b>alu2</b>: a, b 4-bit; op 2-bit; y 4-bit. "00" a + b, "01" a − b, "10" a and b, "11" a or b. Full code with with/select.', `${LN}
+entity alu2 is
+  port ( a, b : in  std_logic_vector(3 downto 0);
+         op   : in  std_logic_vector(1 downto 0);
+         y    : out std_logic_vector(3 downto 0) );
+end alu2;
+
+architecture rtl of alu2 is
+begin
+  with op select
+    y <= std_logic_vector(unsigned(a) + unsigned(b)) when "00",
+         std_logic_vector(unsigned(a) - unsigned(b)) when "01",
+         a and b                                     when "10",
+         a or b                                      when "11",
+         (others => '0')                             when others;
+end rtl;`, FULL('alu2',[PT('a','in',SV(4)),PT('b','in',SV(4)),PT('op','in',SV(2)),PT('y','out',SV(4))],[[/with op select/,'with op select'],[/std_logic_vector\(unsigned\(a\)\+unsigned\(b\)\) when "00"/,'a + b converted'],[/std_logic_vector\(unsigned\(a\)-unsigned\(b\)\) when "01"/,'a − b converted'],[/a and b when "10"/,'and'],[/a or b when ("11"|others)/,'or'],[/when others;/,'when others;']],true)),
+'select-10': W1('Entity <b>sq2</b>: input x (2-bit); output y (4-bit) = x × x (0, 1, 4, 9). Lookup table with with/select.', `${LH}
+entity sq2 is
+  port ( x : in  std_logic_vector(1 downto 0);
+         y : out std_logic_vector(3 downto 0) );
+end sq2;
+
+architecture rom of sq2 is
+begin
+  with x select
+    y <= "0000" when "00",
+         "0001" when "01",
+         "0100" when "10",
+         "1001" when "11",
+         "0000" when others;
+end rom;`, FULL('sq2',[PT('x','in',SV(2)),PT('y','out',SV(4))],[[/"0000" when "00"/,'0 × 0'],[/"0001" when "01"/,'1 × 1'],[/"0100" when "10"/,'2 × 2 = 4'],[/"1001" when ("11"|others)/,'3 × 3 = 9'],[/when others;/,'when others;']])),
+'select-11': W1('Rewrite as a with/select, full code (entity <b>rev</b>, s 2-bit in, y 2-bit out):<br><code>y &lt;= "00" when s = "11" else "01" when s = "10" else "10" when s = "01" else "11";</code>', `${LH}
+entity rev is
+  port ( s : in  std_logic_vector(1 downto 0);
+         y : out std_logic_vector(1 downto 0) );
+end rev;
+
+architecture sel of rev is
+begin
+  with s select
+    y <= "00" when "11",
+         "01" when "10",
+         "10" when "01",
+         "11" when others;
+end sel;`, FULL('rev',[PT('s','in',SV(2)),PT('y','out',SV(2))],[[/with s select/,'with s select'],[/"00" when "11"/,'"00" when "11"'],[/"01" when "10"/,'"01" when "10"'],[/"10" when "01"/,'"10" when "01"'],[/"11" when (others|"00")/,'"11" for the rest'],[/when others;/,'when others;']])),
+
+'seq-1': W1('Entity <b>dlatch</b>: inputs d, en; output q. A level-sensitive D latch (transparent when en = \'1\').', `${LH}
+entity dlatch is
+  port ( d, en : in  std_logic;
+         q     : out std_logic );
+end dlatch;
+
+architecture rtl of dlatch is
+begin
+  process(d, en)
+  begin
+    if en = '1' then
+      q <= d;
+    end if;
+  end process;
+end rtl;`, FULL('dlatch',[PT('d','in','sl'),PT('en','in','sl'),PT('q','out','sl')],[[/process\((d,en|en,d)\)/,'process(d, en)'],[/if en='1' then q<=d;end if;/,"if en = '1' then q <= d; end if; (no else)"],[/end process;/,'end process;'],[/rising_edge|falling_edge/,'no clock edge (it is a latch)',true]])),
+'seq-2': W1('Entity <b>dff_n</b>: inputs clk, d; output q. A FALLING-edge D flip-flop with no reset.', `${LH}
+entity dff_n is
+  port ( clk, d : in  std_logic;
+         q      : out std_logic );
+end dff_n;
+
+architecture rtl of dff_n is
+begin
+  process(clk)
+  begin
+    if falling_edge(clk) then
+      q <= d;
+    end if;
+  end process;
+end rtl;`, FULL('dff_n',[PT('clk','in','sl'),PT('d','in','sl'),PT('q','out','sl')],[[/process\(clk\)/,'process(clk)'],[/if (falling_edge\(clk\)|clk'event and clk='0') then q<=d;end if;/,'if falling_edge(clk) then q <= d; end if;'],[/end process;/,'end process;']])),
+'seq-3': W1('Entity <b>dffe</b>: inputs clk, rst, en, d; output q. Rising edge, ASYNCHRONOUS active-high reset, enable.', `${LH}
+entity dffe is
+  port ( clk, rst, en, d : in  std_logic;
+         q               : out std_logic );
+end dffe;
+
+architecture rtl of dffe is
+begin
+  process(clk, rst)
+  begin
+    if rst = '1' then
+      q <= '0';
+    elsif rising_edge(clk) then
+      if en = '1' then
+        q <= d;
+      end if;
+    end if;
+  end process;
+end rtl;`, FULL('dffe',[PT('clk','in','sl'),PT('rst','in','sl'),PT('en','in','sl'),PT('q','out','sl')],[[/process\((clk,rst|rst,clk)\)/,'process(clk, rst)'],[/if rst='1' then q<='0';elsif rising_edge\(clk\) then/,'reset FIRST, then elsif rising_edge'],[/if en='1' then q<=d;end if;/,"if en = '1' then q <= d; end if;"],[/end process;/,'end process;']])),
+'seq-4': W1('Entity <b>dffs</b>: inputs clk, rst_n, d; output q. Rising edge, SYNCHRONOUS ACTIVE-LOW reset.', `${LH}
+entity dffs is
+  port ( clk, rst_n, d : in  std_logic;
+         q             : out std_logic );
+end dffs;
+
+architecture rtl of dffs is
+begin
+  process(clk)
+  begin
+    if rising_edge(clk) then
+      if rst_n = '0' then
+        q <= '0';
+      else
+        q <= d;
+      end if;
+    end if;
+  end process;
+end rtl;`, FULL('dffs',[PT('clk','in','sl'),PT('rst_n','in','sl'),PT('q','out','sl')],[[/process\(clk\)/,'process(clk) — only the clock'],[/if rising_edge\(clk\) then if rst_n='0' then q<='0';/,"edge first, then if rst_n = '0'"],[/else q<=d;end if;end if;/,'else q <= d;'],[/end process;/,'end process;']])),
+'seq-5': W1('Entity <b>reg4l</b>: inputs clk, clr, load, d (4-bit); output q (4-bit). Rising edge. Synchronous clear has priority over load; with load = \'0\' the register holds.', `${LH}
+entity reg4l is
+  port ( clk, clr, load : in  std_logic;
+         d : in  std_logic_vector(3 downto 0);
+         q : out std_logic_vector(3 downto 0) );
+end reg4l;
+
+architecture rtl of reg4l is
+begin
+  process(clk)
+  begin
+    if rising_edge(clk) then
+      if clr = '1' then
+        q <= (others => '0');
+      elsif load = '1' then
+        q <= d;
+      end if;
+    end if;
+  end process;
+end rtl;`, FULL('reg4l',[PT('clk','in','sl'),PT('load','in','sl'),PT('d','in',SV(4)),PT('q','out',SV(4))],[[/process\(clk\)/,'process(clk)'],[/if rising_edge\(clk\) then if clr='1' then q<=(\(others=>'0'\)|"0000");/,'clear first, inside the edge'],[/elsif load='1' then q<=d;end if;/,"elsif load = '1' then q <= d;"],[/end process;/,'end process;']])),
+'seq-6': null,
+'seq-7': W1('Entity <b>sipo4</b>: inputs clk, rst, en, sin; output po (4-bit). Rising edge, ASYNC active-high reset, enable, shift RIGHT (sin enters the MSB).', `${LH}
+entity sipo4 is
+  port ( clk, rst, en, sin : in  std_logic;
+         po : out std_logic_vector(3 downto 0) );
+end sipo4;
+
+architecture rtl of sipo4 is
+  signal q : std_logic_vector(3 downto 0);
+begin
+  process(clk, rst)
+  begin
+    if rst = '1' then
+      q <= (others => '0');
+    elsif rising_edge(clk) then
+      if en = '1' then
+        q <= sin & q(3 downto 1);
+      end if;
+    end if;
+  end process;
+  po <= q;
+end rtl;`, FULL('sipo4',[PT('clk','in','sl'),PT('sin','in','sl'),PT('po','out',SV(4))],[[/signal \w+:std_logic_vector\(3 downto 0\);begin/,'internal 4-bit signal'],[/process\((clk,rst|rst,clk)\)/,'process(clk, rst)'],[/if rst='1' then \w+<=(\(others=>'0'\)|"0000");elsif rising_edge\(clk\) then/,'async reset then edge'],[/if en='1' then (\w+)<=sin&\1\(3 downto 1\);/,'shift: q <= sin & q(3 downto 1);'],[/po<=\w+;/,'po <= q; outside the process']])),
+'seq-8': W1('Entity <b>cnt4</b>: inputs clk, rst_n, en; output q (4-bit). Up counter, rising edge, ASYNC active-low reset, enable.', `${LN}
+entity cnt4 is
+  port ( clk, rst_n, en : in  std_logic;
+         q              : out std_logic_vector(3 downto 0) );
+end cnt4;
+
+architecture rtl of cnt4 is
+  signal count : unsigned(3 downto 0);
+begin
+  process(clk, rst_n)
+  begin
+    if rst_n = '0' then
+      count <= (others => '0');
+    elsif rising_edge(clk) then
+      if en = '1' then
+        count <= count + 1;
+      end if;
+    end if;
+  end process;
+  q <= std_logic_vector(count);
+end rtl;`, FULL('cnt4',[PT('clk','in','sl'),PT('rst_n','in','sl'),PT('en','in','sl'),PT('q','out',SV(4))],[[/signal (\w+):unsigned\(3 downto 0\);/,'signal count : unsigned(3 downto 0);'],[/process\((clk,rst_n|rst_n,clk)\)/,'process(clk, rst_n)'],[/if rst_n='0' then \w+<=(\(others=>'0'\)|"0000");elsif rising_edge\(clk\)/,'async active-low reset then edge'],[/if en='1' then (\w+)<=\1\+1;/,'count <= count + 1 when enabled'],[/q<=std_logic_vector\(\w+\);/,'q <= std_logic_vector(count);']],true)),
+'seq-9': W1('Entity <b>bcd</b>: inputs clk, rst, en; outputs q (4-bit) and tc. Mod-10 up counter (0..9), rising edge, ASYNC active-high reset, enable; tc = \'1\' when the count is 9.', `${LN}
+entity bcd is
+  port ( clk, rst, en : in  std_logic;
+         q  : out std_logic_vector(3 downto 0);
+         tc : out std_logic );
+end bcd;
+
+architecture rtl of bcd is
+  signal count : unsigned(3 downto 0);
+begin
+  process(clk, rst)
+  begin
+    if rst = '1' then
+      count <= (others => '0');
+    elsif rising_edge(clk) then
+      if en = '1' then
+        if count = 9 then
+          count <= (others => '0');
+        else
+          count <= count + 1;
+        end if;
+      end if;
+    end if;
+  end process;
+  q  <= std_logic_vector(count);
+  tc <= '1' when count = 9 else '0';
+end rtl;`, FULL('bcd',[PT('clk','in','sl'),PT('en','in','sl'),PT('q','out',SV(4)),PT('tc','out','sl')],[[/signal \w+:unsigned\(3 downto 0\);/,'unsigned count'],[/process\((clk,rst|rst,clk)\)/,'process(clk, rst)'],[/if (\w+)=9 then \1<=(\(others=>'0'\)|"0000");else \1<=\1\+1;end if;/,'wrap at 9, else +1'],[/q<=std_logic_vector\(\w+\);/,'q conversion'],[/tc<='1' when \w+=9 else '0';/,"tc <= '1' when count = 9 else '0';"]],true)),
+'seq-10': W1('Entity <b>tff</b>: inputs clk, t, clr_n; output q. Rising-edge T flip-flop with ASYNC active-low clear. Use an internal signal q_i.', `${LH}
+entity tff is
+  port ( clk, t, clr_n : in  std_logic;
+         q             : out std_logic );
+end tff;
+
+architecture rtl of tff is
+  signal q_i : std_logic;
+begin
+  process(clk, clr_n)
+  begin
+    if clr_n = '0' then
+      q_i <= '0';
+    elsif rising_edge(clk) then
+      if t = '1' then
+        q_i <= not q_i;
+      end if;
+    end if;
+  end process;
+  q <= q_i;
+end rtl;`, FULL('tff',[PT('clk','in','sl'),PT('t','in','sl'),PT('clr_n','in','sl'),PT('q','out','sl')],[[/signal q_i:std_logic/,'signal q_i : std_logic'],[/process\((clk,clr_n|clr_n,clk)\)/,'process(clk, clr_n)'],[/if clr_n='0' then q_i<='0';elsif rising_edge\(clk\) then/,'async clear then edge'],[/(if t='1' then q_i<=not q_i;end if;|q_i<=q_i xor t;|q_i<=t xor q_i;)/,'toggle when t = 1'],[/q<=q_i;/,'q <= q_i;']])),
+'seq-11': W1('Entity <b>down4</b>: inputs clk, rst; output q (4-bit). DOWN counter on the FALLING edge, ASYNC active-high reset that sets the count to "1111".', `${LN}
+entity down4 is
+  port ( clk, rst : in  std_logic;
+         q        : out std_logic_vector(3 downto 0) );
+end down4;
+
+architecture rtl of down4 is
+  signal count : unsigned(3 downto 0);
+begin
+  process(clk, rst)
+  begin
+    if rst = '1' then
+      count <= (others => '1');
+    elsif falling_edge(clk) then
+      count <= count - 1;
+    end if;
+  end process;
+  q <= std_logic_vector(count);
+end rtl;`, FULL('down4',[PT('clk','in','sl'),PT('rst','in','sl'),PT('q','out',SV(4))],[[/signal \w+:unsigned\(3 downto 0\);/,'unsigned count'],[/if rst='1' then \w+<=(\(others=>'1'\)|"1111");/,'reset to "1111"'],[/elsif falling_edge\(clk\) then (\w+)<=\1-1;/,'falling edge, count - 1'],[/q<=std_logic_vector\(\w+\);/,'output conversion']],true))
+};
+Object.entries(MAINW).forEach(([k,it])=>{ if(!it) return; PRACTICE[k]=PRACTICE[k]||[]; PRACTICE[k].unshift(it); });
+// existing full-code writes become "main" too, and move to the front
+['basics-1','when-5','when-7','select-4','seq-6'].forEach(k=>{ const i=PRACTICE[k].findIndex(x=>x.t==='write'); if(i>=0){ const it=PRACTICE[k].splice(i,1)[0]; it.main=true; it.rows=14; PRACTICE[k].unshift(it); } });
+
 /* ===================== Interactive hardware widgets (lesson "from zero") ===================== */
 const W = (() => {
   const h = (tag, attrs={}, ...kids) => { const e=document.createElement(tag); for(const [k,v] of Object.entries(attrs)){ if(k==='class') e.className=v; else if(k.startsWith('on')) e.addEventListener(k.slice(2),v); else e.setAttribute(k,v); } kids.flat().forEach(k=>e.append(k instanceof Node?k:document.createTextNode(k))); return e; };
@@ -4696,6 +5481,583 @@ const W = (() => {
   const ALL={gate,mux,decoder,encoder,ff,register,shift,counter};
   function init(){ $$('[data-w]').forEach(el=>{ const f=ALL[el.dataset.w]; if(f && !el.dataset.ready){ el.dataset.ready=1; el.classList.add('widget'); f(el); } }); }
   return {init};
+})();
+
+/* ===================== VSIM: a small VHDL subset parser + simulator used to auto-check answers =====================
+   Supports: library/use, entity (generic, port), architecture with signal/constant declarations,
+   concurrent assignments (simple, when/else, with/select), processes with if/case/for, variables,
+   rising_edge/falling_edge/'event, numeric_std (unsigned/signed, +, -, *, compare, conversions).
+   Not supported: components/port map, generate, wait, user types. */
+const VSIM = (() => {
+  class VErr extends Error { constructor(msg, line){ super(msg); this.line=line; } }
+  const KEYW = new Set('abs access after alias all and architecture array assert attribute begin block body buffer bus case component configuration constant disconnect downto else elsif end entity exit file for function generate generic group guarded if impure in inertial inout is label library linkage literal loop map mod nand new next nor not null of on open or others out package port postponed procedure process pure range record register reject rem report return rol ror select severity signal shared sla sll sra srl subtype then to transport type unaffected units until use variable wait when while with xnor xor'.split(' '));
+
+  /* ---------- tokenizer ---------- */
+  function lex(src){
+    const T=[]; let i=0, line=1; const n=src.length;
+    const push=(t,v,raw)=>T.push({t,v,raw:raw===undefined?v:raw,line});
+    while(i<n){
+      const c=src[i];
+      if(c==='\n'){ line++; i++; continue; }
+      if(/\s/.test(c)){ i++; continue; }
+      if(c==='-' && src[i+1]==='-'){ while(i<n && src[i]!=='\n') i++; continue; }
+      if(/[A-Za-z]/.test(c)){
+        let j=i; while(j<n && /[A-Za-z0-9_]/.test(src[j])) j++;
+        const w=src.slice(i,j); const lw=w.toLowerCase();
+        if((lw==='x'||lw==='b') && src[j]==='"'){ let k=j+1; while(k<n && src[k]!=='"') k++; const body=src.slice(j+1,k).replace(/_/g,'');
+          const bits= lw==='x' ? [...body].map(h=>parseInt(h,16).toString(2).padStart(4,'0')).join('') : body; push('str',bits,src.slice(i,k+1)); i=k+1; continue; }
+        push(KEYW.has(lw)?'kw':'id', lw, w); i=j; continue;
+      }
+      if(/[0-9]/.test(c)){ let j=i; while(j<n && /[0-9_]/.test(src[j])) j++; push('num', parseInt(src.slice(i,j).replace(/_/g,''),10), src.slice(i,j)); i=j; continue; }
+      if(c==='"'){ let j=i+1; while(j<n && src[j]!=='"' && src[j]!=='\n') j++; if(src[j]!=='"') throw new VErr('string literal is not closed with "', line); push('str', src.slice(i+1,j)); i=j+1; continue; }
+      if(c==="'"){
+        const prev=T[T.length-1];
+        const tick = prev && ((prev.t==='id') || (prev.t==='op' && prev.v===')'));
+        if(!tick && src[i+2]==="'"){ push('chr', src[i+1].toUpperCase()==='X'||src[i+1].toUpperCase()==='U'||src[i+1].toUpperCase()==='Z'?src[i+1].toUpperCase():src[i+1], src.slice(i,i+3)); i+=3; continue; }
+        if(!tick) throw new VErr(`a single quote must be a character literal like '1' (found ${src.slice(i,i+3)})`, line);
+        push('op',"'"); i++; continue;
+      }
+      const two=src.slice(i,i+2);
+      if(['<=','=>',':=','/=','>=','**'].includes(two)){ push('op',two); i+=2; continue; }
+      if('()<>=&,;:|+-*/.'.includes(c)){ push('op',c); i++; continue; }
+      if(c==='`'||c==='‘'||c==='’'||c==='“'||c==='”') throw new VErr(`curly/odd quote character ${c} — use the plain ' or " quotes`, line);
+      throw new VErr(`unexpected character "${c}"`, line);
+    }
+    push('eof','');
+    return T;
+  }
+
+  /* ---------- parser ---------- */
+  function parse(src){
+    const T=lex(src); let p=0;
+    const peek=(k=0)=>T[p+k];
+    const is=(v,k=0)=>{ const t=T[p+k]; return t && (t.t==='kw'||t.t==='op') && t.v===v; };
+    const desc=t=> t.t==='eof'?'end of the code': `"${t.raw}"`;
+    const expect=(v,what)=>{ if(!is(v)) throw new VErr(`expected ${what||'"'+v+'"'} but found ${desc(peek())}`, peek().line); return T[p++]; };
+    const RAW={};
+    const ident=(what)=>{ const t=peek(); if(t.t==='id') RAW[t.v]=RAW[t.v]||t.raw; if(t.t!=='id'){ throw new VErr(`expected ${what||'a name'} but found ${desc(t)}${t.t==='kw'?' (that is a reserved word)':''}`, t.line); } p++; return t.v; };
+    const units={entities:{}, archs:[], libs:[], uses:[], raw:RAW};
+    while(peek().t!=='eof'){
+      if(is('library')){ p++; units.libs.push(ident('a library name')); while(is(',')){p++; units.libs.push(ident());} expect(';','";" after the library clause'); }
+      else if(is('use')){ p++; let s=ident(); while(is('.')){ p++; s+='.'+(is('all')?(p++,'all'):ident()); } units.uses.push(s); expect(';','";" after the use clause'); }
+      else if(is('entity')) parseEntity();
+      else if(is('architecture')) parseArch();
+      else if(is('configuration')||is('package')) throw new VErr('configurations / packages are not supported by the auto-checker', peek().line);
+      else throw new VErr(`expected library, use, entity or architecture but found ${desc(peek())}`, peek().line);
+    }
+    return units;
+
+    function parseEntity(){
+      const line=peek().line; p++; const name=ident('the entity name'); expect('is','"is" after the entity name');
+      const e={name, generics:[], ports:[], line};
+      if(is('generic')){ p++; expect('('); do{ const ids=[ident('a generic name')]; while(is(',')){p++; ids.push(ident());} expect(':','":" in the generic'); const type=parseType(); let def=null; if(is(':=')){ p++; def=parseExpr(); } ids.forEach(id=>e.generics.push({name:id,type,def})); if(is(';')){ p++; continue; } break; }while(true); expect(')','")" to close the generic list'); expect(';','";" after the generic list'); }
+      if(is('port')){ p++; expect('(','"(" after port');
+        while(true){
+          const l=peek().line; const ids=[ident('a port name')]; while(is(',')){p++; ids.push(ident('a port name'));}
+          if(is(';')) throw new VErr('expected ":" after the port name but found ";" (write name : mode type)', peek().line);
+          expect(':','":" after the port name(s)');
+          let mode='in'; if(is('in')||is('out')||is('inout')||is('buffer')){ mode=peek().v; p++; }
+          const type=parseType(); ids.forEach(id=>e.ports.push({name:id,mode,type,line:l}));
+          if(is(';')){ p++; if(is(')')) throw new VErr('remove the ";" before ")" — the last port has no semicolon', peek().line); continue; }
+          if(is(')')) break;
+          throw new VErr(`expected ";" between ports or ")" at the end of the port list, found ${desc(peek())}`, peek().line);
+        }
+        expect(')'); expect(';','";" after the closing ")" of the port list'); }
+      expect('end','"end" of the entity');
+      if(is('entity')) p++;
+      if(peek().t==='id'){ const en=ident(); if(en!==name) throw new VErr(`"end ${en}" does not match the entity name "${name}"`, T[p-1].line); }
+      expect(';','";" after end');
+      if(units.entities[name]) throw new VErr(`entity ${name} is declared twice`, line);
+      units.entities[name]=e;
+    }
+    function parseType(){
+      const l=peek().line; const tn=ident('a type');
+      if(['std_logic_vector','unsigned','signed','bit_vector','std_ulogic_vector'].includes(tn)){
+        if(!is('(')) throw new VErr(`${tn} needs a range, e.g. ${tn}(3 downto 0)`, l);
+        p++; const a=parseExpr(); let dir; if(is('downto')||is('to')){ dir=peek().v; p++; } else throw new VErr('expected "downto" or "to" in the range (not ..)', peek().line);
+        const b=parseExpr(); expect(')','")" to close the range'); return {k:tn==='unsigned'?'uns':tn==='signed'?'sgn':'slv', a, b, d:dir, bit:tn==='bit_vector'};
+      }
+      if(['std_logic','std_ulogic','bit'].includes(tn)) return {k:'sl', bit:tn==='bit'};
+      if(['integer','natural','positive'].includes(tn)){ let lo=null, hi=null; if(is('range')){ p++; lo=parseExpr(); if(!(is('to')||is('downto'))) throw new VErr('expected "to" in the integer range', peek().line); p++; hi=parseExpr(); } return {k:'int', lo, hi, sub:tn}; }
+      if(tn==='boolean') return {k:'bool'};
+      if(tn==='time') return {k:'time'};
+      throw new VErr(`unknown type "${tn}" (did you mean std_logic or std_logic_vector?)`, l);
+    }
+    function parseArch(){
+      const line=peek().line; p++; const name=ident('the architecture name'); expect('of','"of" in "architecture name of entity is"'); const ent=ident('the entity name'); expect('is','"is" after the entity name');
+      const a={name, ent, decls:[], stmts:[], line};
+      while(!is('begin')){
+        if(is('signal')||is('constant')){ const kind=peek().v; const l=peek().line; p++; const ids=[ident()]; while(is(',')){p++; ids.push(ident());} expect(':'); const type=parseType(); let init=null; if(is(':=')){ p++; init=parseExpr(); } expect(';',`";" after the ${kind} declaration`); ids.forEach(id=>a.decls.push({kind,name:id,type,init,line:l})); }
+        else if(is('component')) throw new VErr('components / port map are not supported by the auto-checker — compare with the model answer by eye', peek().line);
+        else if(is('type')||is('subtype')) throw new VErr('user-defined types are not supported by the auto-checker', peek().line);
+        else if(peek().t==='eof') throw new VErr('missing "begin" in the architecture', peek().line);
+        else throw new VErr(`expected a signal declaration or "begin" but found ${desc(peek())}`, peek().line);
+      }
+      p++;
+      while(!is('end')){ if(peek().t==='eof') throw new VErr('missing "end" for the architecture', peek().line); a.stmts.push(parseConc()); }
+      p++; if(is('architecture')) p++; if(peek().t==='id'){ const en=ident(); if(en!==name) throw new VErr(`"end ${en}" does not match the architecture name "${name}"`, T[p-1].line); }
+      expect(';','";" after end');
+      units.archs.push(a);
+    }
+    function parseConc(){
+      const line=peek().line; let label=null;
+      if(peek().t==='id' && is(':',1)){ label=ident(); p++; }
+      if(is('process')) return parseProcess(label);
+      if(is('with')){ p++; const sel=parseExpr(); expect('select','"select" after the selector'); const target=parseTarget(); expect('<=','"<=" in the selected assignment');
+        const alts=[]; while(true){ const val=is('unaffected')?(p++,{e:'unaff'}):parseExpr(); expect('when','"when" in the selected assignment'); const ch=parseChoices(); alts.push({val,ch}); if(is(',')){p++; continue;} if(is(';')){p++; break;} if(is('when')) throw new VErr('expected "," between the branches', peek().line);
+          throw new VErr(`expected "," between branches or ";" at the end, found ${desc(peek())}`, peek().line); }
+        return {s:'sel', sel, target, alts, line}; }
+      if(peek().t==='id' && (is('port',1)||is('entity',0))) throw new VErr('component instances are not supported by the auto-checker', line);
+      if(is('entity')) throw new VErr('direct instantiation is not supported by the auto-checker', line);
+      if(is('if')||is('case')||is('for')) throw new VErr(`"${peek().v}" can only be used inside a process`, line);
+      const target=parseTarget();
+      if(is(':=')) throw new VErr('signals are assigned with "<=", not ":=" (":=" is only for variables)', peek().line);
+      if(is('=>')) throw new VErr('signals are assigned with "<=", not "=>"', peek().line);
+      if(is('=')) throw new VErr('use "<=" to assign a signal ("=" is a comparison)', peek().line);
+      expect('<=','"<=" (signal assignment)');
+      return parseCondRest(target, line, true);
+    }
+    function parseCondRest(target, line, conc){
+      const waves=[];
+      while(true){
+        if(is('transport')||is('inertial')) p++;
+        const val = is('unaffected') ? (p++,{e:'unaff'}) : parseExpr();
+        if(is('after')){ p++; parseExpr(); while(peek().t==='id'&&['ns','ps','us','ms','fs','sec'].includes(peek().v)) p++; }
+        if(is('when')){ p++; const cond=parseExpr(); waves.push({val,cond});
+          if(is('else')){ p++; continue; }
+          if(is(';')){ p++; return {s:'cond', target, waves, noElse:true, line}; }
+          throw new VErr(`expected "else" or ";" after the condition, found ${desc(peek())}`, peek().line); }
+        waves.push({val,cond:null});
+        if(is(';')){ p++; return waves.length===1 ? {s:'assign', target, val, line} : {s:'cond', target, waves, line}; }
+        if(peek().t==='kw' && ['when','else'].includes(peek().v)) throw new VErr(`unexpected "${peek().v}"`, peek().line);
+        throw new VErr(`expected ";" at the end of the statement, found ${desc(peek())}${peek().t==='id'?' — a ";" is probably missing at the end of the line before':''}`, peek().line);
+      }
+    }
+    function parseChoices(){
+      const ch=[]; do{ if(is('others')){ p++; ch.push({others:true}); } else { const a=parseExpr(); if(is('to')||is('downto')){ const d=peek().v; p++; const b=parseExpr(); ch.push({range:[a,b,d]}); } else ch.push({e:a}); } if(is('|')){ p++; continue; } break; }while(true);
+      return ch;
+    }
+    function parseTarget(){ const l=peek().line; if(peek().t!=='id') throw new VErr(`expected a signal name at the start of the statement but found ${desc(peek())}`, l); const n=ident(); let idx=null;
+      if(is('(')){ p++; const a=parseExpr(); if(is('downto')||is('to')){ const d=peek().v; p++; const b=parseExpr(); idx={a,b,d}; } else idx={i:a}; expect(')'); }
+      return {name:n, idx, line:l}; }
+    function parseProcess(label){
+      const line=peek().line; p++; let sens=null;
+      if(is('(')){ p++; sens=[]; if(is('all')){ p++; sens='all'; } else { do{ sens.push(ident('a signal name in the sensitivity list')); if(is(',')){p++; continue;} break; }while(true); } expect(')','")" to close the sensitivity list'); }
+      if(is('is')) p++;
+      const vars=[];
+      while(!is('begin')){
+        if(is('variable')){ p++; const ids=[ident()]; while(is(',')){p++; ids.push(ident());} expect(':'); const type=parseType(); let init=null; if(is(':=')){p++; init=parseExpr();} expect(';'); ids.forEach(id=>vars.push({name:id,type,init})); }
+        else if(peek().t==='eof') throw new VErr('missing "begin" in the process', line);
+        else throw new VErr(`expected "begin" of the process but found ${desc(peek())}`, peek().line);
+      }
+      p++;
+      const body=parseSeqList(['end']);
+      expect('end'); if(!is('process')) throw new VErr('expected "end process;"', peek().line); p++;
+      if(peek().t==='id') p++;
+      expect(';','";" after end process');
+      return {s:'proc', sens, vars, body, line, label};
+    }
+    function parseSeqList(stops){ const L=[]; while(!stops.some(s=>is(s))){ if(peek().t==='eof') throw new VErr(`missing "${stops[0]}"`, peek().line); L.push(parseSeq()); } return L; }
+    function parseSeq(){
+      const line=peek().line;
+      if(peek().t==='id' && is(':',1) && (is('for',2)||is('while',2))){ p+=2; }
+      if(is('if')){ p++; const arms=[]; const c=parseExpr(); expect('then','"then" after the if condition'); arms.push({c, b:parseSeqList(['elsif','else','end'])});
+        while(is('elsif')){ p++; const c2=parseExpr(); expect('then','"then" after the elsif condition'); arms.push({c:c2,b:parseSeqList(['elsif','else','end'])}); }
+        let els=null; if(is('else')){ p++; els=parseSeqList(['end']); }
+        expect('end'); if(!is('if')) throw new VErr(`expected "end if;" but found "end ${peek().raw}"`, peek().line); p++; expect(';','";" after end if');
+        return {s:'if', arms, els, line}; }
+      if(is('case')){ p++; const sel=parseExpr(); expect('is','"is" after the case selector'); const alts=[];
+        while(is('when')){ p++; const ch=parseChoices(); expect('=>','"=>" after the case choice'); alts.push({ch, b:parseSeqList(['when','end'])}); }
+        expect('end','"end case"'); if(!is('case')) throw new VErr('expected "end case;"', peek().line); p++; expect(';');
+        return {s:'case', sel, alts, line}; }
+      if(is('for')){ p++; const v=ident('the loop variable'); expect('in'); const a=parseExpr(); let d; if(is('to')||is('downto')){ d=peek().v; p++; } else throw new VErr('expected to/downto in the for loop', peek().line); const b=parseExpr(); expect('loop'); const body=parseSeqList(['end']); expect('end'); expect('loop','"end loop;"'); if(peek().t==='id') p++; expect(';');
+        return {s:'for', v, a, b, d, body, line}; }
+      if(is('null')){ p++; expect(';'); return {s:'null'}; }
+      if(is('wait')) throw new VErr('wait statements are not supported by the auto-checker (use a sensitivity list)', line);
+      if(is('report')||is('assert')){ while(!is(';')) p++; p++; return {s:'null'}; }
+      const target=parseTarget();
+      if(is(':=')){ p++; const val=parseExpr(); expect(';','";" at the end of the statement'); return {s:'var', target, val, line}; }
+      if(is('=')) throw new VErr('use "<=" to assign a signal ("=" is a comparison)', peek().line);
+      expect('<=','"<=" or ":="');
+      return parseCondRest(target, line, false);
+    }
+    /* expressions */
+    function parseExpr(){
+      let left=parseRel(); let op=null;
+      while(peek().t==='kw' && ['and','or','xor','nand','nor','xnor'].includes(peek().v)){
+        const o=peek().v, l=peek().line;
+        if(op && o!==op) throw new VErr(`"${op}" and "${o}" cannot be mixed without parentheses — add ( )`, l);
+        if(op && (o==='nand'||o==='nor')) throw new VErr(`"${o}" cannot be chained — use parentheses`, l);
+        op=o; p++; const right=parseRel(); left={e:'bin', op:o, a:left, b:right, line:l};
+      }
+      return left;
+    }
+    function parseRel(){ const a=parseSimple(); if(peek().t==='op' && ['=','/=','<','<=','>','>='].includes(peek().v)){ const op=peek().v, l=peek().line; p++; const b=parseSimple(); return {e:'bin', op, a, b, line:l}; } return a; }
+    function parseSimple(){ let neg=false; if(is('-')){ p++; neg=true; } else if(is('+')) p++;
+      let a=parseTerm(); if(neg) a={e:'neg', a};
+      while(peek().t==='op' && ['+','-','&'].includes(peek().v)){ const op=peek().v, l=peek().line; p++; const b=parseTerm(); a={e:'bin', op, a, b, line:l}; } return a; }
+    function parseTerm(){ let a=parseFactor(); while((peek().t==='op' && ['*','/'].includes(peek().v)) || is('mod') || is('rem')){ const op=peek().v, l=peek().line; p++; const b=parseFactor(); a={e:'bin', op, a, b, line:l}; } return a; }
+    function parseFactor(){ if(is('not')){ p++; return {e:'not', a:parsePrimary()}; } if(is('abs')){ p++; return {e:'abs', a:parsePrimary()}; } const a=parsePrimary(); if(is('**')){ p++; return {e:'bin',op:'**',a,b:parsePrimary()}; } return a; }
+    function parsePrimary(){
+      const t=peek();
+      if(t.t==='chr'){ p++; return {e:'chr', v:t.v}; }
+      if(t.t==='str'){ p++; return {e:'str', v:t.v}; }
+      if(t.t==='num'){ p++; if(peek().t==='id' && ['ns','ps','us','ms'].includes(peek().v)) p++; return {e:'num', v:t.v}; }
+      if(is('(')){ p++;
+        if(is('others') || (peek().t==='num' && is('=>',1))){ const items=[]; do{ if(is('others')){ p++; expect('=>','"=>" after others'); items.push({others:true, v:parseExpr()}); } else { const k=parseExpr(); expect('=>'); items.push({k, v:parseExpr()}); } if(is(',')){p++; continue;} break; }while(true); expect(')','")" to close the aggregate'); return {e:'agg', items}; }
+        const e=parseExpr(); expect(')','")"'); return {e:'paren', a:e}; }
+      if(t.t==='id'){ p++; let node={e:'name', n:t.v, line:t.line};
+        while(true){
+          if(is('(')){ p++; const args=[]; let slice=null;
+            if(!is(')')){ do{ const a=parseExpr(); if(is('downto')||is('to')){ const d=peek().v; p++; const b=parseExpr(); slice={a,b,d}; } else args.push(a); if(is(',')){p++; continue;} break; }while(true); }
+            expect(')','")"'); node = slice ? {e:'slice', base:node, a:slice.a, b:slice.b, d:slice.d, line:t.line} : {e:'call', base:node, args, line:t.line}; continue; }
+          if(is("'")){ p++; if(is('(')){ p++; const inner=parseExpr(); expect(')'); node={e:'qual', type:node.n, a:inner}; continue; } const at=peek(); p++; node={e:'attr', base:node, attr:at.v, line:t.line}; continue; }
+          break;
+        }
+        return node; }
+      if(t.t==='kw' && t.v==='others') throw new VErr('"others" must be written as (others => \'0\') or used in "when others"', t.line);
+      throw new VErr(`expected a value or expression but found ${desc(t)}`, t.line);
+    }
+  }
+
+  /* ---------- values ---------- */
+  const SL=v=>({t:'sl',v}), INT=v=>({t:'int',v}), BOOL=v=>({t:'bool',v});
+  const VEC=(s,k,l,r,d)=>({t:'vec',s,k:k||'lit',l:l===undefined?s.length-1:l,r:r===undefined?0:r,d:d||'downto'});
+  const isBin=s=>/^[01]+$/.test(s);
+  const toNum=v=>{ if(v.t==='int') return v.v; if(v.t==='vec'){ if(!isBin(v.s)) return NaN; if(v.k==='sgn'){ const u=parseInt(v.s,2); return v.s[0]==='1'? u-(2**v.s.length) : u; } return parseInt(v.s,2); } return NaN; };
+  const fromNum=(n,w,k)=>{ const m=2**w; let x=((n%m)+m)%m; return VEC(x.toString(2).padStart(w,'0').slice(-w),k); };
+  const bitAnd=(a,b)=>a==='0'||b==='0'?'0':(a==='1'&&b==='1'?'1':'X');
+  const bitOr=(a,b)=>a==='1'||b==='1'?'1':(a==='0'&&b==='0'?'0':'X');
+  const bitXor=(a,b)=>(/[01]/.test(a)&&/[01]/.test(b)&&a.length===1&&b.length===1)?String(+a^+b):'X';
+  const bitNot=a=>a==='0'?'1':a==='1'?'0':'X';
+  const show=v=> v.t==='sl'?`'${v.v}'`: v.t==='vec'?`"${v.s}"`: v.t==='bool'?String(v.v): String(v.v);
+
+  /* ---------- elaboration ---------- */
+  function elaborate(units, preferEntity){
+    const names=Object.keys(units.entities);
+    if(!names.length) throw new VErr('no entity found — write "entity name is port ( … ); end name;"', 1);
+    let ent = units.entities[preferEntity] || (names.length===1 ? units.entities[names[0]] : null);
+    if(!ent){ const withArch=names.filter(n=>units.archs.some(a=>a.ent===n)); ent=units.entities[withArch[0]||names[0]]; }
+    const arch = units.archs.find(a=>a.ent===ent.name);
+    if(!arch){ const other=units.archs[0]; if(other) throw new VErr(`architecture "${other.name}" is "of ${other.ent}", but the entity is called "${ent.name}"`, other.line); throw new VErr(`no architecture found for entity ${ent.name}`, ent.line); }
+    const D={ent, arch, sig:{}, consts:{}, procs:[], ports:ent.ports, warnings:[], numeric: units.uses.some(u=>u.startsWith('ieee.numeric_std')), uses:units.uses, libs:units.libs};
+    const cenv={}; ent.generics.forEach(g=>{ if(!g.def) throw new VErr(`generic ${g.name} has no default value`, ent.line); cenv[g.name]=evalConst(g.def,cenv); });
+    function evalConst(e,env){ const v=evalE(e,{consts:env,sig:{},vars:{},D:{consts:env,sig:{}}}); return v; }
+    function mkType(ty, env){ if(ty.k==='slv'||ty.k==='uns'||ty.k==='sgn'){ const a=toNum(evalConst(ty.a,env)), b=toNum(evalConst(ty.b,env)); if(isNaN(a)||isNaN(b)) throw new VErr('vector range must be numbers', 1); const len=ty.d==='downto'?a-b+1:b-a+1; if(len<1) throw new VErr(`empty vector range (${a} ${ty.d} ${b}) — did you mean ${ty.d==='to'?'downto':'to'}?`, 1); return {k:ty.k,l:a,r:b,d:ty.d,len,bit:ty.bit}; } return Object.assign({},ty); }
+    const initOf=ty=> ty.k==='sl'?SL(ty.bit?'0':'U') : ty.k==='int'?INT(0) : ty.k==='bool'?BOOL(false) : VEC((ty.bit?'0':'U').repeat(ty.len), ty.k, ty.l, ty.r, ty.d);
+    Object.assign(D.consts, cenv);
+    ent.ports.forEach(pt=>{ const ty=mkType(pt.type,cenv); if(pt.type.bit) D.warnings.push(`port ${pt.name} uses BIT; the course uses std_logic`); D.sig[pt.name]={name:pt.name, ty, mode:pt.mode, val:initOf(ty), prev:null, ev:false}; });
+    arch.decls.forEach(d=>{ const env=Object.assign({},cenv,D.consts); const ty=mkType(d.type,env);
+      if(D.sig[d.name]||D.consts[d.name]) throw new VErr(`"${d.name}" is declared twice`, d.line);
+      if(d.kind==='constant'){ D.consts[d.name]=fit(evalConst(d.init,env),ty,d.line); }
+      else { const v = d.init ? fit(evalConst(d.init,env),ty,d.line) : initOf(ty); D.sig[d.name]={name:d.name, ty, mode:'sig', val:v, prev:null, ev:false}; } });
+    // processes
+    arch.stmts.forEach((st,i)=>{
+      if(st.s==='proc'){ const reads=new Set(); collectReads(st.body,reads); st.vars.forEach(v=>reads.delete(v.name));
+        D.procs.push({kind:'proc', st, sens: st.sens==='all' ? [...reads].filter(n=>D.sig[n]) : (st.sens||[]), vars:st.vars, line:st.line});
+        (st.sens&&st.sens!=='all'?st.sens:[]).forEach(n=>{ if(!D.sig[n]) throw new VErr(`"${n}" in the sensitivity list is not a declared signal or port`, st.line); });
+      } else { const reads=new Set(); collectReads([st],reads); D.procs.push({kind:'conc', st, sens:[...reads].filter(n=>D.sig[n]), line:st.line}); }
+    });
+    // static checks: targets exist, out-port reads, multiple drivers, sensitivity hints
+    const drivers={};
+    D.procs.forEach((pr,pi)=>{ const tg=new Set(); collectTargets(pr.kind==='proc'?pr.st.body:[pr.st], tg, pr.vars||[]);
+      tg.forEach(t=>{ const [n,bit]=t.split('#'); const s=D.sig[n]; if(!s){ if(D.consts[n]) throw new VErr(`cannot assign to constant ${n}`, pr.line); throw new VErr(`"${n}" is assigned but never declared (add it as a port or a signal)`, pr.line); }
+        if(s.mode==='in') throw new VErr(`"${n}" is an input port — it cannot be assigned`, pr.line);
+        drivers[n]=drivers[n]||[]; drivers[n].push({pi,bit}); });
+      const reads=new Set(); collectReads(pr.kind==='proc'?pr.st.body:[pr.st], reads, true);
+      reads.forEach(n=>{ if(D.sig[n] && D.sig[n].mode==='out') throw new VErr(`"${n}" is an OUT port and cannot be read (VHDL-93). Use an internal signal and copy it to the port`, pr.line);
+        if(!D.sig[n] && !D.consts[n] && !(pr.vars||[]).some(v=>v.name===n) && !BUILTIN.has(n) && !isLoopVar(pr,n)) throw new VErr(`"${n}" is not declared`, pr.line); });
+      if(pr.kind==='proc'){
+        const edge=findEdge(pr.st.body);
+        if(edge){ if(pr.st.sens!=='all' && !pr.sens.includes(edge)) D.warnings.push(`the clocked process (line ${pr.line}) does not have ${edge} in its sensitivity list`);
+          const first=pr.st.body[0]; if(first && first.s==='if' && first.arms.length>1 && !hasEdge(first.arms[0].c) && hasEdge(first.arms[1].c)){ const rr=new Set(); collectExprReads(first.arms[0].c,rr); rr.forEach(r=>{ if(D.sig[r] && pr.st.sens!=='all' && !pr.sens.includes(r)) D.warnings.push(`asynchronous reset "${r}" is tested before the clock edge but is missing from the sensitivity list (line ${pr.line}) — write process(${[...pr.sens, r].join(', ')})`); }); }
+        } else if(pr.st.sens!=='all'){ const rd=new Set(); collectReads(pr.st.body,rd); const miss=[...rd].filter(n=>D.sig[n] && !pr.sens.includes(n)); if(miss.length) D.warnings.push(`the combinational process (line ${pr.line}) reads ${miss.join(', ')} but they are not in its sensitivity list — simulation will not react to them (use process(all) or list every input)`); }
+      }
+      if(pr.kind==='conc' && pr.st.s==='cond' && pr.st.noElse) D.warnings.push(`line ${pr.line}: when/else without a final else → the synthesiser builds a LATCH`);
+    });
+    Object.entries(drivers).forEach(([n,ds])=>{ const ps=new Set(ds.map(d=>d.pi)); if(ps.size>1){ const whole=ds.some(d=>d.bit==='*'); const bits=ds.map(d=>d.bit); const dup= whole || new Set(bits).size<bits.length; if(dup) throw new VErr(`"${n}" is driven by more than one concurrent statement/process (multiple drivers → 'X'). Each signal needs exactly one driver`, D.procs[ds[1].pi].line); } });
+    return D;
+    function isLoopVar(pr,n){ let found=false; walk(pr.kind==='proc'?pr.st.body:[], s=>{ if(s.s==='for' && s.v===n) found=true; }); return found; }
+  }
+  const BUILTIN=new Set(['rising_edge','falling_edge','unsigned','signed','std_logic_vector','to_unsigned','to_signed','to_integer','resize','std_logic','integer','natural','conv_integer','true','false','shift_left','shift_right']);
+  function walk(list,f){ list.forEach(s=>{ f(s); if(s.s==='if'){ s.arms.forEach(a=>walk(a.b,f)); if(s.els) walk(s.els,f); } if(s.s==='case') s.alts.forEach(a=>walk(a.b,f)); if(s.s==='for') walk(s.body,f); }); }
+  function collectExprReads(e,set){ if(!e||typeof e!=='object') return; if(Array.isArray(e)){ e.forEach(x=>collectExprReads(x,set)); return; }
+    if(e.e==='name'){ set.add(e.n); return; } if(e.e==='call'){ if(e.base.e==='name' && !BUILTIN.has(e.base.n)) set.add(e.base.n); else if(e.base.e!=='name') collectExprReads(e.base,set); e.args.forEach(a=>collectExprReads(a,set)); return; }
+    if(e.e==='attr'){ collectExprReads(e.base,set); return; }
+    ['a','b','base'].forEach(k=>{ if(e[k]) collectExprReads(e[k],set); }); if(e.items) e.items.forEach(it=>{ collectExprReads(it.v,set); }); }
+  function collectReads(list,set){ list.forEach(s=>{
+    if(s.s==='assign'||s.s==='var'){ collectExprReads(s.val,set); if(s.target.idx) collectExprReads([s.target.idx.a,s.target.idx.b,s.target.idx.i],set); }
+    if(s.s==='cond'){ s.waves.forEach(w=>{ collectExprReads(w.val,set); collectExprReads(w.cond,set); }); }
+    if(s.s==='sel'){ collectExprReads(s.sel,set); s.alts.forEach(a=>{ collectExprReads(a.val,set); }); }
+    if(s.s==='if'){ s.arms.forEach(a=>{ collectExprReads(a.c,set); collectReads(a.b,set); }); if(s.els) collectReads(s.els,set); }
+    if(s.s==='case'){ collectExprReads(s.sel,set); s.alts.forEach(a=>collectReads(a.b,set)); }
+    if(s.s==='for'){ collectReads(s.body,set); set.delete(s.v); }
+  }); }
+  function collectTargets(list,set,vars){ walk(list,s=>{ if(['assign','cond','sel'].includes(s.s)){ const t=s.target; let bit='*'; if(t.idx){ if(t.idx.i && t.idx.i.e==='num') bit=String(t.idx.i.v); else if(t.idx.a && t.idx.a.e==='num' && t.idx.b.e==='num') bit=`${t.idx.a.v}:${t.idx.b.v}`; } set.add(t.name+'#'+bit); } }); }
+  function hasEdge(e){ let f=false; (function w(x){ if(!x||typeof x!=='object') return; if(x.e==='call' && x.base.e==='name' && (x.base.n==='rising_edge'||x.base.n==='falling_edge')) f=true; if(x.e==='attr' && x.attr==='event') f=true; ['a','b','base'].forEach(k=>w(x[k])); if(x.args) x.args.forEach(w); })(e); return f; }
+  function edgeSig(e){ let s=null; (function w(x){ if(!x||typeof x!=='object') return; if(x.e==='call' && x.base.e==='name' && (x.base.n==='rising_edge'||x.base.n==='falling_edge') && x.args[0] && x.args[0].e==='name') s=x.args[0].n; if(x.e==='attr' && x.attr==='event' && x.base.e==='name') s=x.base.n; ['a','b','base'].forEach(k=>w(x[k])); if(x.args) x.args.forEach(w); })(e); return s; }
+  function findEdge(body){ let s=null; walk(body,st=>{ if(st.s==='if') st.arms.forEach(a=>{ const e=edgeSig(a.c); if(e) s=e; }); }); return s; }
+
+  /* ---------- evaluation ---------- */
+  function fit(v, ty, line){
+    if(v.t==='agg'){ if(ty.k==='sl'||ty.k==='int') throw new VErr('(others => …) can only be assigned to a vector', line); return VEC(resolveAgg(v,ty.len,ty), ty.k, ty.l, ty.r, ty.d); }
+    if(ty.k==='sl'){ if(v.t!=='sl') throw new VErr(`type mismatch: a std_logic needs a single bit like '1', but got ${v.t==='vec'?`a ${v.s.length}-bit vector "${v.s}" (use single quotes)`:v.t==='int'?'an integer':'a boolean'}`, line); return v; }
+    if(ty.k==='int'){ if(v.t!=='int') throw new VErr('type mismatch: integer expected', line); return v; }
+    if(ty.k==='bool'){ if(v.t!=='bool') throw new VErr('type mismatch: boolean expected', line); return v; }
+    if(v.t==='sl') throw new VErr(`type mismatch: the target is a ${ty.len}-bit vector but the value is a single bit '${v.v}' (use double quotes "…" for vectors)`, line);
+    if(v.t==='int') throw new VErr(`type mismatch: cannot assign an integer to a vector — use std_logic_vector(to_unsigned(…, ${ty.len})) or a literal "…"`, line);
+    if(v.t==='bool') throw new VErr('type mismatch: a condition (boolean) cannot be assigned to a signal — use when/else', line);
+    if(v.s.length!==ty.len) throw new VErr(`width mismatch: assigning ${v.s.length} bits to a ${ty.len}-bit target`, line);
+    if(v.k!=='lit' && v.k!==ty.k){ const nm={slv:'std_logic_vector',uns:'unsigned',sgn:'signed'}; throw new VErr(`type mismatch: ${nm[v.k]} value assigned to a ${nm[ty.k]} target — convert it with ${nm[ty.k]}(…)`, line); }
+    return VEC(v.s, ty.k, ty.l, ty.r, ty.d);
+  }
+  function resolveAgg(v,len,ty){ let arr=new Array(len).fill(null); const oth=v.items.find(i=>i.others);
+    v.items.filter(i=>!i.others).forEach(i=>{ const k=i.kv; const pos= ty && ty.d==='to' ? k-ty.l : (ty? ty.l-k : len-1-k); if(pos>=0&&pos<len) arr[pos]=i.vv.v; });
+    return arr.map(x=>x===null ? (oth?oth.vv.v:'U') : x).join(''); }
+  function posOf(ty,i){ return ty.d==='downto' ? ty.l-i : i-ty.l; }
+  function evalE(e, C){
+    switch(e.e){
+      case 'chr': return SL(e.v);
+      case 'str': return VEC(e.v,'lit');
+      case 'num': return INT(e.v);
+      case 'paren': return evalE(e.a,C);
+      case 'agg': return {t:'agg', items:e.items.map(it=>({others:it.others, kv: it.k?toNum(evalE(it.k,C)):null, vv:evalE(it.v,C)}))};
+      case 'name': { const n=e.n;
+        if(C.vars && n in C.vars) return C.vars[n];
+        if(C.D.sig[n]) return C.D.sig[n].val;
+        if(C.D.consts && n in C.D.consts) return C.D.consts[n];
+        if(C.consts && n in C.consts) return C.consts[n];
+        if(n==='true') return BOOL(true); if(n==='false') return BOOL(false);
+        throw new VErr(`"${n}" is not declared`, e.line); }
+      case 'attr': { const b=e.base;
+        if(e.attr==='event'){ if(b.e!=='name'||!C.D.sig[b.n]) throw new VErr("'event needs a signal name", e.line); return BOOL(!!C.D.sig[b.n].ev); }
+        const v=evalE(b,C); if(e.attr==='length') return INT(v.s.length); if(e.attr==='high') return INT(Math.max(v.l,v.r)); if(e.attr==='low') return INT(Math.min(v.l,v.r));
+        throw new VErr(`attribute '${e.attr} is not supported`, e.line); }
+      case 'qual': return evalE(e.a,C);
+      case 'not': { const a=evalE(e.a,C); if(a.t==='sl') return SL(bitNot(a.v)); if(a.t==='vec') return VEC([...a.s].map(bitNot).join(''),a.k,a.l,a.r,a.d); if(a.t==='bool') return BOOL(!a.v); throw new VErr('not needs a bit, vector or condition', e.line); }
+      case 'neg': { const a=evalE(e.a,C); if(a.t==='int') return INT(-a.v); if(a.t==='vec' && a.k==='sgn') return fromNum(-toNum(a),a.s.length,'sgn'); throw new VErr('unary minus needs an integer or signed', e.line); }
+      case 'abs': { const a=evalE(e.a,C); if(a.t==='int') return INT(Math.abs(a.v)); if(a.t==='vec'&&a.k==='sgn') return fromNum(Math.abs(toNum(a)),a.s.length,'sgn'); throw new VErr('abs needs integer/signed', e.line); }
+      case 'slice': { const b=evalE(e.base,C); if(b.t!=='vec') throw new VErr('only vectors can be sliced', e.line); const A=toNum(evalE(e.a,C)), B=toNum(evalE(e.b,C));
+        if(e.d!==b.d) throw new VErr(`slice direction "${e.d}" does not match the vector's "${b.d}"`, e.line);
+        const p1=posOf(b,A), p2=posOf(b,B); if(p1<0||p2<0||p1>=b.s.length||p2>=b.s.length) throw new VErr(`slice (${A} ${e.d} ${B}) is outside the vector range`, e.line); if(p2<p1) throw new VErr('empty slice', e.line);
+        return VEC(b.s.slice(p1,p2+1), b.k, A, B, e.d); }
+      case 'call': return evalCall(e,C);
+      case 'bin': return evalBin(e,C);
+    }
+    throw new VErr('unsupported expression', e.line);
+  }
+  function evalCall(e,C){
+    const b=e.base; const fn = b.e==='name' ? b.n : null;
+    const args=()=>e.args.map(a=>evalE(a,C));
+    if(fn && !(C.vars && fn in C.vars) && !C.D.sig[fn] && !(C.D.consts&&fn in C.D.consts)){
+      if(fn==='rising_edge'||fn==='falling_edge'){ const a=e.args[0]; if(!a||a.e!=='name'||!C.D.sig[a.n]) throw new VErr(`${fn} needs a signal like ${fn}(clk)`, e.line); const s=C.D.sig[a.n]; const want=fn==='rising_edge'?'1':'0', was=fn==='rising_edge'?'0':'1'; return BOOL(!!s.ev && s.val.v===want && s.prev && s.prev.v===was); }
+      const A=args();
+      const conv=k=>{ const v=A[0]; if(!v) throw new VErr(`${fn}(…) needs an argument`, e.line); if(v.t==='vec') return VEC(v.s,k,v.l,v.r,v.d); if(v.t==='int') throw new VErr(`${fn}(integer) is not allowed — use to_${k==='sgn'?'signed':'unsigned'}(n, width)`, e.line); throw new VErr(`${fn}() needs a vector`, e.line); };
+      if(fn==='unsigned') return conv('uns'); if(fn==='signed') return conv('sgn');
+      if(fn==='std_logic_vector'){ if(A[0] && A[0].t==='vec' && A[0].k==='slv') return A[0]; return conv('slv'); }
+      if(fn==='to_unsigned'||fn==='to_signed'){ if(A.length<2) throw new VErr(`${fn} needs (value, width)`, e.line); return fromNum(toNum(A[0]), toNum(A[1]), fn==='to_unsigned'?'uns':'sgn'); }
+      if(fn==='to_integer'||fn==='conv_integer'){ const v=A[0]; if(v.t==='vec' && v.k==='slv' && fn==='to_integer') throw new VErr('to_integer needs unsigned/signed — write to_integer(unsigned(x))', e.line); return INT(toNum(v)); }
+      if(fn==='resize'){ const v=A[0], w=toNum(A[1]); if(v.k==='sgn') return fromNum(toNum(v),w,'sgn'); return VEC(v.s.length>=w? v.s.slice(-w) : v.s.padStart(w,'0'),v.k); }
+      if(fn==='shift_left'||fn==='shift_right'){ const v=A[0], k=toNum(A[1]); const n=v.s.length; const s= fn==='shift_left' ? (v.s.slice(k)+'0'.repeat(k)).slice(0,n) : ('0'.repeat(k)+v.s).slice(0,n); return VEC(s,v.k,v.l,v.r,v.d); }
+      throw new VErr(`"${fn}" is not declared (unknown function or signal)`, e.line);
+    }
+    // indexing
+    const base=evalE(b,C); if(base.t!=='vec') throw new VErr(`${b.n||'this'} is not a vector, it cannot be indexed`, e.line);
+    if(e.args.length!==1) throw new VErr('index with one number, e.g. x(3)', e.line);
+    const i=toNum(evalE(e.args[0],C)); const pos=posOf(base,i); if(pos<0||pos>=base.s.length) throw new VErr(`index ${i} is outside the range of ${b.n||'the vector'}`, e.line);
+    return SL(base.s[pos]);
+  }
+  function evalBin(e,C){
+    const op=e.op; let a=evalE(e.a,C), b=evalE(e.b,C);
+    if(a.t==='agg' && b.t==='vec') a=VEC(resolveAgg(a,b.s.length),'lit'); if(b.t==='agg' && a.t==='vec') b=VEC(resolveAgg(b,a.s.length),'lit');
+    if(['and','or','xor','nand','nor','xnor'].includes(op)){
+      if(a.t==='bool' && b.t==='bool'){ const r= op==='and'?a.v&&b.v: op==='or'?a.v||b.v: op==='xor'?a.v!==b.v: op==='nand'?!(a.v&&b.v): op==='nor'?!(a.v||b.v): a.v===b.v; return BOOL(r); }
+      const f=(x,y)=>{ const r= op==='and'||op==='nand'?bitAnd(x,y): op==='or'||op==='nor'?bitOr(x,y): bitXor(x,y); return ['nand','nor','xnor'].includes(op)?bitNot(r):r; };
+      if(a.t==='sl' && b.t==='sl') return SL(f(a.v,b.v));
+      if(a.t==='vec' && b.t==='vec'){ if(a.s.length!==b.s.length) throw new VErr(`"${op}" on vectors of different widths (${a.s.length} and ${b.s.length} bits)`, e.line); return VEC([...a.s].map((x,i)=>f(x,b.s[i])).join(''), a.k!=='lit'?a.k:b.k, a.l,a.r,a.d); }
+      if((a.t==='bool')!==(b.t==='bool')) throw new VErr(`cannot combine a condition with a bit using "${op}" — compare the bit first, e.g. x = '1'`, e.line);
+      throw new VErr(`"${op}" needs two bits or two vectors of the same width (got ${a.t==='sl'?'a bit':'a '+(a.s?a.s.length:'')+'-bit vector'} and ${b.t==='sl'?'a bit':'a '+(b.s?b.s.length:'')+'-bit vector'})`, e.line);
+    }
+    if(['=','/=','<','<=','>','>='].includes(op)){
+      let r;
+      if(a.t==='sl' && b.t==='sl') r = op==='='? a.v===b.v : op==='/='? a.v!==b.v : null;
+      else if(a.t==='bool' && b.t==='bool') r = op==='='? a.v===b.v : op==='/='? a.v!==b.v : null;
+      else if(a.t==='sl' || b.t==='sl'){ const o=a.t==='sl'?b:a; throw new VErr(o.t==='vec'?`comparing a bit with a vector "${o.s}" — use single quotes for one bit: '${o.s}'`:`cannot compare a bit with ${o.t==='int'?'the integer '+o.v+" — write '"+o.v+"' with quotes":'this value'}`, e.line); }
+      else {
+        const numeric = a.t==='int'||b.t==='int'||a.k==='uns'||a.k==='sgn'||b.k==='uns'||b.k==='sgn';
+        if(numeric){ if((a.t==='int'&&b.t==='vec'&&b.k==='slv')||(b.t==='int'&&a.t==='vec'&&a.k==='slv')) throw new VErr('comparing a std_logic_vector with a number needs unsigned(…) (numeric_std)', e.line);
+          const x=toNum(a), y=toNum(b); if(isNaN(x)||isNaN(y)) r=false; else r= op==='='?x===y: op==='/='?x!==y: op==='<'?x<y: op==='<='?x<=y: op==='>'?x>y: x>=y; }
+        else { const x=a.s, y=b.s; if(op==='='||op==='/='){ const eq= x===y; r= op==='='?eq:!eq; } else { const c= x<y?-1:x>y?1:0; r= op==='<'?c<0: op==='<='?c<=0: op==='>'?c>0: c>=0; } }
+      }
+      if(r===null) throw new VErr(`"${op}" is not defined for single bits`, e.line);
+      return BOOL(r);
+    }
+    if(op==='&'){
+      const sv=v=> v.t==='sl'?v.v: v.t==='vec'?v.s: null;
+      if(sv(a)===null||sv(b)===null) throw new VErr('& joins bits and vectors only', e.line);
+      const ks=[a,b].filter(v=>v.t==='vec'&&v.k!=='lit').map(v=>v.k); return VEC(sv(a)+sv(b), ks[0]||'lit');
+    }
+    if(['+','-','*'].includes(op)){
+      if(a.t==='int' && b.t==='int') return INT(op==='+'?a.v+b.v: op==='-'?a.v-b.v: a.v*b.v);
+      const bad=v=>v.t==='vec' && (v.k==='slv'||v.k==='lit');
+      if((a.t==='vec'&&a.k==='slv')||(b.t==='vec'&&b.k==='slv')) throw new VErr(`"${op}" on std_logic_vector is not allowed — convert first: std_logic_vector(unsigned(a) ${op} …)`, e.line);
+      if(a.t==='sl'||b.t==='sl') throw new VErr(`"${op}" with a single std_logic bit is not allowed in numeric_std (VHDL-93) — make it a vector, e.g. "0000000" & cin`, e.line);
+      const k = (a.t==='vec'&&a.k!=='lit')?a.k:(b.t==='vec'&&b.k!=='lit')?b.k:'uns';
+      const wa=a.t==='vec'?a.s.length:0, wb=b.t==='vec'?b.s.length:0;
+      const x=toNum(a), y=toNum(b); const w = op==='*' ? (wa&&wb? wa+wb : 2*Math.max(wa,wb)) : Math.max(wa,wb);
+      if(isNaN(x)||isNaN(y)) return VEC('X'.repeat(w),k);
+      return fromNum(op==='+'?x+y: op==='-'?x-y: x*y, w, k);
+    }
+    if(op==='mod'||op==='rem'||op==='/'||op==='**'){ const x=toNum(a), y=toNum(b); if(a.t==='int'&&b.t==='int'){ return INT(op==='mod'?((x%y)+y)%y: op==='rem'? x%y : op==='/'?Math.trunc(x/y): x**y); } throw new VErr(`"${op}" is only supported on integers here`, e.line); }
+    throw new VErr(`operator ${op} not supported`, e.line);
+  }
+  function cond(e,C){ const v=evalE(e,C); if(v.t!=='bool'){ throw new VErr(v.t==='sl'? (e.e==='name'?`a condition must be true/false — write ${e.n} = '1' instead of just ${e.n}`:`this condition gives a bit, not true/false — compare every signal, e.g. (a = '1' and b = '1') instead of (a and b)`):'a condition must be a comparison like x = "01"', e.line||C.line); } return v.v; }
+  function matchChoice(ch,v,C){ for(const c of ch){ if(c.others) return true; if(c.range){ const n=toNum(v), a=toNum(evalE(c.range[0],C)), b=toNum(evalE(c.range[1],C)); if(n>=Math.min(a,b)&&n<=Math.max(a,b)) return true; continue; } const cv=evalE(c.e,C);
+      if(v.t==='sl'&&cv.t==='sl'&&v.v===cv.v) return true; if(v.t==='vec'&&cv.t==='vec'){ if(cv.s.length!==v.s.length) throw new VErr(`choice "${cv.s}" has ${cv.s.length} bits but the selector has ${v.s.length}`, C.line); if(cv.s===v.s) return true; } if(v.t==='int'&&cv.t==='int'&&v.v===cv.v) return true;
+      if(v.t==='sl'&&cv.t==='vec') throw new VErr(`choice "${cv.s}" is a vector but the selector is one bit — use '${cv.s}'`, C.line); if(v.t==='vec'&&cv.t==='sl') throw new VErr(`choice '${cv.v}' is one bit but the selector is a ${v.s.length}-bit vector — use "…"`, C.line); }
+    return false; }
+  function checkChoices(alts, selv, line){ // completeness + duplicates for vector selectors
+    const hasOthers=alts.some(a=>a.ch.some(c=>c.others));
+    const seen=new Set(); alts.forEach(a=>a.ch.forEach(c=>{ if(c.e && (c.e.e==='str'||c.e.e==='chr')){ const k=c.e.v; if(seen.has(k)) throw new VErr(`the choice ${c.e.e==='str'?'"'+k+'"':"'"+k+"'"} appears twice — each value may be used only once`, line); seen.add(k); } }));
+    if(!hasOthers && (selv.t==='vec'||selv.t==='sl')) throw new VErr('the choices are not complete — add "when others" (std_logic also has X, Z, U …)', line);
+  }
+
+  /* ---------- simulator ---------- */
+  function makeSim(D){
+    const S={D, t:0};
+    D.procs.forEach(pr=>{ if(pr.kind==='proc'){ pr.varv={}; pr.vars.forEach(v=>{ const ty=v.type; let val; if(ty.k==='sl') val=SL('U'); else if(ty.k==='int') val=INT(0); else if(ty.k==='bool') val=BOOL(false); else { const a=toNum(evalE(ty.a,{D,vars:{}})), b=toNum(evalE(ty.b,{D,vars:{}})); const len=ty.d==='downto'?a-b+1:b-a+1; val=VEC('U'.repeat(len),ty.k,a,b,ty.d); } if(v.init) val=evalE(v.init,{D,vars:{}}); pr.varv[v.name]=val; }); }
+      if(pr.st.s==='sel') pr.checked=false; });
+    function runProc(pr, upd){
+      const C={D, vars:pr.varv||{}, line:pr.line};
+      const sched=(t,val,line)=>{ const s=D.sig[t.name]; let nv;
+        if(val && val.e==='unaff') return;
+        if(t.idx){ const cur=(upd.get(t.name)||s.val); if(cur.t!=='vec') throw new VErr(`${t.name} is not a vector`, line);
+          if(t.idx.i){ const i=toNum(evalE(t.idx.i,C)); const pos=posOf(cur,i); if(pos<0||pos>=cur.s.length) throw new VErr(`index ${i} out of range for ${t.name}`, line); if(val.t!=='sl') throw new VErr(`${t.name}(${i}) is one bit — assign a single bit like '1'`, line); nv=VEC(cur.s.slice(0,pos)+val.v+cur.s.slice(pos+1),cur.k,cur.l,cur.r,cur.d); }
+          else { const A=toNum(evalE(t.idx.a,C)), B=toNum(evalE(t.idx.b,C)); const p1=posOf(cur,A), p2=posOf(cur,B); const len=p2-p1+1; const fv=fit(val,{k:cur.k,len,l:A,r:B,d:t.idx.d},line); nv=VEC(cur.s.slice(0,p1)+fv.s+cur.s.slice(p2+1),cur.k,cur.l,cur.r,cur.d); }
+        } else nv=fit(val, s.ty, line);
+        upd.set(t.name, nv); };
+      const exec=(list)=>{ for(const st of list){
+        if(st.s==='assign') sched(st.target, evalE(st.val,C), st.line);
+        else if(st.s==='cond'){ let done=false; for(const w of st.waves){ if(w.cond===null || cond(w.cond,Object.assign(C,{line:st.line}))){ if(w.val.e!=='unaff') sched(st.target, evalE(w.val,C), st.line); done=true; break; } } }
+        else if(st.s==='sel'){ const v=evalE(st.sel,C); checkChoices(st.alts,v,st.line); for(const a of st.alts){ if(matchChoice(a.ch,v,Object.assign(C,{line:st.line}))){ if(a.val.e!=='unaff') sched(st.target, evalE(a.val,C), st.line); break; } } }
+        else if(st.s==='var'){ const nm=st.target.name; if(!(nm in C.vars)) throw new VErr(`":=" is only for variables — "${nm}" is a signal, use "<="`, st.line); const cur=C.vars[nm]; C.vars[nm]= cur.t==='vec'? fit(evalE(st.val,C),{k:cur.k,len:cur.s.length,l:cur.l,r:cur.r,d:cur.d},st.line) : evalE(st.val,C); }
+        else if(st.s==='if'){ let hit=false; for(const a of st.arms){ if(cond(a.c,Object.assign(C,{line:st.line}))){ exec(a.b); hit=true; break; } } if(!hit && st.els) exec(st.els); }
+        else if(st.s==='case'){ const v=evalE(st.sel,C); checkChoices(st.alts,v,st.line); for(const a of st.alts){ if(matchChoice(a.ch,v,Object.assign(C,{line:st.line}))){ exec(a.b); break; } } }
+        else if(st.s==='for'){ const a=toNum(evalE(st.a,C)), b=toNum(evalE(st.b,C)); const step=st.d==='to'?1:-1; const had=st.v in C.vars, old=C.vars[st.v]; for(let i=a; st.d==='to'?i<=b:i>=b; i+=step){ C.vars[st.v]=INT(i); exec(st.body); } if(had) C.vars[st.v]=old; else delete C.vars[st.v]; }
+      } };
+      exec(pr.kind==='proc'?pr.st.body:[pr.st]);
+    }
+    function delta(trigAll){
+      let iter=0; let triggered = trigAll ? D.procs.slice() : D.procs.filter(pr=>pr.sens.some(n=>D.sig[n].ev));
+      while(triggered.length){
+        if(++iter>200) throw new VErr('the design never settles (combinational loop / oscillation)', 1);
+        const updates=[]; triggered.forEach(pr=>{ const u=new Map(); runProc(pr,u); updates.push(u); });
+        Object.values(D.sig).forEach(s=>{ s.ev=false; });
+        const merged=new Map(); updates.forEach(u=>u.forEach((v,k)=>{ if(merged.has(k)){ const o=merged.get(k); if(o.t==='vec'&&v.t==='vec'){ const cur=D.sig[k].val.s; let s=''; for(let i=0;i<cur.length;i++){ const a=o.s[i]!==cur[i], b=v.s[i]!==cur[i]; s+= a&&!b?o.s[i]: !a&&b?v.s[i]: a&&b&&o.s[i]!==v.s[i]?'X': v.s[i]; } merged.set(k,VEC(s,v.k,v.l,v.r,v.d)); } else merged.set(k,v); } else merged.set(k,v); }));
+        merged.forEach((v,k)=>{ const s=D.sig[k]; if(show(s.val)!==show(v)){ s.prev=s.val; s.val=v; s.ev=true; } });
+        triggered = D.procs.filter(pr=>pr.sens.some(n=>D.sig[n].ev));
+      }
+      Object.values(D.sig).forEach(s=>{ s.ev=false; });
+    }
+    S.init=()=>delta(true);
+    S.set=(vals)=>{ let any=false; Object.entries(vals).forEach(([k,v])=>{ const s=D.sig[k]; if(!s) return; const nv = s.ty.k==='sl'? SL(v) : VEC(v,s.ty.k,s.ty.l,s.ty.r,s.ty.d); if(show(s.val)!==show(nv)){ s.prev=s.val; s.val=nv; s.ev=true; any=true; } }); if(any) delta(false); };
+    S.get=k=>{ const v=D.sig[k].val; return v.t==='sl'?v.v: v.t==='vec'?v.s: String(v.v); };
+    return S;
+  }
+
+  function compile(src, preferEntity){ const u=parse(src); const D=elaborate(u, preferEntity); return {u,D}; }
+
+  /* ---------- compare student vs model ---------- */
+  function rnd(seed){ let s=seed>>>0||7; return ()=>{ s^=s<<13; s>>>=0; s^=s>>>17; s^=s<<5; s>>>=0; return (s%100000)/100000; }; }
+  function check(modelSrc, studentSrc){
+    const R={syntax:null, ports:[], warnings:[], mism:[], tested:0, kind:'', score:0, notes:[]};
+    let M; try{ M=compile(modelSrc); }catch(e){ R.internal='model:'+e.message; return R; }
+    let St; try{ St=compile(studentSrc, M.D.ent.name); }catch(e){ R.syntax={msg:e.message, line:e.line||null}; R.score=estimate(R); return R; }
+    const md=M.D, sd=St.D; R.warnings=sd.warnings.slice();
+    if(sd.ent.name!==md.ent.name) R.notes.push(`your entity is called "${sd.ent.name}", the question uses "${md.ent.name}" (fine for the checker, but use the given name in the exam)`);
+    const usesNumeric = /unsigned|signed|to_integer|to_unsigned/.test(studentSrc.toLowerCase().replace(/--[^\n]*/g,''));
+    if(usesNumeric && !sd.numeric) R.warnings.push('you use unsigned/signed but forgot "use ieee.numeric_std.all;"');
+    if(!sd.libs.includes('ieee') || !sd.uses.some(u=>u.startsWith('ieee.std_logic_1164'))) R.warnings.push('missing "library ieee;" / "use ieee.std_logic_1164.all;" at the top');
+    // style: the exam asks for a specific kind of statement
+    const sty=D=>({cond:D.arch.stmts.some(s=>s.s==='cond'), sel:D.arch.stmts.some(s=>s.s==='sel'), proc:D.arch.stmts.some(s=>s.s==='proc')});
+    const ms_=sty(md), ss_=sty(sd);
+    if(ms_.cond && !ms_.sel && !ms_.proc && !ss_.cond){ R.style='This question asks for a CONDITIONAL signal assignment (when / else) — your answer uses '+(ss_.sel?'with / select':ss_.proc?'a process':'another form')+'.'; }
+    else if(ms_.sel && !ms_.cond && !ms_.proc && !ss_.sel){ R.style='This question asks for a SELECTED signal assignment (with / select) — your answer uses '+(ss_.cond?'when / else':ss_.proc?'a process':'another form')+'.'; }
+    if(R.style) R.warnings.unshift(R.style);
+    // ports
+    md.ports.forEach(mp=>{ const sp=sd.ports.find(x=>x.name===mp.name); const mt=md.sig[mp.name].ty;
+      if(!sp){ R.ports.push(`port "${mp.name}" (${mp.mode}) is missing`); return; }
+      if(sp.mode!==mp.mode) R.ports.push(`port "${mp.name}" should be "${mp.mode}" (you wrote "${sp.mode}")`);
+      const stt=sd.sig[mp.name].ty; const w=t=>t.k==='sl'?'1 bit (std_logic)':t.len?`${t.len} bits`:t.k;
+      if((mt.k==='sl')!==(stt.k==='sl') || (mt.len||1)!==(stt.len||1)) R.ports.push(`port "${mp.name}" should be ${w(mt)} — yours is ${w(stt)}`); });
+    sd.ports.forEach(sp=>{ if(!md.ports.find(x=>x.name===sp.name)) R.ports.push(`extra port "${sp.name}" that the question does not have`); });
+    if(R.ports.length){ R.score=estimate(R); return R; }
+    // simulate
+    const ins=md.ports.filter(p=>p.mode==='in'), outs=md.ports.filter(p=>p.mode==='out');
+    let clk=null; md.procs.forEach(pr=>{ if(pr.kind==='proc'){ const e=findEdge(pr.st.body); if(e) clk=e; } });
+    const ms=makeSim(M.D), ss=makeSim(St.D);
+    try{ ms.init(); }catch(e){ R.internal='model sim:'+e.message; return R; }
+    try{ ss.init(); }catch(e){ R.syntax={msg:e.message, line:e.line||null, runtime:true}; R.score=estimate(R); return R; }
+    const width=p=>{ const t=md.sig[p.name].ty; return t.k==='sl'?1:t.len; };
+    const fmt=(p,v)=> width(p)===1?`'${v}'`:`"${v}"`;
+    const NM=n=>M.u.raw[n]||n; R.NM=NM;
+    const cmp=(label)=>{ R.tested++; for(const o of outs){ const a=ms.get(o.name), b=ss.get(o.name); if(a.includes('U')) continue; if(a!==b){ if(R.mism.length<4) R.mism.push({when:label(), out:NM(o.name), exp:fmt(o,a), got:fmt(o,b), edge:lastEdge}); return false; } } return true; };
+    const inVals=()=>Object.fromEntries(ins.map(p=>[p.name, ms.get(p.name)]));
+    const descIns=(names)=>names.map(n=>{ const p=ins.find(x=>x.name===n); return `${NM(n)} = ${fmt(p,ms.get(n))}`; }).join(', '); let lastEdge=null;
+    try{
+      if(!clk){
+        R.kind='comb'; const total=ins.reduce((s,p)=>s+width(p),0);
+        const vecs=[]; if(total<=11){ for(let i=0;i<(1<<total);i++){ const g=i^(i>>1); vecs.push(g); } } else { const r=rnd(99); for(let i=0;i<400;i++) vecs.push(Math.floor(r()*2**Math.min(total,30))); }
+        const split=n=>{ let s=n.toString(2).padStart(total,'0').slice(-total); const o={}; ins.forEach(p=>{ const w=width(p); o[p.name]=s.slice(0,w); s=s.slice(w); }); return o; };
+        if(total>11){ const r=rnd(5); for(let i=0;i<400;i++){ const o={}; ins.forEach(p=>{ let s=''; for(let k=0;k<width(p);k++) s+= r()<0.5?'1':'0'; o[p.name]=s; }); applyBoth(o); cmp(()=>descIns(ins.map(p=>p.name))); } }
+        else vecs.forEach(v=>{ applyBoth(split(v)); cmp(()=>descIns(ins.map(p=>p.name))); });
+      } else {
+        R.kind='seq';
+        const isRst=n=>/rst|reset|clr|clear/.test(n), isEn=n=>/^en|enable|_en|^e$|^ce$/.test(n), isLoad=n=>/load|init|ld/.test(n);
+        const activeLow=n=>/_n$|n$/.test(n) && /rst|reset|clr|clear|en/.test(n) && !/^en$|^clr$/.test(n);
+        for(let run=0; run<4; run++){
+          const r=rnd(1234+run*77); const N=96; let edges=0;
+          const sig={}; ins.filter(p=>p.name!==clk).forEach(p=>{ const w=width(p); const arr=[]; let cur=null;
+            for(let t=0;t<N;t++){
+              if(w===1){ let on;
+                if(isRst(p.name)){ on = t<5 || (run>0 && ((t>=27&&t<29) || (t>=59&&t<63))); cur = (activeLow(p.name)? !on : on) ? '1':'0'; }
+                else if(t%2===1 || cur===null){ if(isLoad(p.name)) cur = r()<0.12?'1':'0'; else if(isEn(p.name)){ const act= r()<0.75; cur = (activeLow(p.name)?!act:act)?'1':'0'; } else if(t%2===1||cur===null){ if(cur===null||r()<0.45) cur = r()<0.5?'1':'0'; } }
+                arr.push(cur);
+              } else { if(cur===null || (t%2===1 && r()<0.4)){ let s=''; for(let k=0;k<w;k++) s+= r()<0.5?'1':'0'; cur=s; } arr.push(cur); }
+            }
+            sig[p.name]=arr; });
+          for(let t=0;t<N;t++){
+            const c = (t%4)>=2 ? '1':'0'; const prevc = t===0?null:((t-1)%4)>=2?'1':'0';
+            const o={}; Object.keys(sig).forEach(k=>o[k]=sig[k][t]);
+            const changedIns=Object.keys(sig).filter(k=>t>0 && sig[k][t]!==sig[k][t-1]);
+            if(changedIns.length) applyBoth(o);
+            const isEdge = prevc!==null && c!==prevc; if(isEdge) edges++; lastEdge = isEdge ? (c==='1'?'rise':'fall') : 'none';
+            const oc={}; oc[clk]=c; applyBoth(oc);
+            cmp(()=>{ const ed = isEdge ? `right after a ${c==='1'?'RISING':'FALLING'} clock edge (t = ${t})` : `between clock edges (t = ${t}${changedIns.length?', '+changedIns.map(NM).join(', ')+' just changed':''})`; return `${ed} with ${descIns(Object.keys(sig))}`; });
+            if(R.mism.length>=4) break;
+          }
+          if(R.mism.length>=4) break;
+        }
+      }
+    }catch(e){ R.syntax={msg:e.message, line:e.line||null, runtime:true}; }
+    if(R.mism.length){ const m=R.mism[0];
+      if(R.kind==='comb') R.hint='Trace your statement for exactly these input values, top to bottom: which line is the first true one? Check the codes / order of the conditions.';
+      else if(m.edge==='none') R.hint='Between clock edges a register may only change because of an ASYNCHRONOUS reset. If the correct output changed here, your reset must be tested BEFORE the clock edge (if rst … elsif rising_edge …) and be in the sensitivity list. If YOUR output changed here, you probably tested a level (clk = \'1\') instead of an edge.';
+      else R.hint=`Check at this ${m.edge==='rise'?'rising':'falling'} edge: (1) is your process using the right edge? (2) priority order reset → load → enable; (3) the value assigned (direction of a shift, +1 / −1, wrap-around).`;
+      if(/U/.test(m.got)) R.hint+=' Your output is still U (never assigned) at this moment.'; }
+    R.score=estimate(R);
+    return R;
+    function applyBoth(o){ ms.set(o); ss.set(o); }
+  }
+  function estimate(R){
+    if(R.syntax) return R.syntax.runtime ? 2 : 1;
+    if(R.ports.length) return 2;
+    let s = R.mism.length===0 ? 5 : (R.mism.length>=4 ? 3 : 3.5);
+    if(R.warnings.some(w=>/LATCH|sensitivity|numeric_std|library/.test(w))) s-=0.5;
+    if(R.style) s-=1.5;
+    return Math.max(0,s);
+  }
+  return {lex, parse, compile, makeSim, check, VErr};
 })();
 
 /* ===================== App ===================== */
@@ -4882,6 +6244,35 @@ function practiceStats(lesson){ const sv=store.get('solved',{}); let n=0,k=0; Ob
 function updateNav(){ $$('.np[data-np]').forEach(sp=>{ const [k,n]=practiceStats(sp.dataset.np); sp.textContent=n?`${k}/${n}`:''; sp.classList.toggle('full',n>0&&k===n); });
   const d=store.get('done',{}); $$('.nav a[data-k]').forEach(a=>{ let s=$('.done',a); if(d[a.dataset.k]){ if(!s){ s=document.createElement('span'); s.className='done'; s.textContent='✓'; a.appendChild(s);} } else if(s) s.remove(); }); }
 
+
+/* ---------- auto-check UI ---------- */
+const isFullDesign=c=>/entity\s+\w+\s+is/i.test(c)&&/architecture\s+\w+\s+of/i.test(c);
+function autoCheckHTML(model, code){
+  if(!code.trim()) return '<p class="small">Type your answer in the box first.</p>';
+  let R; try{ R=VSIM.check(model, code); }catch(e){ return `<p class="small">The checker could not run on this code (${esc(e.message)}). Compare with the model answer.</p>`; }
+  if(R.internal) return '<p class="small">Auto-check is not available for this question — compare with the model answer.</p>';
+  const lines=code.split('\n'); const L=[];
+  if(R.syntax){ const ln=R.syntax.line; L.push(`<li class="no">✗ <b>${R.syntax.runtime?'Error':'Syntax error'}${ln?` on line ${ln}`:''}:</b> ${esc(R.syntax.msg)}${ln&&lines[ln-1]!==undefined?`<pre class="code errline"><span class="ln">${ln}</span>${esc(lines[ln-1])}</pre>`:''}</li>`); }
+  else L.push('<li class="ok">✓ Compiles — no syntax or type errors found</li>');
+  if(!R.syntax){ if(R.ports.length) R.ports.forEach(p=>L.push(`<li class="no">✗ Entity: ${esc(p)}</li>`)); else L.push('<li class="ok">✓ Entity ports match the question (names, in/out, widths)</li>'); }
+  if(!R.syntax && !R.ports.length){
+    if(!R.mism.length) L.push(`<li class="ok">✓ Behaviour is correct: ${R.kind==='comb'?`all ${R.tested} input combinations`:`${R.tested} simulated time steps (clock, reset, enable, data)`} give exactly the model's outputs</li>`);
+    else { const m=R.mism[0]; L.push(`<li class="no">✗ Behaviour differs from the model. ${R.kind==='comb'?'For the inputs':'Simulation'} <b>${esc(m.when)}</b>: <b>${esc(m.out)}</b> should be <code>${esc(m.exp)}</code> but your design gives <code>${esc(m.got)}</code>.${R.hint?`<br><span class="hint">💡 ${esc(R.hint)}</span>`:''}</li>`);
+      if(R.mism.length>1) L.push(`<li class="small">Other differences: ${R.mism.slice(1).map(x=>`${esc(x.when)} → ${esc(x.out)} should be ${esc(x.exp)}, yours ${esc(x.got)}`).join(' · ')}</li>`); }
+  }
+  R.notes.forEach(n=>L.push(`<li class="warnl">ℹ ${esc(n)}</li>`));
+  R.warnings.forEach(w=>L.push(`<li class="warnl">⚠ ${esc(w)}</li>`));
+  const perfect=!R.syntax && !R.ports.length && !R.mism.length && !R.style;
+  const score = R.syntax&&!R.syntax.runtime ? null : R.score;
+  return `<div class="ac ${perfect?'perfect':''}"><div class="ac-head"><span class="ac-score">${score===null?'Fix the syntax first':`≈ ${score} / 5`}</span><span class="small">${perfect&&!R.warnings.length?'Excellent — this would get full marks.':perfect?'Correct behaviour — fix the warnings for full marks.':'Estimated mark (the real marker may be kinder to small slips).'}</span></div><ul class="checks2">${L.join('')}</ul></div>`;
+}
+function mountAutoCheck(host, model, ta, onPerfect){
+  const btnEl=document.createElement('button'); btnEl.type='button'; btnEl.className='btn primary sm'; btnEl.innerHTML='✔ Check my answer';
+  const out=document.createElement('div'); out.className='acout';
+  btnEl.addEventListener('click',()=>{ out.innerHTML=autoCheckHTML(model, ta.value); if(out.querySelector('.ac.perfect') && onPerfect) onPerfect(btnEl); out.scrollIntoView({block:'nearest'}); });
+  host.append(btnEl,out);
+}
+
 /* ---------- question cards ---------- */
 const PARTS={W:'Q1 · when / else',S:'Q2 · with / select',R:'Q3 · registers & counters',T:'Q4 · timing diagram',E:'Basics & error-finding'};
 function qCard(it, opts={}){
@@ -4889,6 +6280,7 @@ function qCard(it, opts={}){
   const d=document.createElement('div'); d.className='q'; d.id='q-'+it.id;
   d.innerHTML=`<div class="q-head"><h3>${esc(it.id)} · ${it.title}</h3><span class="chip">${PARTS[it.part]}</span>${it.src?`<span class="chip src">${esc(it.src)}</span>`:''}${it.marks?`<span class="chip m">${it.marks} marks</span>`:''}</div>${it.q}`+
     (it.demo?`<div class="wavebox qwave"></div>`:'')+
+    (!it.demo || it.code || it.checkModel ? `<div class="typebox"><span class="label">✍ Your answer — type the full code here (saved in this browser)</span><textarea class="codein draft" rows="12" spellcheck="false" autocapitalize="off" data-draft="${it.id}" aria-label="your answer for ${it.id}"></textarea></div>` : '')+
     (it.demo && it.interactive!==false?`<details class="sol try"><summary>Answer it interactively (draw the waveform)</summary><div class="quizmount"></div></details>`:'')+
     `<details class="sol main"><summary>Show model answer</summary><div>${(it.code||[]).map(c=>codeBlock(c.code,c.label)).join('')}<div class="answ"></div>${it.exp||''}${it.rubric?`<p class="label">How the marks are earned (self-check)</p><ul class="rubric">${it.rubric.map(r=>`<li>${r}</li>`).join('')}</ul>`:''}</div></details>`+
     (opts.noMark?'':`<div class="selfmark"><span class="small">Your result:</span><button type="button" class="btn sm" data-v="ok">I got it right</button><button type="button" class="btn sm" data-v="rev">Review again</button></div>`);
@@ -4898,6 +6290,12 @@ function qCard(it, opts={}){
     if(tr) tr.addEventListener('toggle',()=>{ if(tr.open && !mounted){ mounted=true; const m=$('.quizmount',d); m.id='qz-'+it.id; mountQuiz(m,it.demo); } });
     let shown=false; const sol=$('.main',d); sol.addEventListener('toggle',()=>{ if(sol.open && !shown){ shown=true; const w=document.createElement('div'); w.className='wavebox'; $('.answ',d).appendChild(w); showSpec(w,it.demo,true); } });
   }
+  const fullModel=it.checkModel || (it.code||[]).map(c=>c.code).find(isFullDesign);
+  $$('.typebox',d).forEach(tb=>{ const ta=$('textarea',tb); const row=document.createElement('div'); row.className='row acrow'; tb.appendChild(row);
+    if(fullModel){ const ent=(fullModel.match(/entity[\s\S]*?end\s+(entity\s*)?\w*\s*;/i)||[''])[0]; const dd=document.createElement('details'); dd.className='entexp'; dd.innerHTML=`<summary>Entity the checker expects (open only if the question does not give the port names)</summary>${codeBlock(ent)}`; tb.insertBefore(dd, ta);
+      mountAutoCheck(row, fullModel, ta, b=>XP.award('bank#'+it.id,30,b)); const note=document.createElement('span'); note.className='small'; note.textContent='Checks syntax, the entity and the behaviour against the model answer'+((it.code||[]).filter(c=>isFullDesign(c.code)).length>1||(it.code||[]).length>1?' (first full design of the model answer)':'')+'.'; row.insertBefore(note,row.lastChild); }
+    else { const n=document.createElement('span'); n.className='small'; n.textContent='This question is checked by comparing with the model answer below.'; row.appendChild(n); } });
+  $$('textarea.draft',d).forEach(ta=>{ ta.value=store.get('draft:'+ta.dataset.draft,''); ta.addEventListener('input',()=>store.set('draft:'+ta.dataset.draft,ta.value)); ta.addEventListener('keydown',e=>{ if(e.key==='Tab'){ e.preventDefault(); const s=ta.selectionStart; ta.value=ta.value.slice(0,s)+'  '+ta.value.slice(ta.selectionEnd); ta.selectionStart=ta.selectionEnd=s+2; } }); });
   const sm=$('.selfmark',d);
   if(sm){ const cur=marks[it.id]; $$('button',sm).forEach(b=>{ if(b.dataset.v===cur){ b.classList.add('on'); if(cur==='rev') b.classList.add('rev'); }
     b.addEventListener('click',()=>{ const m=store.get('mark',{}); m[it.id]=b.dataset.v; store.set('mark',m); $$('button',sm).forEach(x=>x.classList.remove('on','rev')); b.classList.add('on'); if(b.dataset.v==='rev') b.classList.add('rev'); renderBankStats(); }); }); }
@@ -4927,8 +6325,11 @@ function initGen(){
   let seed=Date.now()%100000;
   const make=()=>{ let k=sel.value; if(k==='mixW') k=TD.pick(TD.rng(seed+7),['sigma','mux','prio','dec','range','lut','alu','cmp']);
     const g=GENS[k][1](seed); const host=$('#gen-out');
-    host.innerHTML=`<div class="q"><div class="q-head"><h3>${g.title}</h3><span class="chip">#${seed}</span></div>${g.prompt}<p class="small">Write your answer on paper first (exam conditions), then compare.</p><details class="sol"><summary>Show model answer</summary><div>${g.sol.map(s=>codeBlock(s.code,s.label)).join('')}${g.notes||''}</div></details></div>`;
+    host.dataset.model=(g.sol.find(s=>isFullDesign(s.code))||{code:''}).code;
+    host.innerHTML=`<div class="q"><div class="q-head"><h3>${g.title}</h3><span class="chip">#${seed}</span></div>${g.prompt}<div class="typebox"><span class="label">✍ Type your full answer here, then compare</span><textarea class="codein" rows="12" spellcheck="false" autocapitalize="off" aria-label="your answer"></textarea></div><details class="sol"><summary>Show model answer</summary><div>${g.sol.map(s=>codeBlock(s.code,s.label)).join('')}${g.notes||''}</div></details></div>`;
+    hookGen();
   };
+  const hookGen=()=>{ const host=$('#gen-out'); const tb=$('.typebox',host); if(!tb) return; const ta=$('textarea',tb); const model=$('#gen-out').dataset.model; if(model && isFullDesign(model)){ const row=document.createElement('div'); row.className='row acrow'; tb.appendChild(row); mountAutoCheck(row, model, ta); } };
   $('#gen-new').addEventListener('click',()=>{ seed=(seed*7919+13)%1000003; make(); });
   sel.addEventListener('change',make); make();
 }
@@ -5103,7 +6504,7 @@ function route(){
   if(h.startsWith('q-')){ const it=BANK.find(b=>'q-'+b.id===h);
     if(it){ $$('.view').forEach(x=>x.classList.toggle('on', x.id==='v-bank')); $$('.nav a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#bank')); $('.side').classList.remove('open');
       store.set('bankPart',it.part); store.set('bankOnly','all'); $('#bank-list').dataset.ready=1; renderBank();
-      const el=$('#'+h); if(el){ el.scrollIntoView(); } return; } }
+      const el=$('#bank-list #'+h); if(el){ el.scrollIntoView(); } return; } }
   const v=$('#v-'+h) ? h : 'home';
   $$('.view').forEach(x=>x.classList.toggle('on', x.id==='v-'+v));
   $$('.nav a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+v));
@@ -5113,7 +6514,10 @@ function route(){
 }
 function initTheme(){
   const t=store.get('theme',null); if(t) document.documentElement.setAttribute('data-theme',t);
-  $$('.theme-btn').forEach(b=>b.addEventListener('click',()=>{ const cur=document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); const nx=cur==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',nx); store.set('theme',nx); }));
+  const cur=()=>document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  const label=()=>$$('.theme-btn .tt').forEach(t=>t.textContent= cur()==='dark'?'Light mode':'Dark mode');
+  $$('.theme-btn').forEach(b=>b.addEventListener('click',()=>{ const nx=cur()==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',nx); store.set('theme',nx); label(); }));
+  label();
 }
 document.addEventListener('DOMContentLoaded',()=>{
   initTheme();
@@ -5123,7 +6527,10 @@ document.addEventListener('DOMContentLoaded',()=>{
   initLessons(); initDemos(); initPath(); updateNav(); initGen(); initTrace(); initTrainer(); initMocks();
   const narrow=()=>matchMedia('(max-width:900px)').matches;
   if(store.get('navClosed',false)) document.body.classList.add('nav-closed');
-  $('#menu-btn').addEventListener('click',()=>{ if(narrow()) $('.side').classList.toggle('open'); else { const c=document.body.classList.toggle('nav-closed'); store.set('navClosed',c); } });
+  const menuLabel=()=>{ const open = narrow() ? $('.side').classList.contains('open') : !document.body.classList.contains('nav-closed'); $('#menu-btn .mt').textContent = open ? 'Hide menu' : 'Show menu'; };
+  const toggleMenu=()=>{ if(narrow()) $('.side').classList.toggle('open'); else { const c=document.body.classList.toggle('nav-closed'); store.set('navClosed',c); } menuLabel(); };
+  $('#menu-btn').addEventListener('click',toggleMenu); $('#side-hide').addEventListener('click',toggleMenu);
+  window.addEventListener('hashchange',menuLabel); menuLabel();
   XP.paint(); W.init();
   document.addEventListener('keydown',e=>{ if(e.key==='Escape') $('.side').classList.remove('open'); });
   window.addEventListener('hashchange',route); route();
